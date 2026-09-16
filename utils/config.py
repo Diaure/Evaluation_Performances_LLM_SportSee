@@ -14,7 +14,7 @@ if not MISTRAL_API_KEY:
 
 # --- Modèles Mistral ---
 EMBEDDING_MODEL = "mistral-embed"
-MODEL_NAME = "mistral-small-latest" # Ou un autre modèle comme mistral-large-latest
+MODEL_NAME = "mistral-tiny-latest" # Ou un autre modèle comme mistral-large-latest
 
 # --- Configuration de l'Indexation ---
 # INPUT_DATA_URL = os.getenv("INPUT_DATA_URL") # Décommentez si vous utilisez une URL
@@ -28,7 +28,7 @@ CHUNK_OVERLAP = 150                 # Chevauchement en *caractères*
 EMBEDDING_BATCH_SIZE = 32           # Taille des lots pour l'API d'embedding
 
 # --- Configuration de la Recherche ---
-SEARCH_K = 5                        # Nombre de documents à récupérer par défaut
+SEARCH_K = 3                        # Nombre de documents à récupérer par défaut
 
 # --- Configuration de la Base de Données ---
 DATABASE_DIR = "database"

@@ -199,7 +199,7 @@ class VectorStoreManager:
         except Exception as e:
             logging.error(f"Erreur lors de la sauvegarde de l'index/chunks: {e}")
 
-    def search(self, query_text: str, k: int = 5, min_score: float = None) -> List[Dict[str, any]]:
+    def search(self, query_text: str, k: int = 3, min_score: float = None) -> List[Dict[str, any]]:
         """
         Recherche les k chunks les plus pertinents pour une requête.
 
