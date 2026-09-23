@@ -18,3 +18,5 @@ langchain-core==0.1.52
 langchain-community==0.0.38
 langchain-openai==0.0.2
 numpy==1.26.4
+openai==1.6.1
+anyio==3.7.1

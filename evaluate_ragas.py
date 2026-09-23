@@ -24,6 +24,7 @@ from ragas.metrics import (
 
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
+from ragas.llms import LangchainLLMWrapper
 
 from utils.config import (
     MISTRAL_API_KEY,
@@ -32,6 +33,18 @@ from utils.config import (
 
 from utils.vector_store import VectorStoreManager
 
+from openai import OpenAI
+client = OpenAI(
+    api_key=MISTRAL_API_KEY,
+    base_url="https://api.mistral.ai/v1")
+
+def llm(prompt):
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.0
+    )
+    return response.choices[0].message.content
 
 # Charger le dataset d’évaluation
 def load_evaluation_set(path="./evaluation/validation_set.json"):
@@ -110,15 +123,15 @@ def build_ragas_dataset(eval_set, vector_store_manager):
         dataset["ground_truth"].append(item["ground_truth"])
         # Ajouter les métadonnées
         dataset["metadata"].append(item)
+
     return dataset
 
 
 # Évaluation RAGAS
 def run_ragas_evaluation(dataset):
 
-    os.environ["OPENAI_API_KEY"] = "dummy"          # empêche l’erreur
-    os.environ["RAGAS_USE_OPENAI"] = "false"        # désactive OpenAI
-    os.environ["RAGAS_LLM_BACKEND"] = "custom"      # force l’usage de ton LLM
+    # os.environ["OPENAI_API_KEY"] = "dummy"          # empêche l’erreur
+    # os.environ["RAGAS_USE_OPENAI"] = "false"        # désactive OpenAI
 
     ragas_dataset = Dataset.from_dict({
     "question": dataset["question"],
@@ -139,11 +152,12 @@ def run_ragas_evaluation(dataset):
             # semantic_similarity,
             # noise_sensitivity,
         ],
-        llm=lambda prompt: client.chat(
-            model=MODEL_NAME,
-            messages=[ChatMessage(role="user", content=prompt)],
-            temperature=0.0,
-        ).choices[0].message.content
+        llm=llm
+        # llm=lambda prompt: client.chat(
+        #     model=MODEL_NAME,
+        #     messages=[ChatMessage(role="user", content=prompt)],
+        #     temperature=0.0,
+        # ).choices[0].message.content
     )
     return result
 
