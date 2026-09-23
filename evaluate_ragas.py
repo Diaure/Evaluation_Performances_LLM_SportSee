@@ -4,10 +4,12 @@ import json
 import csv
 from pathlib import Path
 import pandas as pd
+import os
 
 from dotenv import load_dotenv
 load_dotenv()
 
+from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import (
     answer_relevancy,
@@ -80,7 +82,8 @@ def build_ragas_dataset(eval_set, vector_store_manager):
         "question": [],
         "answer": [],
         "contexts": [],
-        "metadata": []  # On ajoute les métadonnées du dataset
+        "ground_truth": [],
+        "metadata": [],  # On ajoute les métadonnées du dataset  
     }
 
     for item in eval_set:
@@ -104,7 +107,7 @@ def build_ragas_dataset(eval_set, vector_store_manager):
         dataset["question"].append(q)
         dataset["answer"].append(answer)
         dataset["contexts"].append([r["text"] for r in search_results])
-
+        dataset["ground_truth"].append(item["ground_truth"])
         # Ajouter les métadonnées
         dataset["metadata"].append(item)
     return dataset
@@ -112,14 +115,20 @@ def build_ragas_dataset(eval_set, vector_store_manager):
 
 # Évaluation RAGAS
 def run_ragas_evaluation(dataset):
-    df = pd.DataFrame({
+
+    os.environ["OPENAI_API_KEY"] = "dummy"          # empêche l’erreur
+    os.environ["RAGAS_USE_OPENAI"] = "false"        # désactive OpenAI
+    os.environ["RAGAS_LLM_BACKEND"] = "custom"      # force l’usage de ton LLM
+
+    ragas_dataset = Dataset.from_dict({
     "question": dataset["question"],
     "answer": dataset["answer"],
     "contexts": dataset["contexts"],
+    "ground_truth": dataset["ground_truth"],
 })
-    
+
     result = evaluate(
-        dataset=df,
+        dataset=ragas_dataset,
         metrics=[
             answer_relevancy,
             answer_correctness,

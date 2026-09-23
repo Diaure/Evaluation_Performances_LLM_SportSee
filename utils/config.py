@@ -28,7 +28,7 @@ CHUNK_OVERLAP = 150                 # Chevauchement en *caractères*
 EMBEDDING_BATCH_SIZE = 32           # Taille des lots pour l'API d'embedding
 
 # --- Configuration de la Recherche ---
-SEARCH_K = 3                        # Nombre de documents à récupérer par défaut
+SEARCH_K = 5                        # Nombre de documents à récupérer par défaut
 
 # --- Configuration de la Base de Données ---
 DATABASE_DIR = "database"
