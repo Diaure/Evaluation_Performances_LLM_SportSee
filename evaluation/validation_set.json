@@ -1,0 +1,252 @@
+[
+  {
+    "id": "Q001",
+    "question": "Combien de points Jayson Tatum a-t-il marqués ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "1930",
+    "answerable": true
+  },
+  {
+    "id": "Q002",
+    "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "626",
+    "answerable": true
+  },
+  {
+    "id": "Q003",
+    "question": "Combien de passes décisives Jayson Tatum a-t-il réalisées ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "432",
+    "answerable": true
+  },
+  {
+    "id": "Q004",
+    "question": "Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "45.2%",
+    "answerable": true
+  },
+  {
+    "id": "Q005",
+    "question": "Quels sont les trois joueurs qui ont marqué le plus de points ?",
+    "type": "ranking_player",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Shai Gilgeous-Alexander (2485), Anthony Edwards (2180) et Nikola Jokić (2072).",
+    "answerable": true
+  },
+  {
+    "id": "Q006",
+    "question": "Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?",
+    "type": "comparison_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Anthony Edwards, avec 2180 points contre 1930 pour Jayson Tatum.",
+    "answerable": true
+  },
+  {
+    "id": "Q007",
+    "question": "Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",
+    "type": "ranking_player",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Giannis Antetokounmpo avec 60.1% de FG.",
+    "answerable": true
+  },
+  {
+    "id": "Q008",
+    "question": "Quelles sont les cinq équipes qui ont marqué le plus de points ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Analyse",
+    "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+    "answerable": true
+  },
+  {
+    "id": "Q009",
+    "question": "Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
+    "answerable": true
+  },
+  {
+    "id": "Q010",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
+    "answerable": true
+  },
+  {
+    "id": "Q011",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+    "answerable": true
+  },
+  {
+    "id": "Q012",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
+    "answerable": true
+  },
+  {
+    "id": "Q013",
+    "question": "Quelle équipe possède le plus grand nombre de joueurs dans les données ?",
+    "type": "team",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
+    "answerable": true
+  },
+  {
+    "id": "Q014",
+    "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
+    "type": "comparison_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Detroit Pistons : 10292 points et 3834 rebonds. Milwaukee Bucks : 10016 points et 3875 rebonds.",
+    "answerable": true
+  },
+  {
+    "id": "Q015",
+    "question": "Quelle est la meilleure équipe toutes statistiques confondues ?",
+    "type": "ambiguous_team",
+    "difficulty": "complex",
+    "noise": "low",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données ne définissent pas de critère permettant d'identifier une « meilleure équipe » toutes statistiques confondues. Les équipes arrivent en tête selon des statistiques différentes : Detroit Pistons en points, Houston Rockets en rebonds, Atlanta Hawks en passes décisives, Oklahoma City Thunder en interceptions et Dallas Mavericks en contres.",
+    "answerable": false
+  },
+  {
+    "id": "Q016",
+    "question": "Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?",
+    "type": "multi_criteria_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Jokić (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
+    "answerable": true
+  },
+  {
+    "id": "Q017",
+    "question": "Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?",
+    "type": "multi_criteria_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
+    "answerable": true
+  },
+  {
+    "id": "Q018",
+    "question": "Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",
+    "type": "comparison_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum : 1930 points, 626 rebonds, 432 passes décisives, 45.2% FG. Nikola Jokić : 2072 points, 889 rebonds, 714 passes décisives, 57.6% FG.",
+    "answerable": true
+  },
+  {
+    "id": "Q019",
+    "question": "Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",
+    "type": "multi_criteria_team",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes décisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes décisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes décisives.",
+    "answerable": true
+  },
+  {
+    "id": "Q020",
+    "question": "Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",
+    "type": "multi_criteria_team",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes décisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
+    "answerable": true
+  },
+  {
+    "id": "Q021",
+    "question": "Tatum, il a mis combien de points au total ?",
+    "type": "noisy_reformulation",
+    "difficulty": "simple",
+    "noise": "low",
+    "source_expected": "Données NBA",
+    "ground_truth": "1930",
+    "answerable": true
+  },
+  {
+    "id": "Q022",
+    "question": "C'est qui les 5 équipes qui ont le plus de points ?",
+    "type": "noisy_reformulation",
+    "difficulty": "medium",
+    "noise": "low",
+    "source_expected": "Analyse",
+    "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+    "answerable": true
+  },
+  {
+    "id": "Q023",
+    "question": "Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": null,
+    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne contiennent pas les statistiques match par match nécessaires pour identifier les cinq derniers matchs.",
+    "answerable": false
+  },
+  {
+    "id": "Q024",
+    "question": "Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "low",
+    "source_expected": null,
+    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne distinguent pas les performances à domicile et à l'extérieur.",
+    "answerable": false
+  },
+  {
+    "id": "Q025",
+    "question": "Quel joueur a marqué le plus de points lors de son dernier match ?",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": null,
+    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne fournissent pas les statistiques match par match permettant d'identifier le dernier match.",
+    "answerable": false
+  }
+]
