@@ -1,0 +1,261 @@
+{
+    "ragas_scores": {
+        "answer_relevancy": 0.48713846190903654,
+        "answer_correctness": 0.24950258157034055,
+        "context_precision": 0.08333333332800001,
+        "context_recall": 1.0,
+        "faithfulness": 0.5271717171717172
+    },
+    "metadata": [
+        {
+            "id": "Q001",
+            "question": "Combien de points Jayson Tatum a-t-il marqu\u00e9s ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "1930",
+            "answerable": true
+        },
+        {
+            "id": "Q002",
+            "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "626",
+            "answerable": true
+        },
+        {
+            "id": "Q003",
+            "question": "Combien de passes d\u00e9cisives Jayson Tatum a-t-il r\u00e9alis\u00e9es ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "432",
+            "answerable": true
+        },
+        {
+            "id": "Q004",
+            "question": "Quel est le pourcentage de r\u00e9ussite aux tirs de Jayson Tatum ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "45.2%",
+            "answerable": true
+        },
+        {
+            "id": "Q005",
+            "question": "Quels sont les trois joueurs qui ont marqu\u00e9 le plus de points ?",
+            "type": "ranking_player",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Shai Gilgeous-Alexander (2485), Anthony Edwards (2180) et Nikola Joki\u0107 (2072).",
+            "answerable": true
+        },
+        {
+            "id": "Q006",
+            "question": "Qui a marqu\u00e9 le plus de points entre Jayson Tatum et Anthony Edwards ?",
+            "type": "comparison_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Anthony Edwards, avec 2180 points contre 1930 pour Jayson Tatum.",
+            "answerable": true
+        },
+        {
+            "id": "Q007",
+            "question": "Parmi les cinq joueurs ayant marqu\u00e9 le plus de points, lequel poss\u00e8de le meilleur FG% ?",
+            "type": "ranking_player",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Giannis Antetokounmpo avec 60.1% de FG.",
+            "answerable": true
+        },
+        {
+            "id": "Q008",
+            "question": "Quelles sont les cinq \u00e9quipes qui ont marqu\u00e9 le plus de points ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Analyse",
+            "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+            "answerable": true
+        },
+        {
+            "id": "Q009",
+            "question": "Quelles sont les cinq \u00e9quipes qui ont capt\u00e9 le plus de rebonds au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
+            "answerable": true
+        },
+        {
+            "id": "Q010",
+            "question": "Quelles sont les cinq \u00e9quipes qui ont r\u00e9alis\u00e9 le plus de passes d\u00e9cisives au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
+            "answerable": true
+        },
+        {
+            "id": "Q011",
+            "question": "Quelles sont les cinq \u00e9quipes qui ont r\u00e9alis\u00e9 le plus d'interceptions au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+            "answerable": true
+        },
+        {
+            "id": "Q012",
+            "question": "Quelles sont les cinq \u00e9quipes qui ont r\u00e9alis\u00e9 le plus de contres au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
+            "answerable": true
+        },
+        {
+            "id": "Q013",
+            "question": "Quelle \u00e9quipe poss\u00e8de le plus grand nombre de joueurs dans les donn\u00e9es ?",
+            "type": "team",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
+            "answerable": true
+        },
+        {
+            "id": "Q014",
+            "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
+            "type": "comparison_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Detroit Pistons : 10292 points et 3834 rebonds. Milwaukee Bucks : 10016 points et 3875 rebonds.",
+            "answerable": true
+        },
+        {
+            "id": "Q015",
+            "question": "Quelle est la meilleure \u00e9quipe toutes statistiques confondues ?",
+            "type": "ambiguous_team",
+            "difficulty": "complex",
+            "noise": "low",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Les donn\u00e9es ne d\u00e9finissent pas de crit\u00e8re permettant d'identifier une \u00ab meilleure \u00e9quipe \u00bb toutes statistiques confondues. Les \u00e9quipes arrivent en t\u00eate selon des statistiques diff\u00e9rentes : Detroit Pistons en points, Houston Rockets en rebonds, Atlanta Hawks en passes d\u00e9cisives, Oklahoma City Thunder en interceptions et Dallas Mavericks en contres.",
+            "answerable": false
+        },
+        {
+            "id": "Q016",
+            "question": "Quels joueurs ont marqu\u00e9 plus de 1900 points et ont un FG% sup\u00e9rieur \u00e0 50% ?",
+            "type": "multi_criteria_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Joki\u0107 (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
+            "answerable": true
+        },
+        {
+            "id": "Q017",
+            "question": "Quels joueurs ont \u00e0 la fois plus de 2000 points et plus de 700 rebonds ?",
+            "type": "multi_criteria_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Nikola Joki\u0107 (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
+            "answerable": true
+        },
+        {
+            "id": "Q018",
+            "question": "Compare les performances de Jayson Tatum et Nikola Joki\u0107 en points, rebonds, passes d\u00e9cisives et pourcentage aux tirs.",
+            "type": "comparison_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Jayson Tatum : 1930 points, 626 rebonds, 432 passes d\u00e9cisives, 45.2% FG. Nikola Joki\u0107 : 2072 points, 889 rebonds, 714 passes d\u00e9cisives, 57.6% FG.",
+            "answerable": true
+        },
+        {
+            "id": "Q019",
+            "question": "Quelles sont les trois \u00e9quipes qui ont marqu\u00e9 le plus de points, et combien de rebonds et de passes d\u00e9cisives chacune a-t-elle r\u00e9alis\u00e9s ?",
+            "type": "multi_criteria_team",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes d\u00e9cisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes d\u00e9cisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes d\u00e9cisives.",
+            "answerable": true
+        },
+        {
+            "id": "Q020",
+            "question": "Quelle \u00e9quipe arrive en t\u00eate pour chacune des statistiques suivantes : points, rebonds, passes d\u00e9cisives, interceptions et contres ?",
+            "type": "multi_criteria_team",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes d\u00e9cisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
+            "answerable": true
+        },
+        {
+            "id": "Q021",
+            "question": "Tatum, il a mis combien de points au total ?",
+            "type": "noisy_reformulation",
+            "difficulty": "simple",
+            "noise": "low",
+            "source_expected": "Donn\u00e9es NBA",
+            "ground_truth": "1930",
+            "answerable": true
+        },
+        {
+            "id": "Q022",
+            "question": "C'est qui les 5 \u00e9quipes qui ont le plus de points ?",
+            "type": "noisy_reformulation",
+            "difficulty": "medium",
+            "noise": "low",
+            "source_expected": "Analyse",
+            "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+            "answerable": true
+        },
+        {
+            "id": "Q023",
+            "question": "Quel joueur a le meilleur pourcentage de r\u00e9ussite \u00e0 trois points sur ses cinq derniers matchs ?",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": null,
+            "ground_truth": "Les donn\u00e9es fournies ne permettent pas de r\u00e9pondre : elles ne contiennent pas les statistiques match par match n\u00e9cessaires pour identifier les cinq derniers matchs.",
+            "answerable": false
+        },
+        {
+            "id": "Q024",
+            "question": "Compare les statistiques de rebonds de l'\u00e9quipe \u00e0 domicile et \u00e0 l'ext\u00e9rieur.",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "low",
+            "source_expected": null,
+            "ground_truth": "Les donn\u00e9es fournies ne permettent pas de r\u00e9pondre : elles ne distinguent pas les performances \u00e0 domicile et \u00e0 l'ext\u00e9rieur.",
+            "answerable": false
+        },
+        {
+            "id": "Q025",
+            "question": "Quel joueur a marqu\u00e9 le plus de points lors de son dernier match ?",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": null,
+            "ground_truth": "Les donn\u00e9es fournies ne permettent pas de r\u00e9pondre : elles ne fournissent pas les statistiques match par match permettant d'identifier le dernier match.",
+            "answerable": false
+        }
+    ]
+}
