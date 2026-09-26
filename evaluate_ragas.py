@@ -124,17 +124,6 @@ class MistralRagasEmbeddings(BaseRagasEmbeddings):
         return [item.embedding for item in response.data]
 
 
-# LLM pour RAGAS
-# def ragas_llm(prompt):
-#     response = client.chat(
-#         model=MODEL_NAME,
-#         messages=[{"role": "user", "content": prompt}],
-#         temperature=0.0
-#     )
-#     return response.choices[0].message.content
-
-# wrapped_llm = LangchainLLMWrapper(ragas_llm)
-
 # Prompt RAG du prototype
 SYSTEM_PROMPT = f"""Tu es 'NBA Analyst AI', un assistant expert sur la ligue de basketball NBA.
 Ta mission est de répondre aux questions des fans en animant le débat.
@@ -259,6 +248,21 @@ def export_results(result, dataset, output_dir="ragas_results"):
         writer.writerow(["metric", "score"])
         for metric, score in result.items():
             writer.writerow([metric, score])
+
+    # Construction du fichier détaillé par question
+    detailed = []
+
+    for i in range(len(dataset["question"])):
+        detailed.append({
+            "question": dataset["question"][i],
+            "contexts": dataset["contexts"][i],
+            "answer": dataset["answer"][i],
+            "ground_truth": dataset["ground_truth"][i],
+            "scores": result  # scores globaux répétés pour chaque question
+        })
+
+    with open(Path(output_dir) / "results_detaille.json", "w", encoding="utf-8") as f:json.dump(detailed, f, indent=4)
+
 
 
 # MAIN

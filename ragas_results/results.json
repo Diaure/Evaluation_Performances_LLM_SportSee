@@ -1,10 +1,10 @@
 {
     "ragas_scores": {
-        "answer_relevancy": 0.48713846190903654,
-        "answer_correctness": 0.24950258157034055,
-        "context_precision": 0.08333333332800001,
-        "context_recall": 1.0,
-        "faithfulness": 0.5271717171717172
+        "answer_relevancy": 0.5231578597270814,
+        "answer_correctness": 0.23703479607011538,
+        "context_precision": 0.11666666665599999,
+        "context_recall": 0.3333333333333333,
+        "faithfulness": 0.5477139406487233
     },
     "metadata": [
         {
