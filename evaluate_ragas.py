@@ -8,6 +8,10 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+from typing import Any
+# import logfire
+from pydantic import BaseModel, Field
+
 from utils.config import (
     MISTRAL_API_KEY,
     MODEL_NAME,
@@ -26,94 +30,74 @@ from ragas.metrics import (
     # noise_sensitivity,
 )
 
-# from langchain_community.embeddings import HuggingFaceEmbeddings
-# from mistralai import MistralAIEmbeddings
-# embeddings = MistralAIEmbeddings(api_key=MISTRAL_API_KEY, 
-#                                 model="mistral-embed")
-
-# from mistralai import ChatMistralAI
-# from ragas.llms import LangchainLLMWrapper
-# from langchain_openai import ChatOpenAI
-
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 
 from utils.vector_store import VectorStoreManager
-# from openai import OpenAI
-# client = OpenAI(
-#     api_key=MISTRAL_API_KEY,
-#     base_url="https://api.mistral.ai/v1")
-
-# def llm(prompt):
-#     response = client.chat.completions.create(
-#         model=MODEL_NAME,
-#         messages=[{"role": "user", "content": prompt}],
-#         temperature=0.0
-#     )
-#     return response.choices[0].message.content
-
-
-# LLM Mistral (prototype)
-client = MistralClient(api_key=MISTRAL_API_KEY)
 
 from ragas.llms import BaseRagasLLM
 from ragas.run_config import RunConfig
 from ragas.embeddings.base import BaseRagasEmbeddings
 from langchain_core.outputs import LLMResult, Generation
 
+# logfire.configure(
+#     service_name="sportsee-rag-eval",
+#     environment="development",)
+
+# Modèles pydantic
+class QuestionModel(BaseModel):
+    question: str = Field(..., min_length=1)
+
+class ChunkModel(BaseModel):
+    text: str = Field(..., min_length=1)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    score: float | None = None
+
+class AnswerModel(BaseModel):
+    question: str = Field(..., min_length=1)
+    context: str = Field(..., min_length=1)
+    answer: str = Field(..., min_length=1)
+
+class RAGResultModel(BaseModel):
+    question: str = Field(..., min_length=1)
+    contexts: list[str] = Field(..., min_length=1)
+    answer: str = Field(..., min_length=1)
+    ground_truth: str | None = None
+
+# LLM Mistral (prototype)
+client = MistralClient(api_key=MISTRAL_API_KEY)
+
 # LLM pour RAGAS
 class MistralRagasLLM(BaseRagasLLM):
-
     def generate_text(
         self,
         prompt,
         n=1,
         temperature=1e-8,
         stop=None,
-        callbacks=None,
-    ):
+        callbacks=None,):
+
         response = client.chat(
             model=MODEL_NAME,
-            messages=[
-                ChatMessage(
-                    role="user",
-                    content=prompt.to_string()
-                )
-            ],
-            temperature=temperature,
-        )
+            messages=[ChatMessage(role="user", content=prompt.to_string())],
+            temperature=temperature,)
 
         text = response.choices[0].message.content
+        return LLMResult(generations=[[Generation(text=text)]])
 
-        return LLMResult(
-            generations=[
-                [Generation(text=text)]
-            ]
-        )
-
-    async def agenerate_text(
-        self,
-        prompt,
-        n=1,
-        temperature=1e-8,
-        stop=None,
-        callbacks=None,
-    ):
+    async def agenerate_text(self, prompt, n=1, temperature=1e-8, stop=None,  callbacks=None,):
         return self.generate_text(
             prompt=prompt,
             n=n,
             temperature=temperature,
             stop=stop,
-            callbacks=callbacks,
-        )
+            callbacks=callbacks,)
 
 class MistralRagasEmbeddings(BaseRagasEmbeddings):
-
     def embed_query(self, text):
         response = client.embeddings(
             model="mistral-embed",
-            input=[text],
-        )
+            input=[text],)
         return response.data[0].embedding
 
     def embed_documents(self, texts):
@@ -170,31 +154,74 @@ def build_ragas_dataset(eval_set, vector_store_manager):
         "answer": [],
         "contexts": [],
         "ground_truth": [],
-        "metadata": [],
-    }
+        "metadata": [],}
 
+    # Validation de la question avant son entrée dans le pipeline RAG
     for item in eval_set:
-        q = item["question"]
+        validated_question = QuestionModel(
+        question=item["question"])
+
+        q = validated_question["question"]
 
         # Retrieval prototype
         search_results = vector_store_manager.search(q, k=SEARCH_K)
 
-        # Format du contexte prototype
-        if search_results:
+        # Validation des chunks retournés par le retrieval
+        validated_chunks = [
+        ChunkModel(
+            text=res["text"],
+            metadata=res.get("metadata", {}),
+            score=res.get("score"))
+            for res in search_results]
+
+        # Construction du contexte prototype
+        # if search_results:
+        #     context_str = "\n\n---\n\n".join([
+        #         f"Source: {res['metadata'].get('source', 'Inconnue')} (Score: {res['score']:.1f}%)\nContenu: {res['text']}"
+        #         for res in search_results])
+        # else:
+        #     context_str = "Aucune information pertinente trouvée dans la base de connaissances."
+
+        if validated_chunks:
             context_str = "\n\n---\n\n".join([
-                f"Source: {res['metadata'].get('source', 'Inconnue')} (Score: {res['score']:.1f}%)\nContenu: {res['text']}"
-                for res in search_results])
+                f"Source: {chunk.metadata.get('source', 'Inconnue')} "
+                f"(Score: {chunk.score:.1f}%)\n"
+                f"Contenu: {chunk.text}"
+                for chunk in validated_chunks])
         else:
             context_str = "Aucune information pertinente trouvée dans la base de connaissances."
 
-        # Génération EXACTEMENT comme prototype
+        # Génération du prototype
         answer = generate_answer(q, context_str)
 
+        # Validation Pydantic de la réponse du LLM
+        validated_answer = AnswerModel(
+            question=q,
+            context=context_str,
+            answer=answer)
+
+        # Validation de l'ensemble des données transmises à RAGAS
+        rag_result = RAGResultModel(
+            question=validated_answer.question,
+            contexts=[
+                chunk.text
+                for chunk in validated_chunks],
+                
+            answer=validated_answer.answer,
+            ground_truth=item["ground_truth"])
+
         # RAGAS dataset
-        dataset["question"].append(q)
-        dataset["answer"].append(answer)
-        dataset["contexts"].append([r["text"] for r in search_results])
-        dataset["ground_truth"].append(item["ground_truth"])
+        # dataset["question"].append(q)
+        # dataset["answer"].append(answer)
+        # dataset["contexts"].append([r["text"] for r in search_results])
+        # dataset["ground_truth"].append(item["ground_truth"])
+        # dataset["metadata"].append(item)
+
+        # Ajout des données validées au dataset
+        dataset["question"].append(rag_result.question)
+        dataset["answer"].append(rag_result.answer)
+        dataset["contexts"].append(rag_result.contexts)
+        dataset["ground_truth"].append(rag_result.ground_truth)
         dataset["metadata"].append(item)
 
     return dataset
