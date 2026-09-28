@@ -9,8 +9,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from typing import Any
-# import logfire
+import logfire
 from pydantic import BaseModel, Field
+from pydantic_ai import Agent
+
 
 from utils.config import (
     MISTRAL_API_KEY,
@@ -30,8 +32,9 @@ from ragas.metrics import (
     # noise_sensitivity,
 )
 
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+# from mistralai.client import MistralClient
+# from mistralai.models.chat_completion import ChatMessage
+from mistralai import Mistral
 
 from utils.vector_store import VectorStoreManager
 
@@ -40,32 +43,28 @@ from ragas.run_config import RunConfig
 from ragas.embeddings.base import BaseRagasEmbeddings
 from langchain_core.outputs import LLMResult, Generation
 
-# logfire.configure(
-#     service_name="sportsee-rag-eval",
-#     environment="development",)
+logfire.configure(
+    service_name="sportsee-rag-eval",
+    environment="development",)
 
 # Modèles pydantic
-class QuestionModel(BaseModel):
-    question: str = Field(..., min_length=1)
-
-class ChunkModel(BaseModel):
-    text: str = Field(..., min_length=1)
-    metadata: dict[str, Any] = Field(default_factory=dict)
-    score: float | None = None
-
-class AnswerModel(BaseModel):
-    question: str = Field(..., min_length=1)
-    context: str = Field(..., min_length=1)
-    answer: str = Field(..., min_length=1)
-
-class RAGResultModel(BaseModel):
-    question: str = Field(..., min_length=1)
-    contexts: list[str] = Field(..., min_length=1)
-    answer: str = Field(..., min_length=1)
-    ground_truth: str | None = None
+from utils.pydantic_validation import (
+    DocumentModel,
+    PreparedDocumentModel,
+    QuestionModel,
+    ChunkModel,
+    AnswerModel,
+    RAGResultModel,)
 
 # LLM Mistral (prototype)
-client = MistralClient(api_key=MISTRAL_API_KEY)
+client = Mistral(api_key=MISTRAL_API_KEY)
+
+# Agent pydanticai
+answer_agent = Agent(
+    model=MODEL_NAME,
+    client=client,
+    response_model=AnswerModel
+)
 
 # LLM pour RAGAS
 class MistralRagasLLM(BaseRagasLLM):
@@ -77,12 +76,12 @@ class MistralRagasLLM(BaseRagasLLM):
         stop=None,
         callbacks=None,):
 
-        response = client.chat(
+        response = client.chat.complete(
             model=MODEL_NAME,
-            messages=[ChatMessage(role="user", content=prompt.to_string())],
+            messages=[{"role": "user", "content": prompt.to_string()}] #[ChatMessage(role="user", content=prompt.to_string())],
             temperature=temperature,)
 
-        text = response.choices[0].message.content
+        text = response.output_text #choices[0].message.content
         return LLMResult(generations=[[Generation(text=text)]])
 
     async def agenerate_text(self, prompt, n=1, temperature=1e-8, stop=None,  callbacks=None,):
@@ -95,7 +94,7 @@ class MistralRagasLLM(BaseRagasLLM):
 
 class MistralRagasEmbeddings(BaseRagasEmbeddings):
     def embed_query(self, text):
-        response = client.embeddings(
+        response = client.embeddings.create(
             model="mistral-embed",
             input=[text],)
         return response.data[0].embedding
@@ -139,12 +138,21 @@ def load_vectorstore():
 # Génération de réponse comme le prototype
 def generate_answer(question, context_str):
     final_prompt = SYSTEM_PROMPT.format(context_str=context_str, question=question)
-    messages = [ChatMessage(role="user", content=final_prompt)]
-    response = client.chat(
+    messages = [{"role": "user", "content": final_prompt.to_string()}] #[ChatMessage(role="user", content=final_prompt)]
+    response = client.chat.complet(
         model=MODEL_NAME,
         messages=messages,
         temperature=0.1,)
-    return response.choices[0].message.content
+
+    # Validation PydanticAI
+    validated = answer_agent.run({
+        "question": question,
+        "context": context_str,
+        "answer": response
+    })
+
+    return validated.choices[0].message.content
+
 
 
 # Construction du dataset RAGAS
@@ -161,7 +169,7 @@ def build_ragas_dataset(eval_set, vector_store_manager):
         validated_question = QuestionModel(
         question=item["question"])
 
-        q = validated_question["question"]
+        q = validated_question.question
 
         # Retrieval prototype
         search_results = vector_store_manager.search(q, k=SEARCH_K)
@@ -174,13 +182,6 @@ def build_ragas_dataset(eval_set, vector_store_manager):
             score=res.get("score"))
             for res in search_results]
 
-        # Construction du contexte prototype
-        # if search_results:
-        #     context_str = "\n\n---\n\n".join([
-        #         f"Source: {res['metadata'].get('source', 'Inconnue')} (Score: {res['score']:.1f}%)\nContenu: {res['text']}"
-        #         for res in search_results])
-        # else:
-        #     context_str = "Aucune information pertinente trouvée dans la base de connaissances."
 
         if validated_chunks:
             context_str = "\n\n---\n\n".join([
@@ -206,16 +207,9 @@ def build_ragas_dataset(eval_set, vector_store_manager):
             contexts=[
                 chunk.text
                 for chunk in validated_chunks],
-                
+
             answer=validated_answer.answer,
             ground_truth=item["ground_truth"])
-
-        # RAGAS dataset
-        # dataset["question"].append(q)
-        # dataset["answer"].append(answer)
-        # dataset["contexts"].append([r["text"] for r in search_results])
-        # dataset["ground_truth"].append(item["ground_truth"])
-        # dataset["metadata"].append(item)
 
         # Ajout des données validées au dataset
         dataset["question"].append(rag_result.question)
