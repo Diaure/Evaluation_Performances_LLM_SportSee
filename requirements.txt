@@ -2,6 +2,7 @@ anyio==3.7.1
 datasets==2.19.1
 easyocr==1.7.2
 faiss-cpu==1.7.4
+httpx==0.25.2
 httpx2==2.13.1
 httpcore2==2.13.1
 huggingface_hub==0.23.0

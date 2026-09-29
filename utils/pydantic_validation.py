@@ -40,3 +40,16 @@ class RAGResultModel(BaseModel):
     contexts: list[str] = Field(..., min_length=1)
     answer: str = Field(..., min_length=1)
     ground_truth: str | None = None
+
+# Contrôle des réponses du model
+class ControlledAnswerModel(BaseModel):
+    answer: str = Field(description="Réponse finale à la question de l'utilisateur.")
+    grounded_in_context: bool = Field(
+        description=(
+            "True si la réponse est entièrement justifiée "
+            "par le contexte fourni, sinon False."))
+
+    unsupported_claims: list[str] = Field(default_factory=list,
+                                          description=(
+            "Liste des affirmations présentes dans la réponse "
+            "qui ne sont pas justifiées par le contexte."))
