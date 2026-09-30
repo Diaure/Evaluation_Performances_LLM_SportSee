@@ -6,7 +6,7 @@ import numpy as np
 import logging
 from typing import List, Dict, Tuple, Optional
 from httpx import HTTPError
-from mistralai import Mistral
+from mistralai.client import Mistral
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document # Utilisé pour le format attendu par le splitter
 
@@ -223,7 +223,7 @@ class VectorStoreManager:
             # 1. Générer l'embedding de la requête
             response = self.mistral_client.embeddings.create(
                 model=EMBEDDING_MODEL,
-                input=[query_text] # La requête doit être une liste
+                inputs=[query_text] # La requête doit être une liste
             )
             query_embedding = np.array([response.data[0].embedding]).astype('float32')
 

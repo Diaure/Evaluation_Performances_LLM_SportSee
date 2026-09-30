@@ -1,0 +1,6 @@
+metric,score
+answer_relevancy,0.29176212718653133
+answer_correctness,0.2692768228882837
+context_precision,0.15277777776354165
+context_recall,0.6666666666666666
+faithfulness,0.9362745098039216

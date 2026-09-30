@@ -1,0 +1,32 @@
+[
+    {
+        "metric": "faithfulness",
+        "before_pydantic_ai": 0.5361587301587302,
+        "after_pydantic_ai": 0.9362745098039216,
+        "difference": 0.4001157796451914
+    },
+    {
+        "metric": "context_recall",
+        "before_pydantic_ai": 0.6666666666666666,
+        "after_pydantic_ai": 0.6666666666666666,
+        "difference": 0.0
+    },
+    {
+        "metric": "answer_correctness",
+        "before_pydantic_ai": 0.254315889620137,
+        "after_pydantic_ai": 0.2692768228882837,
+        "difference": 0.014960933268146681
+    },
+    {
+        "metric": "answer_relevancy",
+        "before_pydantic_ai": 0.6181461075949999,
+        "after_pydantic_ai": 0.29176212718653133,
+        "difference": -0.32638398040846855
+    },
+    {
+        "metric": "context_precision",
+        "before_pydantic_ai": 0.129861111098125,
+        "after_pydantic_ai": 0.15277777776354165,
+        "difference": 0.02291666666541664
+    }
+]

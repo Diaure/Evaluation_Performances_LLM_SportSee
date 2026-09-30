@@ -42,11 +42,11 @@ from utils.pydantic_validation import (
     AnswerModel,
     RAGResultModel,
     ControlledAnswerModel,)
-from mistralai import Mistral
+from mistralai.client import Mistral
 
 # LLM Mistral (prototype)
 client = Mistral(api_key=MISTRAL_API_KEY)
-mistral_provider = MistralProvider(mistral_client=client, provider="mistral",)
+mistral_provider = MistralProvider(mistral_client=client,)
 
 # Modèle Mistral utilisé par Pydantic AI
 pydantic_ai_model = MistralModel(MODEL_NAME, provider="mistral",)
@@ -503,6 +503,7 @@ def export_comparison(
 
 # MAIN
 if __name__ == "__main__":
+
     print("Chargement du VectorStore prototype…")
     vector_store_manager = load_vectorstore()
 
@@ -510,12 +511,39 @@ if __name__ == "__main__":
     eval_set = load_evaluation_set()
 
     print("Construction du dataset RAGAS…")
-    dataset = build_ragas_dataset(eval_set, vector_store_manager)
+    baseline_dataset, controlled_dataset = build_ragas_dataset(eval_set, vector_store_manager,)
 
-    print("Évaluation RAGAS…")
-    result = run_ragas_evaluation(dataset)
+    print("\nÉvaluation RAGAS AVANT contrôle Pydantic AI…")
+    baseline_result = run_ragas_evaluation(baseline_dataset)
 
-    print("Export des résultats…")
-    export_results(result, dataset)
+    print("\nScores AVANT contrôle :")
+    for metric, score in baseline_result.items():
+        print(f"  {metric}: {score}")
 
-    print("Évaluation terminée.")
+    print("\nÉvaluation RAGAS APRÈS contrôle Pydantic AI…")
+    controlled_result = run_ragas_evaluation(controlled_dataset)
+
+    print("\nScores APRÈS contrôle :")
+    for metric, score in controlled_result.items():
+        print(f"  {metric}: {score}")
+
+    print("\nExport des résultats…")
+
+    export_results(
+        baseline_result,
+        baseline_dataset,
+        output_dir="ragas_results/before_pydantic_ai",
+        evaluation_name="before_pydantic_ai",)
+
+    export_results(
+        controlled_result,
+        controlled_dataset,
+        output_dir="ragas_results/after_pydantic_ai",
+        evaluation_name="after_pydantic_ai",)
+
+    export_comparison(
+        baseline_result,
+        controlled_result,
+        output_dir="ragas_results",)
+
+    print("\nÉvaluation terminée.")
