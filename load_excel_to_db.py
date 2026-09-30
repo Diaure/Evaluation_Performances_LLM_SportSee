@@ -4,6 +4,13 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from pydantic import BaseModel, ValidationError
 
+from utils.pydantic_validation import (
+    Team,
+    Player,
+    Match,
+    Stats,
+    Top15Player)
+
 # Chargement des variables d'environnement
 load_dotenv()
 
@@ -163,22 +170,47 @@ stats_df.columns = [
 
 
 # Validation Pydantic
-class Player(BaseModel):
-    nom_du_joueur: str
-    equipe_du_joueur: str
-    age_du_joueur: int
+def validate_dataframe(df, model_class, table_name):
+    validated_data = []
+    for index, row in df.iterrows():
+        try:
+            model = model_class(**row.to_dict())
+            validated_data.append(model.model_dump())
+        except ValidationError as e:
+            print(
+                f"\nERREUR DE VALIDATION dans {table_name}, "
+                f"ligne {index} :")
+            print(e)
+            raise
+    print(
+        f"Validation Pydantic réussie pour {table_name} : "
+        f"{len(validated_data)} ligne(s).")
+    return pd.DataFrame(validated_data)
 
-players = []
-for _, row in df.iterrows():
-    try:
-        player = Player(
-            nom_du_joueur=row["Nom_du_joueur"],
-            equipe_du_joueur=row["Équipe_du_joueur_(code_à_3_lettres)"],
-            age_du_joueur=row["Âge_du_joueur"]
-        )
-        players.append(player.model_dump())
-    except ValidationError as e:
-        print(f"Erreur validation ligne {row.get('Nom_du_joueur', 'Inconnu')}: {e}")
+# préparation et validation pydantic joueurs
+players_df = df[
+    [
+        "Nom_du_joueur",
+        "Équipe_du_joueur_(code_à_3_lettres)",
+        "Âge_du_joueur"
+    ]
+].copy()
+
+players_df.rename(
+    columns={
+        "Nom_du_joueur": "nom_du_joueur",
+        "Équipe_du_joueur_(code_à_3_lettres)": "equipe_du_joueur",
+        "Âge_du_joueur": "age_du_joueur"
+    },
+    inplace=True
+)
+
+players_df = validate_dataframe(
+    players_df,
+    Player,
+    "players"
+)
+
 
 # Création des tables
 with engine.begin() as conn:
@@ -226,9 +258,7 @@ with engine.begin() as conn:
 
             CONSTRAINT fk_player
                 FOREIGN KEY (player_id)
-                REFERENCES players(player_id)
-        );
-    """))
+                REFERENCES players(player_id));"""))
 
     # Table stats
     conn.execute(text("""
@@ -270,9 +300,7 @@ with engine.begin() as conn:
 
             CONSTRAINT fk_player_stats
                 FOREIGN KEY (player_id)
-                REFERENCES players(player_id)
-        );
-    """))
+                REFERENCES players(player_id));"""))
 
     # Table top_15_joueurs_points
     conn.execute(text("""
@@ -291,15 +319,24 @@ with engine.begin() as conn:
                 FOREIGN KEY (player_id)
                 REFERENCES players(player_id));"""))
 
-
-# Insertion des données
-players_df = pd.DataFrame(players)
+# validation pydantic teams
+teams_df = validate_dataframe(
+    teams_df,
+    Team, 
+    "teams"
+)
 teams_df.to_sql(
     "teams",
     engine,
     if_exists="append",
     index=False)
 
+# validation pydantic players
+players_df = validate_dataframe(
+    players_df,
+    Player,
+    "players"
+)
 players_df.to_sql(
     "players",
     engine,
@@ -339,7 +376,11 @@ players_mapping = pd.read_sql(
     FROM players;""", engine)
 print(f"Nombre de joueurs dans PostgreSQL : {len(players_mapping)}")
 
-
+matches_df = validate_dataframe(
+    matches_df,
+    Match,
+    "matches"
+)
 matches_df = matches_df.merge(players_mapping, on="nom_du_joueur", how="left")
 # Vérification
 if matches_df["player_id"].isna().any():
@@ -368,39 +409,16 @@ matches_insert.to_sql(
     engine, 
     if_exists="append", 
     index=False)
-# with engine.begin() as conn:
-#     conn.execute(text("""
-#         INSERT INTO matches (
-#             player_id,
-#             nombre_matchs_joues,
-#             victoires,
-#             defaites,
-#             minutes_moyennes,
-#             points_moyens,
-#             tirs_reussis,
-#             tirs_tentes,
-#             pourcentage_reussite,
-#             minutes_apres_15,
-#             tirs_3_points_tentes
-#         )
-#         SELECT
-#             p.player_id,
-#             m.nombre_matchs_joues,
-#             m.victoires,
-#             m.defaites,
-#             m.minutes_moyennes,
-#             m.points_moyens,
-#             m.tirs_reussis,
-#             m.tirs_tentes,
-#             m.pourcentage_reussite,
-#             m.minutes_apres_15,
-#             m.tirs_3_points_tentes
-#         FROM matches_temp m
-#         JOIN players p
-#             ON m.nom_du_joueur = p.nom_du_joueur;"""))
-#     conn.execute(text("""DROP TABLE matches_temp;"""))
 
-stats_df = stats_df.merge(players_mapping, on="nom_du_joueur", how="left")
+stats_df = validate_dataframe(
+    stats_df,
+    Stats,
+    "stats"
+)
+stats_df = stats_df.merge(
+    players_mapping,
+    on="nom_du_joueur",
+    how="left")
 
 # Vérification
 if stats_df["player_id"].isna().any():
@@ -453,83 +471,13 @@ stats_insert.to_sql(
     engine,
     if_exists="append",
     index=False)
-# with engine.begin() as conn:
-#     conn.execute(text("""
-#         INSERT INTO stats (
-#             player_id,
-#             pourcentage_3_points,
-#             lancers_francs_reussis,
-#             lancers_francs_tentes,
-#             pourcentage_lancers_francs,
-#             rebonds_offensifs,
-#             rebonds_defensifs,
-#             rebonds_totaux,
-#             passes_decisives,
-#             balles_perdues,
-#             interceptions,
-#             contres,
-#             fautes_personnelles,
-#             fantasy_points,
-#             double_doubles,
-#             triple_doubles,
-#             plus_minus,
-#             offensive_rating,
-#             defensive_rating,
-#             net_rating,
-#             pourcentage_assists,
-#             ratio_assists_pertes,
-#             ratio_assists_100_possessions,
-#             pourcentage_rebonds_offensifs,
-#             pourcentage_rebonds_defensifs,
-#             pourcentage_rebonds_totaux,
-#             turnover_ratio,
-#             efg_percent,
-#             true_shooting_percent,
-#             usage_rate,
-#             rythme_de_jeu,
-#             player_impact_estimate,
-#             possessions_totales
-#         )
-#         SELECT
-#             p.player_id,
-#             s.pourcentage_3_points,
-#             s.lancers_francs_reussis,
-#             s.lancers_francs_tentes,
-#             s.pourcentage_lancers_francs,
-#             s.rebonds_offensifs,
-#             s.rebonds_defensifs,
-#             s.rebonds_totaux,
-#             s.passes_decisives,
-#             s.balles_perdues,
-#             s.interceptions,
-#             s.contres,
-#             s.fautes_personnelles,
-#             s.fantasy_points,
-#             s.double_doubles,
-#             s.triple_doubles,
-#             s.plus_minus,
-#             s.offensive_rating,
-#             s.defensive_rating,
-#             s.net_rating,
-#             s.pourcentage_assists,
-#             s.ratio_assists_pertes,
-#             s.ratio_assists_100_possessions,
-#             s.pourcentage_rebonds_offensifs,
-#             s.pourcentage_rebonds_defensifs,
-#             s.pourcentage_rebonds_totaux,
-#             s.turnover_ratio,
-#             s.efg_percent,
-#             s.true_shooting_percent,
-#             s.usage_rate,
-#             s.rythme_de_jeu,
-#             s.player_impact_estimate,
-#             s.possessions_totales
-#         FROM stats_temp s
-#         JOIN players p
-#             ON s.nom_du_joueur = p.nom_du_joueur;"""))
-#     conn.execute(text("""DROP TABLE stats_temp;"""))
 
-
+top_15_joueurs_points_df = top_15_joueurs_points_df.rename(columns={"Estimation de l’impact du joueur": "impact_estime"})
+top_15_joueurs_points_df = validate_dataframe(
+    top_15_joueurs_points_df,
+    Top15Player,
+    "top_15_joueurs_points"
+)
 top_15_joueurs_points_df = top_15_joueurs_points_df.merge(
     players_mapping,
     on="nom_du_joueur",
@@ -551,65 +499,24 @@ top_15_insert = top_15_joueurs_points_df[[
         "pourcentage_tirs_3_points",
         "pourcentage_lancers_francs",
         "rebonds_offensifs",
-        "Estimation de l’impact du joueur"]].copy()
+        "impact_estime"]].copy()
 
-# Renommage pour correspondre à PostgreSQL
-top_15_insert.rename(columns={"Estimation de l’impact du joueur": "impact_estime"}, inplace=True)
 top_15_insert.to_sql(
     "top_15_joueurs_points",
     engine,
     if_exists="append",
     index=False)
-# with engine.begin() as conn:
-#     conn.execute(text("""
-#         INSERT INTO top_15_joueurs_points (
-#             player_id,
-#             nom_du_joueur,
-#             nombre_points_total,
-#             tirs_reussis,
-#             pourcentage_tirs_reussis,
-#             pourcentage_tirs_3_points,
-#             pourcentage_lancers_francs,
-#             rebonds_offensifs,
-#             impact_estime
-#         )
-#         SELECT
-#             p.player_id,
-#             t.nom_du_joueur,
-#             t.nombre_points_total,
-#             t.tirs_reussis,
-#             t.pourcentage_tirs_reussis,
-#             t.pourcentage_tirs_3_points,
-#             t.pourcentage_lancers_francs,
-#             t.rebonds_offensifs,
-#             t."Estimation de l’impact du joueur"
-#         FROM top_15_temp t
-#         INNER JOIN players p
-#             ON t.nom_du_joueur = p.nom_du_joueur;"""))
-#     conn.execute(text("""DROP TABLE stats_temp;"""))
-
 
 # check final
 with engine.connect() as conn:
-
-    # Joueurs
     nb_players = conn.execute(text("""SELECT COUNT(*) FROM players;""")).scalar()
-
-    # Matches
     nb_matches = conn.execute(text("""SELECT COUNT(*) FROM matches;""")).scalar()
-
-    # Stats
     nb_stats = conn.execute(text("""SELECT COUNT(*) FROM stats;""")).scalar()
-
-    # Top 15
     nb_top15 = conn.execute(text("""SELECT COUNT(*) FROM top_15_joueurs_points;""")).scalar()
 
-    print("\n========== VÉRIFICATION ==========")
     print(f"Nombre de joueurs : {nb_players}")
     print(f"Nombre de lignes matches : {nb_matches}")
     print(f"Nombre de lignes stats : {nb_stats}")
     print(f"Nombre de joueurs dans le top 15 : {nb_top15}")
-    print("==================================")
 
-
-print("Toutes les données Excel ont été insérées correctement dans PostgreSQL avec la clé étrangère entre players et teams.")
+print("Toutes les données Excel ont été insérées correctement dans PostgreSQL.")
