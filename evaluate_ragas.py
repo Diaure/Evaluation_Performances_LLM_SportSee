@@ -349,13 +349,6 @@ def build_ragas_dataset(eval_set, vector_store_manager):
                 "raw_answer": reponse_raw,
                 },})
 
-        # Ajout des données validées au dataset
-        # dataset["question"].append(rag_result.question)
-        # dataset["answer"].append(rag_result.answer)
-        # dataset["contexts"].append(rag_result.contexts)
-        # dataset["ground_truth"].append(rag_result.ground_truth)
-        # dataset["metadata"].append(item)
-
     return baseline_dataset, controlled_dataset
 
 
@@ -366,8 +359,7 @@ def run_ragas_evaluation(dataset):
     "question": dataset["question"],
     "answer": dataset["answer"],
     "contexts": dataset["contexts"],
-    "ground_truth": dataset["ground_truth"],
-})
+    "ground_truth": dataset["ground_truth"],})
 
     evaluateur_llm = MistralRagasLLM(run_config=RunConfig())
     evaluateur_embeddings = MistralRagasEmbeddings()
@@ -383,44 +375,13 @@ def run_ragas_evaluation(dataset):
             # groundedness,
             # semantic_similarity,
             # noise_sensitivity,
-        ],
+],
         llm=evaluateur_llm,
         embeddings=evaluateur_embeddings)
     
     return result
 
 
-# Export JSON + CSV
-# def export_results(result, dataset, output_dir="ragas_results"):
-#     Path(output_dir).mkdir(exist_ok=True)
-
-#     # JSON complet
-#     with open(Path(output_dir) / "results.json", "w", encoding="utf-8") as f:
-#         json.dump({
-#             "ragas_scores": result,
-#             "metadata": dataset["metadata"]
-#         }, f, indent=4)
-
-#     # CSV simple
-#     with open(Path(output_dir) / "results.csv", "w", newline="", encoding="utf-8") as f:
-#         writer = csv.writer(f)
-#         writer.writerow(["metric", "score"])
-#         for metric, score in result.items():
-#             writer.writerow([metric, score])
-
-#     # Construction du fichier détaillé par question
-#     detailed = []
-
-#     for i in range(len(dataset["question"])):
-#         detailed.append({
-#             "question": dataset["question"][i],
-#             "contexts": dataset["contexts"][i],
-#             "answer": dataset["answer"][i],
-#             "ground_truth": dataset["ground_truth"][i],
-#             "scores": result  # scores globaux répétés pour chaque question
-#         })
-
-#     with open(Path(output_dir) / "results_detaille.json", "w", encoding="utf-8") as f:json.dump(detailed, f, indent=4)
 
 def export_results(
     result,
@@ -443,6 +404,45 @@ def export_results(
         for metric, score in result.items():
             writer.writerow([metric, score,])
 
+    # Scores par question
+    # RAGAS conserve les scores individuels dans le résultat.
+    # to_pandas() permet de les récupérer ligne par ligne.
+    result_df = result.to_pandas()
+    scores_par_question = []
+    metrics = [
+        "answer_relevancy",
+        "answer_correctness",
+        "context_precision",
+        "context_recall",
+        "faithfulness",]
+
+    for i in range(len(dataset["question"])):
+        metadata = dataset["metadata"][i]
+
+        # Utilisation de l'identifiant présent dans le jeu de test. Si aucun identifiant n'est présent, Q001, Q002, etc. est généré.
+        question_id = metadata.get(
+            "id",
+            f"Q{i + 1:03d}",)
+        
+        row = {
+            "question_id": question_id,
+            "question": dataset["question"][i],}
+
+        for metric in metrics:
+
+            if metric in result_df.columns:
+                value = result_df.iloc[i][metric]
+                if pd.isna(value):
+                    row[metric] = None
+                else:
+                    row[metric] = float(value)
+            else:
+                row[metric] = None
+        scores_par_question.append(row)
+
+    scores_df = pd.DataFrame(scores_par_question)
+    scores_df.to_csv(output_path / "scores_par_question.csv", index=False, encoding="utf-8-sig",)
+
     # Résultats détaillés
     detailed = []
     for i in range(len(dataset["question"])):
@@ -457,7 +457,7 @@ def export_results(
         json.dump(detailed, f, indent=4, ensure_ascii=False, default=str,)
 
 # Scores comparés
-def export_comparison(
+def export_comparaison(
     baseline_result,
     controlled_result,
     output_dir="ragas_results",):
@@ -465,7 +465,7 @@ def export_comparison(
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True,)
 
-    comparison = []
+    comparaison = []
     metrics = set(list(baseline_result.keys()) + list(controlled_result.keys()))
     for metric in metrics:
         before = baseline_result.get(metric)
@@ -476,15 +476,14 @@ def export_comparison(
             and after is not None):
             difference = after - before
 
-
-        comparison.append({
+        comparaison.append({
                 "metric": metric,
                 "before_pydantic_ai": before,
                 "after_pydantic_ai": after,
                 "difference": difference,})
 
     with open(output_path / "comparison.json", "w", encoding="utf-8",) as f:
-        json.dump(comparison, f, indent=4, ensure_ascii=False,)
+        json.dump(comparaison, f, indent=4, ensure_ascii=False,)
 
     with open(output_path / "comparison.csv", "w", newline="", encoding="utf-8", ) as f:
         writer = csv.writer(f)
@@ -494,7 +493,7 @@ def export_comparison(
                 "after_pydantic_ai",
                 "difference",])
 
-        for row in comparison:
+        for row in comparaison:
             writer.writerow([
                     row["metric"],
                     row["before_pydantic_ai"],
@@ -541,7 +540,7 @@ if __name__ == "__main__":
         output_dir="ragas_results/after_pydantic_ai",
         evaluation_name="after_pydantic_ai",)
 
-    export_comparison(
+    export_comparaison(
         baseline_result,
         controlled_result,
         output_dir="ragas_results",)

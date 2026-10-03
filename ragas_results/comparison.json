@@ -1,32 +1,32 @@
 [
     {
         "metric": "faithfulness",
-        "before_pydantic_ai": 0.5361587301587302,
-        "after_pydantic_ai": 0.9362745098039216,
-        "difference": 0.4001157796451914
+        "before_pydantic_ai": 0.4854571428571428,
+        "after_pydantic_ai": 0.8166666666666667,
+        "difference": 0.33120952380952384
     },
     {
         "metric": "context_recall",
-        "before_pydantic_ai": 0.6666666666666666,
-        "after_pydantic_ai": 0.6666666666666666,
-        "difference": 0.0
-    },
-    {
-        "metric": "answer_correctness",
-        "before_pydantic_ai": 0.254315889620137,
-        "after_pydantic_ai": 0.2692768228882837,
-        "difference": 0.014960933268146681
+        "before_pydantic_ai": 0.3333333333333333,
+        "after_pydantic_ai": 0.4,
+        "difference": 0.06666666666666671
     },
     {
         "metric": "answer_relevancy",
-        "before_pydantic_ai": 0.6181461075949999,
-        "after_pydantic_ai": 0.29176212718653133,
-        "difference": -0.32638398040846855
+        "before_pydantic_ai": 0.42702754143820243,
+        "after_pydantic_ai": 0.26553799521172694,
+        "difference": -0.1614895462264755
+    },
+    {
+        "metric": "answer_correctness",
+        "before_pydantic_ai": 0.25041951248132244,
+        "after_pydantic_ai": 0.2520328588656743,
+        "difference": 0.0016133463843518436
     },
     {
         "metric": "context_precision",
-        "before_pydantic_ai": 0.129861111098125,
-        "after_pydantic_ai": 0.15277777776354165,
-        "difference": 0.02291666666541664
+        "before_pydantic_ai": 0.109999999989,
+        "after_pydantic_ai": 0.12666666665499998,
+        "difference": 0.016666666665999988
     }
 ]
