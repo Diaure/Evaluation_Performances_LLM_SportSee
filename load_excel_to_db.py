@@ -14,6 +14,7 @@ from utils.pydantic_validation import (
 # Chargement des variables d'environnement
 load_dotenv()
 
+#connexion à sql
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_HOST = os.getenv("DB_HOST")
