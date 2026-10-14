@@ -20,10 +20,10 @@ MODEL_NAME = "mistral-small-latest" # Ou un autre modèle comme mistral-large-la
 # INPUT_DATA_URL = os.getenv("INPUT_DATA_URL") # Décommentez si vous utilisez une URL
 INPUT_DIR = "inputs"                # Dossier pour les données sources après extraction
 VECTOR_DB_DIR = "vector_db"         # Dossier pour stocker l'index Faiss et les chunks
-FAISS_INDEX_FILE = os.path.join(VECTOR_DB_DIR, "faiss_index.idx")
-DOCUMENT_CHUNKS_FILE = os.path.join(VECTOR_DB_DIR, "document_chunks.pkl")
+FAISS_INDEX_FILE = os.path.join(VECTOR_DB_DIR, "faiss_index_new.idx")
+DOCUMENT_CHUNKS_FILE = os.path.join(VECTOR_DB_DIR, "document_chunks_new.pkl")
 
-CHUNK_SIZE = 1500                   # Taille des chunks en *caractères* (vise ~512 tokens)
+CHUNK_SIZE = 1000                   # Taille des chunks en *caractères* (vise ~512 tokens)
 CHUNK_OVERLAP = 150                 # Chevauchement en *caractères*
 EMBEDDING_BATCH_SIZE = 32           # Taille des lots pour l'API d'embedding
 

@@ -18,7 +18,7 @@ from utils.vector_store import VectorStoreManager
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # chemins des nouveaux fichiers
-DEFAULT_NEW_FAISS_INDEX = str(Path(FAISS_INDEX_FILE).with_name("faiss_index_new"))
+DEFAULT_NEW_FAISS_INDEX = str(Path(FAISS_INDEX_FILE).with_name("faiss_index_new.idx"))
 DEFAULT_NEW_CHUNKS = str(Path(DOCUMENT_CHUNKS_FILE).with_name("document_chunks_new.pkl"))
 
 
