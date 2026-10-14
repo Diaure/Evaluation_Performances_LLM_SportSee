@@ -4,7 +4,7 @@ import pickle
 import faiss
 import numpy as np
 import logging
-from typing import List, Dict, Tuple, Optional
+from typing import Any, List, Dict, Tuple, Optional
 from httpx import HTTPError
 from mistralai.client import Mistral
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -20,28 +20,85 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 class VectorStoreManager:
     """Gère la création, le chargement et la recherche dans un index Faiss."""
 
-    def __init__(self):
+    # def __init__(self):
+    #     self.index: Optional[faiss.Index] = None
+    #     self.document_chunks: List[Dict[str, any]] = []
+    #     self.mistral_client = Mistral(api_key=MISTRAL_API_KEY)
+    #     self._load_index_and_chunks()
+
+    def __init__(
+        self,
+        faiss_index_file: Optional[str] = None,
+        document_chunks_file: Optional[str] = None,
+    ):
+        self.faiss_index_file = faiss_index_file or FAISS_INDEX_FILE
+        self.document_chunks_file = (
+            document_chunks_file or DOCUMENT_CHUNKS_FILE
+        )
+
         self.index: Optional[faiss.Index] = None
-        self.document_chunks: List[Dict[str, any]] = []
+        self.document_chunks: List[Dict[str, Any]] = []
+
         self.mistral_client = Mistral(api_key=MISTRAL_API_KEY)
+
         self._load_index_and_chunks()
 
+        # Vérifier la cohérence uniquement si un index a été chargé.
+        if self.index is not None:
+            if self.index.ntotal != len(self.document_chunks):
+                raise ValueError(
+                    f"Index incohérent : {self.index.ntotal} vecteurs "
+                    f"pour {len(self.document_chunks)} chunks."
+                )
+
+    
     def _load_index_and_chunks(self):
-        """Charge l'index Faiss et les chunks si les fichiers existent."""
-        if os.path.exists(FAISS_INDEX_FILE) and os.path.exists(DOCUMENT_CHUNKS_FILE):
+        """Charge l'index FAISS et les chunks si les fichiers existent."""
+
+        if (
+            os.path.exists(self.faiss_index_file)
+            and os.path.exists(self.document_chunks_file)
+        ):
             try:
-                logging.info(f"Chargement de l'index Faiss depuis {FAISS_INDEX_FILE}...")
-                self.index = faiss.read_index(FAISS_INDEX_FILE)
-                logging.info(f"Chargement des chunks depuis {DOCUMENT_CHUNKS_FILE}...")
-                with open(DOCUMENT_CHUNKS_FILE, 'rb') as f:
+                logging.info(
+                    f"Chargement de l'index FAISS depuis "
+                    f"{self.faiss_index_file}..."
+                )
+
+                self.index = faiss.read_index(self.faiss_index_file)
+
+                logging.info(
+                    f"Chargement des chunks depuis "
+                    f"{self.document_chunks_file}..."
+                )
+
+                with open(self.document_chunks_file, "rb") as f:
                     self.document_chunks = pickle.load(f)
-                logging.info(f"Index ({self.index.ntotal} vecteurs) et {len(self.document_chunks)} chunks chargés.")
-            except Exception as e:
-                logging.error(f"Erreur lors du chargement de l'index/chunks: {e}")
+
+                # Vérifier la cohérence entre les vecteurs et les chunks.
+                if self.index.ntotal != len(self.document_chunks):
+                    raise ValueError(
+                        f"Index incohérent : {self.index.ntotal} vecteurs "
+                        f"pour {len(self.document_chunks)} chunks."
+                    )
+
+                logging.info(
+                    f"Index ({self.index.ntotal} vecteurs) et "
+                    f"{len(self.document_chunks)} chunks chargés."
+                )
+
+            except Exception:
+                logging.exception(
+                    "Erreur lors du chargement de l'index et des chunks."
+                )
                 self.index = None
                 self.document_chunks = []
+
         else:
-            logging.warning("Fichiers d'index Faiss ou de chunks non trouvés. L'index est vide.")
+            logging.info(
+                "Aucun index existant trouvé aux chemins configurés. "
+                "Un nouvel index pourra être créé."
+            )
 
     def _split_documents_to_chunks(self, documents: List[Dict[str, any]]) -> List[Dict[str, any]]:
         """Découpe les documents en chunks avec métadonnées."""
@@ -78,126 +135,310 @@ class VectorStoreManager:
         logging.info(f"Total de {len(all_chunks)} chunks créés.")
         return all_chunks
 
-    def _generate_embeddings(self, chunks: List[Dict[str, any]]) -> Optional[np.ndarray]:
-        """Génère les embeddings pour une liste de chunks via l'API Mistral."""
-        if not MISTRAL_API_KEY:
-            logging.error("Impossible de générer les embeddings: MISTRAL_API_KEY manquante.")
-            return None
-        if not chunks:
-            logging.warning("Aucun chunk fourni pour générer les embeddings.")
-            return None
+    # def _generate_embeddings(self, chunks: List[Dict[str, any]]) -> Optional[np.ndarray]:
+    #     """Génère les embeddings pour une liste de chunks via l'API Mistral."""
+    #     if not MISTRAL_API_KEY:
+    #         logging.error("Impossible de générer les embeddings: MISTRAL_API_KEY manquante.")
+    #         return None
+    #     if not chunks:
+    #         logging.warning("Aucun chunk fourni pour générer les embeddings.")
+    #         return None
 
-        logging.info(f"Génération des embeddings pour {len(chunks)} chunks (modèle: {EMBEDDING_MODEL})...")
-        all_embeddings = []
-        total_batches = (len(chunks) + EMBEDDING_BATCH_SIZE - 1) // EMBEDDING_BATCH_SIZE
+    #     logging.info(f"Génération des embeddings pour {len(chunks)} chunks (modèle: {EMBEDDING_MODEL})...")
+    #     all_embeddings = []
+    #     total_batches = (len(chunks) + EMBEDDING_BATCH_SIZE - 1) // EMBEDDING_BATCH_SIZE
 
-        for i in range(0, len(chunks), EMBEDDING_BATCH_SIZE):
-            batch_num = (i // EMBEDDING_BATCH_SIZE) + 1
-            batch_chunks = chunks[i:i + EMBEDDING_BATCH_SIZE]
-            texts_to_embed = [chunk["text"] for chunk in batch_chunks]
+    #     for i in range(0, len(chunks), EMBEDDING_BATCH_SIZE):
+    #         batch_num = (i // EMBEDDING_BATCH_SIZE) + 1
+    #         batch_chunks = chunks[i:i + EMBEDDING_BATCH_SIZE]
+    #         texts_to_embed = [chunk["text"] for chunk in batch_chunks]
 
-            logging.info(f"  Traitement du lot {batch_num}/{total_batches} ({len(texts_to_embed)} chunks)")
-            try:
-                response = self.mistral_client.embeddings.create(
-                    model=EMBEDDING_MODEL,
-                    input=texts_to_embed
-                )
-                batch_embeddings = [data.embedding for data in response.data]
-                all_embeddings.extend(batch_embeddings)
-            except HTTPError as e:
-                logging.error(f"Erreur API Mistral lors de la génération d'embeddings (lot {batch_num}): {e}")
-                logging.error(f"  Détails: Status Code={e.status_code}, Message={e.message}")
-            except Exception as e:
-                logging.error(f"Erreur inattendue lors de la génération d'embeddings (lot {batch_num}): {e}")
-                 # Gérer l'erreur: ici on ajoute des vecteurs nuls pour ne pas bloquer
-                num_failed = len(texts_to_embed)
-                if all_embeddings: # Si on a déjà des embeddings, on prend la dimension du premier
-                    dim = len(all_embeddings[0])
-                else: # Sinon, on ne peut pas déterminer la dimension, on saute ce lot
-                     logging.error("Impossible de déterminer la dimension des embeddings, saut du lot.")
-                     continue
-                logging.warning(f"Ajout de {num_failed} vecteurs nuls de dimension {dim} pour le lot échoué.")
-                all_embeddings.extend([np.zeros(dim, dtype='float32')] * num_failed)
+    #         logging.info(f"  Traitement du lot {batch_num}/{total_batches} ({len(texts_to_embed)} chunks)")
+    #         try:
+    #             response = self.mistral_client.embeddings.create(
+    #                 model=EMBEDDING_MODEL,
+    #                 input=texts_to_embed
+    #             )
+    #             batch_embeddings = [data.embedding for data in response.data]
+    #             all_embeddings.extend(batch_embeddings)
+    #         except HTTPError as e:
+    #             logging.error(f"Erreur API Mistral lors de la génération d'embeddings (lot {batch_num}): {e}")
+    #             logging.error(f"  Détails: Status Code={e.status_code}, Message={e.message}")
+    #         except Exception as e:
+    #             logging.error(f"Erreur inattendue lors de la génération d'embeddings (lot {batch_num}): {e}")
+    #              # Gérer l'erreur: ici on ajoute des vecteurs nuls pour ne pas bloquer
+    #             num_failed = len(texts_to_embed)
+    #             if all_embeddings: # Si on a déjà des embeddings, on prend la dimension du premier
+    #                 dim = len(all_embeddings[0])
+    #             else: # Sinon, on ne peut pas déterminer la dimension, on saute ce lot
+    #                  logging.error("Impossible de déterminer la dimension des embeddings, saut du lot.")
+    #                  continue
+    #             logging.warning(f"Ajout de {num_failed} vecteurs nuls de dimension {dim} pour le lot échoué.")
+    #             all_embeddings.extend([np.zeros(dim, dtype='float32')] * num_failed)
 
-            except Exception as e:
-                logging.error(f"Erreur inattendue lors de la génération d'embeddings (lot {batch_num}): {e}")
-                # Gérer comme ci-dessus
-                num_failed = len(texts_to_embed)
-                if all_embeddings:
-                    dim = len(all_embeddings[0])
-                else:
-                     logging.error("Impossible de déterminer la dimension des embeddings, saut du lot.")
-                     continue
-                logging.warning(f"Ajout de {num_failed} vecteurs nuls de dimension {dim} pour le lot échoué.")
-                all_embeddings.extend([np.zeros(dim, dtype='float32')] * num_failed)
+    #         except Exception as e:
+    #             logging.error(f"Erreur inattendue lors de la génération d'embeddings (lot {batch_num}): {e}")
+    #             # Gérer comme ci-dessus
+    #             num_failed = len(texts_to_embed)
+    #             if all_embeddings:
+    #                 dim = len(all_embeddings[0])
+    #             else:
+    #                  logging.error("Impossible de déterminer la dimension des embeddings, saut du lot.")
+    #                  continue
+    #             logging.warning(f"Ajout de {num_failed} vecteurs nuls de dimension {dim} pour le lot échoué.")
+    #             all_embeddings.extend([np.zeros(dim, dtype='float32')] * num_failed)
 
 
-        if not all_embeddings:
-             logging.error("Aucun embedding n'a pu être généré.")
-             return None
+    #     if not all_embeddings:
+    #          logging.error("Aucun embedding n'a pu être généré.")
+    #          return None
 
-        embeddings_array = np.array(all_embeddings).astype('float32')
-        logging.info(f"Embeddings générés avec succès. Shape: {embeddings_array.shape}")
-        return embeddings_array
+    #     embeddings_array = np.array(all_embeddings).astype('float32')
+    #     logging.info(f"Embeddings générés avec succès. Shape: {embeddings_array.shape}")
+    #     return embeddings_array
 
-    def build_index(self, documents: List[Dict[str, any]]):
-        """Construit l'index Faiss à partir des documents."""
+    
+    def _generate_embeddings(
+            self,
+            chunks: List[Dict[str, Any]]
+        ) -> Optional[np.ndarray]:
+            """Génère les embeddings Mistral pour les chunks."""
+
+            if not MISTRAL_API_KEY:
+                logging.error("MISTRAL_API_KEY manquante.")
+                return None
+
+            if not chunks:
+                logging.warning("Aucun chunk à vectoriser.")
+                return None
+
+            if EMBEDDING_BATCH_SIZE <= 0:
+                logging.error("EMBEDDING_BATCH_SIZE doit être positif.")
+                return None
+
+            all_embeddings = []
+            total_batches = (
+                len(chunks) + EMBEDDING_BATCH_SIZE - 1
+            ) // EMBEDDING_BATCH_SIZE
+
+            for i in range(0, len(chunks), EMBEDDING_BATCH_SIZE):
+                batch_num = i // EMBEDDING_BATCH_SIZE + 1
+                batch = chunks[i:i + EMBEDDING_BATCH_SIZE]
+
+                try:
+                    response = self.mistral_client.embeddings.create(
+                        model=EMBEDDING_MODEL,
+                        inputs=[chunk["text"] for chunk in batch],
+                    )
+
+                    embeddings = [
+                        item.embedding for item in response.data
+                    ]
+
+                    if len(embeddings) != len(batch):
+                        logging.error(
+                            f"Lot {batch_num} : nombre d'embeddings incorrect."
+                        )
+                        return None
+
+                    batch_array = np.asarray(embeddings, dtype=np.float32)
+
+                    if batch_array.ndim != 2 or batch_array.shape[1] == 0:
+                        logging.error(
+                            f"Lot {batch_num} : dimensions invalides."
+                        )
+                        return None
+
+                    if not np.isfinite(batch_array).all():
+                        logging.error(
+                            f"Lot {batch_num} : valeurs non finies détectées."
+                        )
+                        return None
+
+                    if all_embeddings and (
+                        batch_array.shape[1] != len(all_embeddings[0])
+                    ):
+                        logging.error("Dimensions d'embeddings incohérentes.")
+                        return None
+
+                    all_embeddings.extend(batch_array)
+
+                    logging.info(
+                        f"Lot {batch_num}/{total_batches} traité."
+                    )
+
+                except Exception:
+                    logging.exception(
+                        f"Échec du lot {batch_num}/{total_batches}. "
+                        "La génération est interrompue."
+                    )
+                    return None
+
+            result = np.asarray(all_embeddings, dtype=np.float32)
+
+            if result.shape[0] != len(chunks):
+                logging.error("Nombre final d'embeddings incorrect.")
+                return None
+
+            logging.info(f"Embeddings générés : {result.shape}")
+            return result
+
+    # def build_index(self, documents: List[Dict[str, any]]):
+    #     """Construit l'index Faiss à partir des documents."""
+    #     if not documents:
+    #         logging.warning("Aucun document fourni pour construire l'index.")
+    #         return
+
+    #     # 1. Découper en chunks
+    #     self.document_chunks = self._split_documents_to_chunks(documents)
+    #     if not self.document_chunks:
+    #         logging.error("Le découpage n'a produit aucun chunk. Impossible de construire l'index.")
+    #         return
+
+    #     # 2. Générer les embeddings
+    #     embeddings = self._generate_embeddings(self.document_chunks)
+    #     if embeddings is None or embeddings.shape[0] != len(self.document_chunks):
+    #         logging.error("Problème de génération d'embeddings. Le nombre d'embeddings ne correspond pas au nombre de chunks.")
+    #         # Nettoyer pour éviter un état incohérent
+    #         self.document_chunks = []
+    #         self.index = None
+    #         # Supprimer les fichiers potentiellement corrompus
+    #         if os.path.exists(self.self.FAISS_INDEX_FILE): os.remove(self.self.FAISS_INDEX_FILE)
+    #         if os.path.exists(self.self.DOCUMENT_CHUNKS_FILE): os.remove(self.self.DOCUMENT_CHUNKS_FILE)
+    #         return
+
+
+    #     # 3. Créer l'index Faiss optimisé pour la similarité cosinus
+    #     dimension = embeddings.shape[1]
+    #     logging.info(f"Création de l'index Faiss optimisé pour la similarité cosinus avec dimension {dimension}...")
+
+    #     # Normaliser les embeddings pour la similarité cosinus
+    #     faiss.normalize_L2(embeddings)
+
+    #     # Créer un index pour la similarité cosinus (IndexFlatIP = produit scalaire)
+    #     self.index = faiss.IndexFlatIP(dimension)
+    #     self.index.add(embeddings)
+    #     logging.info(f"Index Faiss créé avec {self.index.ntotal} vecteurs.")
+
+    #     # 4. Sauvegarder l'index et les chunks
+    #     self._save_index_and_chunks()
+
+    
+    def build_index(self, documents: List[Dict[str, Any]]) -> bool:
+        """Construit et sauvegarde un nouvel index FAISS."""
+
         if not documents:
-            logging.warning("Aucun document fourni pour construire l'index.")
-            return
+            logging.warning("Aucun document fourni.")
+            return False
 
-        # 1. Découper en chunks
-        self.document_chunks = self._split_documents_to_chunks(documents)
-        if not self.document_chunks:
-            logging.error("Le découpage n'a produit aucun chunk. Impossible de construire l'index.")
-            return
+        new_chunks = self._split_documents_to_chunks(documents)
 
-        # 2. Générer les embeddings
-        embeddings = self._generate_embeddings(self.document_chunks)
-        if embeddings is None or embeddings.shape[0] != len(self.document_chunks):
-            logging.error("Problème de génération d'embeddings. Le nombre d'embeddings ne correspond pas au nombre de chunks.")
-            # Nettoyer pour éviter un état incohérent
-            self.document_chunks = []
-            self.index = None
-            # Supprimer les fichiers potentiellement corrompus
-            if os.path.exists(FAISS_INDEX_FILE): os.remove(FAISS_INDEX_FILE)
-            if os.path.exists(DOCUMENT_CHUNKS_FILE): os.remove(DOCUMENT_CHUNKS_FILE)
-            return
+        if not new_chunks:
+            logging.error("Aucun chunk créé.")
+            return False
 
+        embeddings = self._generate_embeddings(new_chunks)
 
-        # 3. Créer l'index Faiss optimisé pour la similarité cosinus
-        dimension = embeddings.shape[1]
-        logging.info(f"Création de l'index Faiss optimisé pour la similarité cosinus avec dimension {dimension}...")
+        if (
+            embeddings is None
+            or embeddings.shape[0] != len(new_chunks)
+        ):
+            logging.error("Échec des embeddings. Indexation annulée.")
+            return False
 
-        # Normaliser les embeddings pour la similarité cosinus
         faiss.normalize_L2(embeddings)
 
-        # Créer un index pour la similarité cosinus (IndexFlatIP = produit scalaire)
-        self.index = faiss.IndexFlatIP(dimension)
-        self.index.add(embeddings)
-        logging.info(f"Index Faiss créé avec {self.index.ntotal} vecteurs.")
+        new_index = faiss.IndexFlatIP(embeddings.shape[1])
+        new_index.add(embeddings)
 
-        # 4. Sauvegarder l'index et les chunks
-        self._save_index_and_chunks()
+        if new_index.ntotal != len(new_chunks):
+            logging.error("Incohérence entre index et chunks.")
+            return False
 
-    def _save_index_and_chunks(self):
-        """Sauvegarde l'index Faiss et la liste des chunks."""
+        # Sauvegarder les fichiers de la nouvelle version.
+        ancien_index = self.index
+        anciens_chunks = self.document_chunks
+
+        self.index = new_index
+        self.document_chunks = new_chunks
+
+        # try:
+        #     self._save_index_and_chunks()
+
+        #     # Vérifier que les deux fichiers existent.
+        #     if not (
+        #         os.path.isfile(self.faiss_index_file)
+        #         and os.path.isfile(self.document_chunks_file)
+        #     ):
+        #         raise OSError("Un ou plusieurs fichiers n'ont pas été créés.")
+
+        if not self._save_index_and_chunks():
+            logging.error(
+                "Échec de la sauvegarde du nouvel index."
+            )
+            self.index = ancien_index
+            self.document_chunks = anciens_chunks
+            return False
+
+        logging.info(
+            f"Nouvel index créé : {self.index.ntotal} vecteurs.")
+
+        # except Exception:
+        #     logging.exception("Échec de la sauvegarde du nouvel index.")
+        #     self.index = ancien_index
+        #     self.document_chunks = anciens_chunks
+        #     return False
+
+        # logging.info(
+        #     f"Nouvel index créé : {self.index.ntotal} vecteurs."
+        # )
+        return True
+
+    # def _save_index_and_chunks(self):
+    #     """Sauvegarde l'index Faiss et la liste des chunks."""
+    #     if self.index is None or not self.document_chunks:
+    #         logging.warning("Tentative de sauvegarde d'un index ou de chunks vides.")
+    #         return
+
+    #     os.makedirs(os.path.dirname(self.FAISS_INDEX_FILE), exist_ok=True)
+    #     os.makedirs(os.path.dirname(self.DOCUMENT_CHUNKS_FILE), exist_ok=True)
+
+    #     try:
+    #         logging.info(f"Sauvegarde de l'index Faiss dans {self.FAISS_INDEX_FILE}...")
+    #         faiss.write_index(self.index, self.FAISS_INDEX_FILE)
+    #         logging.info(f"Sauvegarde des chunks dans {self.DOCUMENT_CHUNKS_FILE}...")
+    #         with open(self.DOCUMENT_CHUNKS_FILE, 'wb') as f:
+    #             pickle.dump(self.document_chunks, f)
+    #         logging.info("Index et chunks sauvegardés avec succès.")
+    #     except Exception as e:
+    #         logging.error(f"Erreur lors de la sauvegarde de l'index/chunks: {e}")
+
+    
+    def _save_index_and_chunks(self) -> bool:
+        """Sauvegarde l'index FAISS et ses chunks."""
+
         if self.index is None or not self.document_chunks:
-            logging.warning("Tentative de sauvegarde d'un index ou de chunks vides.")
-            return
+            logging.error("Index ou chunks vides : sauvegarde impossible.")
+            return False
 
-        os.makedirs(os.path.dirname(FAISS_INDEX_FILE), exist_ok=True)
-        os.makedirs(os.path.dirname(DOCUMENT_CHUNKS_FILE), exist_ok=True)
+        index_dir = os.path.dirname(self.faiss_index_file) or "."
+        chunks_dir = os.path.dirname(self.document_chunks_file) or "."
+
+        os.makedirs(index_dir, exist_ok=True)
+        os.makedirs(chunks_dir, exist_ok=True)
 
         try:
-            logging.info(f"Sauvegarde de l'index Faiss dans {FAISS_INDEX_FILE}...")
-            faiss.write_index(self.index, FAISS_INDEX_FILE)
-            logging.info(f"Sauvegarde des chunks dans {DOCUMENT_CHUNKS_FILE}...")
-            with open(DOCUMENT_CHUNKS_FILE, 'wb') as f:
+            faiss.write_index(self.index, self.faiss_index_file)
+
+            with open(self.document_chunks_file, "wb") as f:
                 pickle.dump(self.document_chunks, f)
-            logging.info("Index et chunks sauvegardés avec succès.")
-        except Exception as e:
-            logging.error(f"Erreur lors de la sauvegarde de l'index/chunks: {e}")
+
+            logging.info("Index et chunks sauvegardés.")
+            return True
+
+        except Exception:
+            logging.exception("Erreur pendant la sauvegarde.")
+            return False
 
     def search(self, query_text: str, k: int = 5, min_score: float = None) -> List[Dict[str, any]]:
         """

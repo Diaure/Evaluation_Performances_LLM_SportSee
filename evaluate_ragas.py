@@ -1,5 +1,3 @@
-# eval_ragas_prototype.py
-
 import json
 import csv
 from pathlib import Path
@@ -35,8 +33,6 @@ from pydantic_ai.providers.mistral import MistralProvider
 
 # Modèles pydantic
 from utils.pydantic_validation import (
-    DocumentModel,
-    PreparedDocumentModel,
     QuestionModel,
     ChunkModel,
     AnswerModel,
@@ -86,14 +82,14 @@ from ragas.metrics import (
     context_precision,
     context_recall,
     faithfulness,
-    # groundedness,
-    # semantic_similarity,
-    # noise_sensitivity,
+    answer_similarity,
+    context_entity_recall,
 )
 
 from ragas.llms import BaseRagasLLM
 from ragas.run_config import RunConfig
 from ragas.embeddings.base import BaseRagasEmbeddings
+from ragas.executor import Executor
 from langchain_core.outputs import (LLMResult, Generation,)
 
 
@@ -195,13 +191,31 @@ def control_reponse_pydantic_ai(
         RÉPONSE PRODUITE PAR LE PROTOTYPE :
         {raw_answer}
 
-        Analyse cette réponse en appliquant strictement les règles
-        définies dans tes instructions.
+        Analyse cette réponse en appliquant strictement les règles définies dans tes instructions.
+
+        - Vérifie chaque affirmation à partir du contexte.
+        - Signale les affirmations non justifiées.
+        - Si le contexte est insuffisant, indique-le clairement.
+        - Ne produis jamais une réponse vide.
         """
 
     result = answer_agent.run_sync(control_prompt)
+    controlled_answer = result.output
 
-    return result.output
+    # Vérification de la sortie structurée
+    if not isinstance(controlled_answer, ControlledAnswerModel):
+        controlled_answer = ControlledAnswerModel.model_validate(
+            controlled_answer
+        )
+
+    if not controlled_answer.answer.strip():
+        raise ValueError(
+            f"Pydantic AI a retourné une réponse vide "
+            f"pour la question : {question}"
+        )
+
+    print("Sortie Pydantic AI :", repr(controlled_answer))
+    return controlled_answer
 
 # Mini prompt pour la validation des réponses avec pydantic
 def validation_reponse_pydantic_ai(question, context_str, answer):
@@ -319,13 +333,21 @@ def build_ragas_dataset(eval_set, vector_store_manager):
             raw_answer=reponse_raw,)
 
         # Réponse après validation
-        reponse_finale = controlled_answer.answer
+        reponse_finale = controlled_answer.answer.strip()
+
+        if not isinstance(reponse_finale, str) or not reponse_finale.strip():
+            print(
+                f"⚠️ Réponse contrôlée vide pour la question : {question}")
+
+            reponse_finale = (
+                "Les informations disponibles ne permettent pas "
+                "de fournir une réponse exploitable.")
 
         # validation
         reponse_validee_controleer = AnswerModel(
             question=question,
             context=context_str,
-            answer=reponse_finale,)
+            answer=reponse_finale.strip(),)
 
         # résultats ragas après controle
         results_controlled = RAGResultModel(
@@ -372,17 +394,17 @@ def run_ragas_evaluation(dataset):
             context_precision,
             context_recall,
             faithfulness,
-            # groundedness,
-            # semantic_similarity,
-            # noise_sensitivity,
+            answer_similarity,
+            context_entity_recall,
 ],
         llm=evaluateur_llm,
-        embeddings=evaluateur_embeddings)
+        embeddings=evaluateur_embeddings,
+        raise_exceptions=False)
     
     return result
 
 
-
+# export des résultats
 def export_results(
     result,
     dataset,

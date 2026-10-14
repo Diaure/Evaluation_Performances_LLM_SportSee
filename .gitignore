@@ -50,3 +50,4 @@ data/
 .logfire/
 ss_ragas_env
 "ss_ragas_env/" 
+.vector_db/
