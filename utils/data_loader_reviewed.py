@@ -266,21 +266,6 @@ def nettoyer_interface_reddit(texte: str) -> str:
 
 # 
 def filtrer_entete_reddit(resultats, hauteur_image: int, proportion_entete: float = 0.08):
-    # resultats_filtres = []
-
-    # Première page : le titre réel commence vers y=233.
-    # Pages suivantes : les commentaires peuvent commencer dès y=150.
-    # seuil_y = 230 if page_number == 0 else 120
-
-    # for boite, texte, confiance in resultats:
-    #     y_max = max(point[1] for point in boite)
-
-    #     if y_max < seuil_y:
-    #         continue
-
-    #     resultats_filtres.append((boite, texte, confiance))
-
-    # return resultats_filtres
     seuil_y = hauteur_image * proportion_entete
 
     return [

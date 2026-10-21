@@ -1,0 +1,1799 @@
+[
+    {
+        "id": "Q001",
+        "question": "Combien de points Jayson Tatum a-t-il marqués ?",
+        "answer": "Jayson Tatum a marqué 1930 points.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0}"
+        ],
+        "ground_truth": "Jayson Tatum a marqué 1930 points",
+        "metadata": {
+            "id": "Q001",
+            "question": "Combien de points Jayson Tatum a-t-il marqués ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Jayson Tatum a marqué 1930 points",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a marqué 1930 points."
+            }
+        }
+    },
+    {
+        "id": "Q002",
+        "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
+        "answer": "Jayson Tatum a pris **626 rebonds** au total.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}"
+        ],
+        "ground_truth": "Jayson Tatum a pris 626 rebonds",
+        "metadata": {
+            "id": "Q002",
+            "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Jayson Tatum a pris 626 rebonds",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a pris **626 rebonds** au total."
+            }
+        }
+    },
+    {
+        "id": "Q003",
+        "question": "Combien de passes décisives Jayson Tatum a-t-il réalisées ?",
+        "answer": "Jayson Tatum a réalisé **432 passes décisives**.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.passes_decisives\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'passes_decisives': 432.0}"
+        ],
+        "ground_truth": "Jayson Tatum a réalisé 432 passes décisives",
+        "metadata": {
+            "id": "Q003",
+            "question": "Combien de passes décisives Jayson Tatum a-t-il réalisées ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Jayson Tatum a réalisé 432 passes décisives",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.passes_decisives\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'passes_decisives': 432.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a réalisé **432 passes décisives**."
+            }
+        }
+    },
+    {
+        "id": "Q004",
+        "question": "Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?",
+        "answer": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45,2 %.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.pourcentage_reussite\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'pourcentage_reussite': 45.2}"
+        ],
+        "ground_truth": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45.2%",
+        "metadata": {
+            "id": "Q004",
+            "question": "Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?",
+            "type": "simple_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45.2%",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.pourcentage_reussite\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'pourcentage_reussite': 45.2}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45,2 %."
+            }
+        }
+    },
+    {
+        "id": "Q005",
+        "question": "Quels sont les trois joueurs qui ont marqué le plus de points ?",
+        "answer": "Les trois joueurs ayant marqué le plus de points sont Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points).",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nORDER BY t.nombre_points_total DESC\nLIMIT 3;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0}\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0}"
+        ],
+        "ground_truth": "Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points).",
+        "metadata": {
+            "id": "Q005",
+            "question": "Quels sont les trois joueurs qui ont marqué le plus de points ?",
+            "type": "ranking_player",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nORDER BY t.nombre_points_total DESC\nLIMIT 3;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0}\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les trois joueurs ayant marqué le plus de points sont Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points)."
+            }
+        }
+    },
+    {
+        "id": "Q006",
+        "question": "Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?",
+        "answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Jayson Tatum%' OR p.nom_du_joueur LIKE '%Anthony Edwards%'\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}"
+        ],
+        "ground_truth": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930 pour Jayson Tatum.",
+        "metadata": {
+            "id": "Q006",
+            "question": "Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?",
+            "type": "comparison_player",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930 pour Jayson Tatum.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Jayson Tatum%' OR p.nom_du_joueur LIKE '%Anthony Edwards%'\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930."
+            }
+        }
+    },
+    {
+        "id": "Q007",
+        "question": "Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",
+        "answer": "Giannis Antetokounmpo possède le meilleur FG% parmi les cinq joueurs ayant marqué le plus de points, avec un pourcentage de tirs réussis de 60.1.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.player_id IN (\n    SELECT player_id\n    FROM top_15_joueurs_points\n    ORDER BY nombre_points_total DESC\n    LIMIT 5)\nORDER BY t.pourcentage_tirs_reussis DESC\nLIMIT 1;\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'pourcentage_tirs_reussis': 60.1}"
+        ],
+        "ground_truth": "Giannis Antetokounmpo avec 60.1% possède le meilleur FG% parmi les 5 meilleurs marqueurs.",
+        "metadata": {
+            "id": "Q007",
+            "question": "Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",
+            "type": "ranking_player",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Giannis Antetokounmpo avec 60.1% possède le meilleur FG% parmi les 5 meilleurs marqueurs.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.player_id IN (\n    SELECT player_id\n    FROM top_15_joueurs_points\n    ORDER BY nombre_points_total DESC\n    LIMIT 5)\nORDER BY t.pourcentage_tirs_reussis DESC\nLIMIT 1;\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'pourcentage_tirs_reussis': 60.1}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Giannis Antetokounmpo possède le meilleur FG% parmi les cinq joueurs ayant marqué le plus de points, avec un pourcentage de tirs réussis de 60.1."
+            }
+        }
+    },
+    {
+        "id": "Q008",
+        "question": "Quelles sont les cinq équipes qui ont marqué le plus de points ?",
+        "answer": "Les cinq équipes ayant marqué le plus de points sont :\n1. Detroit Pistons (10 292 points)\n2. San Antonio Spurs (10 198 points)\n3. Cleveland Cavaliers (10 180 points)\n4. Milwaukee Bucks (10 016 points)\n5. Dallas Mavericks (9 970 points)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}"
+        ],
+        "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+        "metadata": {
+            "id": "Q008",
+            "question": "Quelles sont les cinq équipes qui ont marqué le plus de points ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Analyse",
+            "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les cinq équipes ayant marqué le plus de points sont :\n1. Detroit Pistons (10 292 points)\n2. San Antonio Spurs (10 198 points)\n3. Cleveland Cavaliers (10 180 points)\n4. Milwaukee Bucks (10 016 points)\n5. Dallas Mavericks (9 970 points)"
+            }
+        }
+    },
+    {
+        "id": "Q009",
+        "question": "Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?",
+        "answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n1. Houston Rockets (4067 rebonds)\n2. Sacramento Kings (3977 rebonds)\n3. Milwaukee Bucks (3875 rebonds)\n4. Dallas Mavericks (3863 rebonds)\n5. Detroit Pistons (3834 rebonds)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.rebonds_totaux) as Total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.rebonds_totaux) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0}"
+        ],
+        "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
+        "metadata": {
+            "id": "Q009",
+            "question": "Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.rebonds_totaux) as Total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.rebonds_totaux) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n1. Houston Rockets (4067 rebonds)\n2. Sacramento Kings (3977 rebonds)\n3. Milwaukee Bucks (3875 rebonds)\n4. Dallas Mavericks (3863 rebonds)\n5. Detroit Pistons (3834 rebonds)"
+            }
+        }
+    },
+    {
+        "id": "Q010",
+        "question": "Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?",
+        "answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.passes_decisives) as Total_passes_decisives\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.passes_decisives) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0}"
+        ],
+        "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
+        "metadata": {
+            "id": "Q010",
+            "question": "Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.passes_decisives) as Total_passes_decisives\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.passes_decisives) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)"
+            }
+        }
+    },
+    {
+        "id": "Q011",
+        "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
+        "answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n\n1. Oklahoma City Thunder (840)\n2. Atlanta Hawks (818)\n3. Los Angeles Clippers (744)\n4. Miami Heat (742)\n5. Philadelphia 76ers (737)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.interceptions) as total_interceptions\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.interceptions) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}"
+        ],
+        "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+        "metadata": {
+            "id": "Q011",
+            "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.interceptions) as total_interceptions\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.interceptions) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n\n1. Oklahoma City Thunder (840)\n2. Atlanta Hawks (818)\n3. Los Angeles Clippers (744)\n4. Miami Heat (742)\n5. Philadelphia 76ers (737)"
+            }
+        }
+    },
+    {
+        "id": "Q012",
+        "question": "Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?",
+        "answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.contres) as Total_contres\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.contres) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0}"
+        ],
+        "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
+        "metadata": {
+            "id": "Q012",
+            "question": "Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?",
+            "type": "ranking_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.contres) as Total_contres\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.contres) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)"
+            }
+        }
+    },
+    {
+        "id": "Q013",
+        "question": "Quelle équipe possède le plus grand nombre de joueurs dans les données ?",
+        "answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les Philadelphia 76ers avec 23 joueurs.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}"
+        ],
+        "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
+        "metadata": {
+            "id": "Q013",
+            "question": "Quelle équipe possède le plus grand nombre de joueurs dans les données ?",
+            "type": "team",
+            "difficulty": "simple",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les Philadelphia 76ers avec 23 joueurs."
+            }
+        }
+    },
+    {
+        "id": "Q014",
+        "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
+        "answer": "Les Detroit Pistons ont marqué 10 292 points et capté 3 834 rebonds, tandis que les Milwaukee Bucks ont marqué 10 016 points et capté 3 875 rebonds.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(m.points_moyens) as total_points,\n    sum(s.rebonds_totaux) as total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}"
+        ],
+        "ground_truth": "Detroit Pistons a marqué 10292 points et pris 3834 rebonds, tandis que Milwaukee Bucks a marqué 10016 points et pris 3875 rebonds.",
+        "metadata": {
+            "id": "Q014",
+            "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
+            "type": "comparison_team",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Detroit Pistons a marqué 10292 points et pris 3834 rebonds, tandis que Milwaukee Bucks a marqué 10016 points et pris 3875 rebonds.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(m.points_moyens) as total_points,\n    sum(s.rebonds_totaux) as total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les Detroit Pistons ont marqué 10 292 points et capté 3 834 rebonds, tandis que les Milwaukee Bucks ont marqué 10 016 points et capté 3 875 rebonds."
+            }
+        }
+    },
+    {
+        "id": "Q015",
+        "question": "Quelle est la meilleure équipe toutes statistiques confondues ?",
+        "answer": "Les données disponibles ne permettent pas de déterminer la meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte.",
+        "contexts": [
+            "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES: aucun critère unique de performance n'est défini. Demander un indicateur précis ou comparer plusieurs statistiques séparément."
+        ],
+        "ground_truth": "Les données ne permettent pas de désigner une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini. Il faut préciser un indicateur à comparer ou examiner plusieurs statistiques séparément.",
+        "metadata": {
+            "id": "Q015",
+            "question": "Quelle est la meilleure équipe toutes statistiques confondues ?",
+            "type": "ambiguous_team",
+            "difficulty": "complex",
+            "noise": "low",
+            "source_expected": "Données NBA",
+            "ground_truth": "Les données ne permettent pas de désigner une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini. Il faut préciser un indicateur à comparer ou examiner plusieurs statistiques séparément.",
+            "answerable": false,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "DONNEES_INSUFFISANTES: aucun critère unique de performance n'est défini. Demander un indicateur précis ou comparer plusieurs statistiques séparément.",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les données disponibles ne permettent pas de déterminer la meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte."
+            }
+        }
+    },
+    {
+        "id": "Q016",
+        "question": "Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?",
+        "answer": "Shai Gilgeous-Alexander, Nikola Jokić et Giannis Antetokounmpo ont marqué plus de 1900 points avec un FG% supérieur à 50%.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}"
+        ],
+        "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Jokić (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
+        "metadata": {
+            "id": "Q016",
+            "question": "Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?",
+            "type": "multi_criteria_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Jokić (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Shai Gilgeous-Alexander, Nikola Jokić et Giannis Antetokounmpo ont marqué plus de 1900 points avec un FG% supérieur à 50%."
+            }
+        }
+    },
+    {
+        "id": "Q017",
+        "question": "Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?",
+        "answer": "Nikola Jokić et Giannis Antetokounmpo.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}"
+        ],
+        "ground_truth": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
+        "metadata": {
+            "id": "Q017",
+            "question": "Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?",
+            "type": "multi_criteria_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Nikola Jokić et Giannis Antetokounmpo."
+            }
+        }
+    },
+    {
+        "id": "Q018",
+        "question": "Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",
+        "answer": "Jayson Tatum a une moyenne de 1930 points, 626 rebonds, 432 passes décisives et un pourcentage de tirs de 45,2 %. Nikola Jokić a une moyenne de 2072 points, 889 rebonds, 714 passes décisives et un pourcentage de tirs de 57,6 %.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\nGROUP BY p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}"
+        ],
+        "ground_truth": "Jayson Tatum marque 1930 points avec 45.2% de réussite aux tirs et 626 rebonds, et réalise 432 passes décisives . Nikola Jokić marque 2072 points avec 57.6% de réussite aux tirs et 889 rebonds, et réalise 714 passes décisives.",
+        "metadata": {
+            "id": "Q018",
+            "question": "Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",
+            "type": "comparison_player",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Jayson Tatum marque 1930 points avec 45.2% de réussite aux tirs et 626 rebonds, et réalise 432 passes décisives . Nikola Jokić marque 2072 points avec 57.6% de réussite aux tirs et 889 rebonds, et réalise 714 passes décisives.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\nGROUP BY p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a une moyenne de 1930 points, 626 rebonds, 432 passes décisives et un pourcentage de tirs de 45,2 %. Nikola Jokić a une moyenne de 2072 points, 889 rebonds, 714 passes décisives et un pourcentage de tirs de 57,6 %."
+            }
+        }
+    },
+    {
+        "id": "Q019",
+        "question": "Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",
+        "answer": "Les trois équipes ayant marqué le plus de points sont les **Detroit Pistons** (10 292 points, 3 834 rebonds, 2 444 passes décisives), les **San Antonio Spurs** (10 198 points, 3 669 rebonds, 2 503 passes décisives) et les **Cleveland Cavaliers** (10 180 points, 3 784 rebonds, 2 203 passes décisives).",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe,\n    sum(s.rebonds_totaux) as total_rebonds,\n    sum(s.passes_decisives) as total_passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292, 'total_rebonds': 3834.0, 'total_passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198, 'total_rebonds': 3669.0, 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180, 'total_rebonds': 3784.0, 'total_passes_decisives': 2203.0}"
+        ],
+        "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes décisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes décisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes décisives.",
+        "metadata": {
+            "id": "Q019",
+            "question": "Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",
+            "type": "multi_criteria_team",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes décisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes décisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes décisives.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe,\n    sum(s.rebonds_totaux) as total_rebonds,\n    sum(s.passes_decisives) as total_passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292, 'total_rebonds': 3834.0, 'total_passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198, 'total_rebonds': 3669.0, 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180, 'total_rebonds': 3784.0, 'total_passes_decisives': 2203.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les trois équipes ayant marqué le plus de points sont les **Detroit Pistons** (10 292 points, 3 834 rebonds, 2 444 passes décisives), les **San Antonio Spurs** (10 198 points, 3 669 rebonds, 2 503 passes décisives) et les **Cleveland Cavaliers** (10 180 points, 3 784 rebonds, 2 203 passes décisives)."
+            }
+        }
+    },
+    {
+        "id": "Q020",
+        "question": "Quelle équipe arrive en tête pour chacune des statistiques suivantes: points, rebonds, passes décisives, interceptions et contres ?",
+        "answer": "L'équipe en tête pour les points, rebonds, passes décisives, interceptions et contres est les Detroit Pistons.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(s.passes_decisives) AS total_passes_decisives,\n    SUM(s.interceptions) AS total_interceptions,\n    SUM(s.contres) AS total_contres,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY\n    total_points DESC,\n    total_rebonds DESC,\n    total_passes_decisives DESC,\n    total_interceptions DESC,\n    total_contres DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'total_interceptions': 717.0, 'total_contres': 460.0, 'total_points': 10292.0, 'total_rebonds': 3834.0}"
+        ],
+        "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes décisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
+        "metadata": {
+            "id": "Q020",
+            "question": "Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",
+            "type": "multi_criteria_team",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes décisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(s.passes_decisives) AS total_passes_decisives,\n    SUM(s.interceptions) AS total_interceptions,\n    SUM(s.contres) AS total_contres,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY\n    total_points DESC,\n    total_rebonds DESC,\n    total_passes_decisives DESC,\n    total_interceptions DESC,\n    total_contres DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'total_interceptions': 717.0, 'total_contres': 460.0, 'total_points': 10292.0, 'total_rebonds': 3834.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "L'équipe en tête pour les points, rebonds, passes décisives, interceptions et contres est les Detroit Pistons."
+            }
+        }
+    },
+    {
+        "id": "Q021",
+        "question": "Tatum, il a mis combien de points au total ?",
+        "answer": "Jayson Tatum a marqué un total de 1930 points.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}"
+        ],
+        "ground_truth": "Jayson Tatum a marqué 1930 points au total",
+        "metadata": {
+            "id": "Q021",
+            "question": "Tatum, il a mis combien de points au total ?",
+            "type": "noisy_reformulation",
+            "difficulty": "simple",
+            "noise": "low",
+            "source_expected": "Données NBA",
+            "ground_truth": "Jayson Tatum a marqué 1930 points au total",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a marqué un total de 1930 points."
+            }
+        }
+    },
+    {
+        "id": "Q022",
+        "question": "C'est qui les 5 équipes qui ont le plus de points ?",
+        "answer": "Les 5 équipes avec le plus de points sont :\n1. Detroit Pistons (10292 points)\n2. San Antonio Spurs (10198 points)\n3. Cleveland Cavaliers (10180 points)\n4. Milwaukee Bucks (10016 points)\n5. Dallas Mavericks (9970 points)",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}"
+        ],
+        "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+        "metadata": {
+            "id": "Q022",
+            "question": "C'est qui les 5 équipes qui ont le plus de points ?",
+            "type": "noisy_reformulation",
+            "difficulty": "medium",
+            "noise": "low",
+            "source_expected": "Analyse",
+            "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les 5 équipes avec le plus de points sont :\n1. Detroit Pistons (10292 points)\n2. San Antonio Spurs (10198 points)\n3. Cleveland Cavaliers (10180 points)\n4. Milwaukee Bucks (10016 points)\n5. Dallas Mavericks (9970 points)"
+            }
+        }
+    },
+    {
+        "id": "Q023",
+        "question": "Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?",
+        "answer": "Les données disponibles ne permettent pas de déterminer le joueur avec le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par séquence de matchs.",
+        "contexts": [
+            "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles."
+        ],
+        "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs. La base contient des statistiques globales et non des statistiques détaillées pour chaque match. Il est donc impossible d'isoler les cinq matchs les plus récents et de calculer ou comparer les pourcentages correspondants.",
+        "metadata": {
+            "id": "Q023",
+            "question": "Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs. La base contient des statistiques globales et non des statistiques détaillées pour chaque match. Il est donc impossible d'isoler les cinq matchs les plus récents et de calculer ou comparer les pourcentages correspondants.",
+            "answerable": false,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "DONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles.",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les données disponibles ne permettent pas de déterminer le joueur avec le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par séquence de matchs."
+            }
+        }
+    },
+    {
+        "id": "Q024",
+        "question": "Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.",
+        "answer": "La comparaison des statistiques de rebonds entre l'équipe à domicile et à l'extérieur est impossible avec les données disponibles, car aucune colonne ne permet d'identifier le lieu des matchs.",
+        "contexts": [
+            "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES: aucune colonne connue ne permet d'identifier explicitement le lieu du match. La comparaison domicile/extérieur est impossible."
+        ],
+        "ground_truth": "Les données disponibles ne permettent pas de comparer les statistiques de rebonds à domicile et à l'extérieur, car elles ne permettent pas d'identifier explicitement le lieu des matchs. De plus, la question ne précise pas l'équipe à analyser. Une comparaison fiable nécessite des données permettant de distinguer les rebonds réalisés à domicile de ceux réalisés à l'extérieur, ainsi que l'identification de l'équipe concernée.",
+        "metadata": {
+            "id": "Q024",
+            "question": "Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "low",
+            "source_expected": "Données NBA",
+            "ground_truth": "Les données disponibles ne permettent pas de comparer les statistiques de rebonds à domicile et à l'extérieur, car elles ne permettent pas d'identifier explicitement le lieu des matchs. De plus, la question ne précise pas l'équipe à analyser. Une comparaison fiable nécessite des données permettant de distinguer les rebonds réalisés à domicile de ceux réalisés à l'extérieur, ainsi que l'identification de l'équipe concernée.",
+            "answerable": false,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "DONNEES_INSUFFISANTES: aucune colonne connue ne permet d'identifier explicitement le lieu du match. La comparaison domicile/extérieur est impossible.",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "La comparaison des statistiques de rebonds entre l'équipe à domicile et à l'extérieur est impossible avec les données disponibles, car aucune colonne ne permet d'identifier le lieu des matchs."
+            }
+        }
+    },
+    {
+        "id": "Q025",
+        "question": "Quel joueur a marqué le plus de points lors de son dernier match ?",
+        "answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match.",
+        "contexts": [
+            "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles."
+        ],
+        "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match. La base contient des statistiques globales et non les points marqués par chaque joueur lors de chaque rencontre. Il est donc impossible d'identifier le dernier match de chaque joueur et de comparer leurs scores respectifs.",
+        "metadata": {
+            "id": "Q025",
+            "question": "Quel joueur a marqué le plus de points lors de son dernier match ?",
+            "type": "unanswerable",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA",
+            "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match. La base contient des statistiques globales et non les points marqués par chaque joueur lors de chaque rencontre. Il est donc impossible d'identifier le dernier match de chaque joueur et de comparer leurs scores respectifs.",
+            "answerable": false,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "SQL",
+            "sql_result": "DONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles.",
+            "rag_chunks": [],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match."
+            }
+        }
+    },
+    {
+        "id": "Q026",
+        "question": "Quelles critiques ou inquiétudes les fans expriment-ils dans les discussions Reddit sur les performances de leur équipe ?",
+        "answer": "Les fans expriment des inquiétudes sur la gestion des effectifs des Celtics, évoquant la possibilité de \"faire exploser leur effectif\" (*blow up the roster*) après une saison réussie. Certains critiquent également le manque de profondeur des équipes en playoffs, soulignant que les équipes sans réserves solides ont été exposées. D'autres discussions mentionnent des frustrations liées à l'arbitrage perçu comme partial.",
+        "contexts": [
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+            "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+            "offense is no joke:\nAfficher plus de commentaires\nTeams without depth have been exposed in this year's playoffs\nWhat team do you absolutely not want to see in the playoffs?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nother in the Finals, is considered to be a snoozefest?\nrInba il y a\nWhich of the top 3 teams should be the most concerned?\nr/hockey 1 y a\nRank the 8 remaining teams in the playoffs from the one you most want to see win the Cup to the one\nyou would least want to see win the Cup\nr/nba ily a 16j\nWhich Teams that are done rebuilding do you see making sneaky playoff appearances?\nFans of current playoff/play-in teams: give me one reason your team will win their first round matchup\nAs we get closer to March; whos an underrated team you think can make noise in the postseason?\nr/nba ily a\nHas there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)",
+            "and injuring them. In fact the only reason either team won a game is due to taking out the elite\nplayers on Boston/GS.\nam not impressed in the slightest. It's bush league stuff due to a complete lack of skill on both\nrosters\nmoby323 Fm.\nThat's going a little overboard\nNotManyBuses ~1 m\nAm wrong though\nMannerSuperb AO -Lm.\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\n2 réponses supplémentaires\nfrankievejle\nBla bla bla the narrative that the Warriors aren't also playing extremely physical basketball is\ncrazy.\nWarriors fans have done a masterful job of complaining so much and so loudly that you have\npeople out here legit thinking the physicality is just one sided while they're playing some\npristine brand of basketball.\nNotManyBuses m.\nThey are; the difference is they have Steph.\nYou have Van Vleet.\nMannerSuperb AO -1m\nThat's on the officials more than the teams. If the refs are swallowing their whistles and letting"
+        ],
+        "ground_truth": "Critiques et inquiétudes des fans sur Reddit concernant les performances de leur équipe :\n\nOpinions (issues des discussions Reddit) :\n\n1. Doute sur l'équité des playoffs :\n   - Certains fans expriment des suspicions sur la possibilité que les playoffs soient « arrangés » pour favoriser certaines équipes (ex. : « massive benefit to having KC go far »).\n   - Critique du système de play-in, jugé trop permissif pour les équipes à 7e/8e place, avec des écarts de seulement 1-2 matchs (« an 8-game behind team having a shot at the playoffs »).\n2. Inquiétudes sur la gestion des effectifs :\n   - Crainte que les Celtics de Boston, malgré leur statut de favori, ne parviennent pas à conserver leur noyau en raison des contraintes salariales (« they're gonna blow up the roster »).\n   - Remarque sur le manque de profondeur des équipes en playoffs, exposées par les blessures (« Teams without depth have been exposed »).\n3. Critiques sur le style de jeu et l'arbitrage :\n   - Accusations de jeu physique excessif et déséquilibré, notamment envers les Warriors, perçus comme se plaignant davantage (« Warriors fans have done a masterful job of complaining »).\n   - Mécontentement face à la tolérance des arbitres envers certaines équipes (« If the refs are swallowing their whistles »).\n4. Comparaisons avec d'autres ligues (NFL) :\n   - Frustration sur la popularité inégale entre NBA et NFL, où les petits marchés bénéficient d'une base de fans plus large (« NFL fans will watch other games because there's only so many a week »).\n   - Regret que la NBA ne parvienne pas à reproduire ce modèle pour renforcer l'engagement (« NBA needs to figure its shit out »).\n\nFaits (non disponibles dans les extraits) : Aucune statistique ou donnée factuelle n'est mentionnée dans les discussions fournies.\n\nSynthèse : Les fans expriment surtout des craintes structurelles (play-in, gestion des effectifs) et des critiques sur l'équité perçue (arbitrage, équilibre compétitif), avec une comparaison récurrente à la NFL pour souligner les lacunes de la NBA en termes d'engagement et de parité.",
+        "metadata": {
+            "id": "Q026",
+            "question": "Quelles critiques ou inquiétudes les fans expriment-ils dans les discussions Reddit sur les performances de leur équipe ?",
+            "type": "qualitative_reddit",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Reddit",
+            "expected_route": "RAG",
+            "ground_truth": "Critiques et inquiétudes des fans sur Reddit concernant les performances de leur équipe :\n\nOpinions (issues des discussions Reddit) :\n\n1. Doute sur l'équité des playoffs :\n   - Certains fans expriment des suspicions sur la possibilité que les playoffs soient « arrangés » pour favoriser certaines équipes (ex. : « massive benefit to having KC go far »).\n   - Critique du système de play-in, jugé trop permissif pour les équipes à 7e/8e place, avec des écarts de seulement 1-2 matchs (« an 8-game behind team having a shot at the playoffs »).\n2. Inquiétudes sur la gestion des effectifs :\n   - Crainte que les Celtics de Boston, malgré leur statut de favori, ne parviennent pas à conserver leur noyau en raison des contraintes salariales (« they're gonna blow up the roster »).\n   - Remarque sur le manque de profondeur des équipes en playoffs, exposées par les blessures (« Teams without depth have been exposed »).\n3. Critiques sur le style de jeu et l'arbitrage :\n   - Accusations de jeu physique excessif et déséquilibré, notamment envers les Warriors, perçus comme se plaignant davantage (« Warriors fans have done a masterful job of complaining »).\n   - Mécontentement face à la tolérance des arbitres envers certaines équipes (« If the refs are swallowing their whistles »).\n4. Comparaisons avec d'autres ligues (NFL) :\n   - Frustration sur la popularité inégale entre NBA et NFL, où les petits marchés bénéficient d'une base de fans plus large (« NFL fans will watch other games because there's only so many a week »).\n   - Regret que la NBA ne parvienne pas à reproduire ce modèle pour renforcer l'engagement (« NBA needs to figure its shit out »).\n\nFaits (non disponibles dans les extraits) : Aucune statistique ou donnée factuelle n'est mentionnée dans les discussions fournies.\n\nSynthèse : Les fans expriment surtout des craintes structurelles (play-in, gestion des effectifs) et des critiques sur l'équité perçue (arbitrage, équilibre compétitif), avec une comparaison récurrente à la NFL pour souligner les lacunes de la NBA en termes d'engagement et de parité.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "RAG",
+            "sql_result": null,
+            "rag_chunks": [
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 77.28668451309204,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 4.pdf",
+                    "text": "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+                    "score": 76.2804388999939,
+                    "metadata": {
+                        "source": "Reddit 4.pdf",
+                        "filename": "Reddit 4.pdf",
+                        "full_path": "inputs\\Reddit 4.pdf",
+                        "relative_path": "Reddit 4.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Miami Heat",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "MIA",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 4197,
+                        "chunk_id_in_doc": 5
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+                    "score": 76.15469694137573,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 11148,
+                        "chunk_id_in_doc": 13
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "offense is no joke:\nAfficher plus de commentaires\nTeams without depth have been exposed in this year's playoffs\nWhat team do you absolutely not want to see in the playoffs?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nother in the Finals, is considered to be a snoozefest?\nrInba il y a\nWhich of the top 3 teams should be the most concerned?\nr/hockey 1 y a\nRank the 8 remaining teams in the playoffs from the one you most want to see win the Cup to the one\nyou would least want to see win the Cup\nr/nba ily a 16j\nWhich Teams that are done rebuilding do you see making sneaky playoff appearances?\nFans of current playoff/play-in teams: give me one reason your team will win their first round matchup\nAs we get closer to March; whos an underrated team you think can make noise in the postseason?\nr/nba ily a\nHas there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)",
+                    "score": 76.1225700378418,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 16961,
+                        "chunk_id_in_doc": 20
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "and injuring them. In fact the only reason either team won a game is due to taking out the elite\nplayers on Boston/GS.\nam not impressed in the slightest. It's bush league stuff due to a complete lack of skill on both\nrosters\nmoby323 Fm.\nThat's going a little overboard\nNotManyBuses ~1 m\nAm wrong though\nMannerSuperb AO -Lm.\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\n2 réponses supplémentaires\nfrankievejle\nBla bla bla the narrative that the Warriors aren't also playing extremely physical basketball is\ncrazy.\nWarriors fans have done a masterful job of complaining so much and so loudly that you have\npeople out here legit thinking the physicality is just one sided while they're playing some\npristine brand of basketball.\nNotManyBuses m.\nThey are; the difference is they have Steph.\nYou have Van Vleet.\nMannerSuperb AO -1m\nThat's on the officials more than the teams. If the refs are swallowing their whistles and letting",
+                    "score": 76.11559629440308,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 7672,
+                        "chunk_id_in_doc": 9
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les fans expriment des inquiétudes sur la gestion des effectifs et la compétitivité des équipes, notamment pour les Celtics qui pourraient \"faire exploser leur effectif\" (*blow up the roster*) après une saison réussie. Certains critiquent aussi le manque de profondeur des équipes en playoffs, soulignant que les équipes sans réserves solides ont été exposées. D'autres discussions mentionnent des frustrations liées à l'arbitrage perçu comme partial et à la difficulté de rivaliser avec des équipes comme les Warriors, jugées trop physiques."
+            }
+        }
+    },
+    {
+        "id": "Q027",
+        "question": "Quelles inquiétudes les fans expriment-ils au sujet du format des playoffs et du play-in NBA ?",
+        "answer": "Les fans expriment principalement une inquiétude concernant le format des playoffs et du play-in NBA : **l'injustice perçue du play-in**. Certains estiment que les équipes à seulement 1-2 matchs d'écart des 7e et 8e places devraient automatiquement obtenir leur place en playoffs, sans risque de perdre leur position face à des équipes bien plus loin au classement (par exemple, une équipe à 8 matchs derrière ayant encore une chance de se qualifier).",
+        "contexts": [
+            "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+            "Has there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)\n\"Main Character\" of these Playoffs?\nr/mlb ily a 3 m.\nWhat are Your Favorite Teams with Wasted Potential?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nHow do you choose what NBA team to become a fan of?\nEliminated East Playoff Teams (expectations for next season)\nrInba ily a 6 j\nEliminated West Playoff Teams (Expectations for next season)\nupvotes 13 commentaires\n[08/Lgi\nWhat is something you dislike about your favorite NBA team? AKER\nNBA playoffs comparison\nWhich teams become powerhouses in dynasty for you guys?\nThis is one of the most exciting weeks of regular season basketball l've seen in years.\nrInba ily a 2 m.\nBesides Erik Spoelstra, who are some of the best coaches at getting the most out of the talent on their\nrosters?\nWhat are your current playoff predictions?",
+            "people tune out way too many ads especially within the last minute; gambling references\neverywhere; free throw hunting; teams shooting 60 threes in a single game; no defense until\nplayoffs, poor refereeing; etc.\nLordBaneoftheSith ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nartist bc there's nothing to watch.\nSure; I'm vaguely concerned the NBA ratings because of what dipshit things it might lead\nAdam Silver to do, but it's not like if they were to spike he'd stop being willing to sell the\ntiniest bit of anything for whatever $ he can get.\n3 réponses supplémentaires\nBNKalt ~15 j\nlike my games being readily available on TV so being popular helps.\nScratchSeekero3 ~15 j\nThe only people that should care about ratings are ESPN. Which is ironic because they are directly the\nreason ratings would be down for this series They' 're costing themselves millions.\ntheskyopenedup -15 j",
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "Now damn near every teams fights for a play in spot or to keep themselves in the 6th seed or\nabove: It has revitalized the last third of the season\nThen the play in games themselves are pretty fun too. Play ins have had nothing but positive\neffects for the NBA\nThe chances of a 6-8th seed making the Finals is slim. Should we exlude them from the\nplayoffs entirely too? Feels silly to base things off their chances of making the Finals.\niustmefishes ~12 j\nThe play-in is worthwhile for its own sake. It's a few mini-Game 7s amongst not-great but not -\ncompletely-awful teams which makes for a nice appetizer going into the playoffs. Personally\nfind it very interesting to see more flawed average teams being put in that situation as you\nget to learn things about teams and players you otherwise wouldn't; because they'd either\nmiss the playoffs entirely or get bounced quickly in the first round by a much better team_"
+        ],
+        "ground_truth": "Les discussions Reddit présentent des opinions divergentes sur l'équité du tournoi de play-in NBA :\n\n1. Critiques concernant l'écart au classement :\n   - Certains internautes estiment que le play-in devrait être organisé lorsque les équipes classées 7e et 8e ne devancent les équipes classées 9e et 10e que d'un ou deux matchs\n   - En revanche, ils considèrent qu'une avance d'environ quatre matchs devrait permettre aux équipes concernées de conserver leur place, sans devoir disputer le play-in\n   - Un commentaire critique également la possibilité qu'une équipe située huit matchs derrière puisse encore accéder aux playoffs.\n2. Arguments en faveur du play-in :\n   - d'autres internautes estiment que ce dispositif a revitalisé le dernier tiers de la saison régulière, en maintenant davantage d'équipes en compétition\n   - Certains apprécient également le suspense des matchs de play-in et les occasions supplémentaires d'observer des équipes qui auraient autrement manqué les playoffs ou été éliminées rapidement au premier tour.\n\nBilan: les opinions sont partagées. Les critiques portent principalement sur l'équité de la qualification lorsque les écarts au classement sont importants, tandis que les avis favorables mettent en avant le suspense et l'intérêt sportif en fin de saison.",
+        "metadata": {
+            "id": "Q027",
+            "question": "Quelles inquiétudes les fans expriment-ils au sujet du format des playoffs et du play-in NBA ?",
+            "type": "qualitative_reddit",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Reddit",
+            "expected_route": "RAG",
+            "ground_truth": "Les discussions Reddit présentent des opinions divergentes sur l'équité du tournoi de play-in NBA :\n\n1. Critiques concernant l'écart au classement :\n   - Certains internautes estiment que le play-in devrait être organisé lorsque les équipes classées 7e et 8e ne devancent les équipes classées 9e et 10e que d'un ou deux matchs\n   - En revanche, ils considèrent qu'une avance d'environ quatre matchs devrait permettre aux équipes concernées de conserver leur place, sans devoir disputer le play-in\n   - Un commentaire critique également la possibilité qu'une équipe située huit matchs derrière puisse encore accéder aux playoffs.\n2. Arguments en faveur du play-in :\n   - d'autres internautes estiment que ce dispositif a revitalisé le dernier tiers de la saison régulière, en maintenant davantage d'équipes en compétition\n   - Certains apprécient également le suspense des matchs de play-in et les occasions supplémentaires d'observer des équipes qui auraient autrement manqué les playoffs ou été éliminées rapidement au premier tour.\n\nBilan: les opinions sont partagées. Les critiques portent principalement sur l'équité de la qualification lorsque les écarts au classement sont importants, tandis que les avis favorables mettent en avant le suspense et l'intérêt sportif en fin de saison.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "RAG",
+            "sql_result": null,
+            "rag_chunks": [
+                {
+                    "source": "Reddit 4.pdf",
+                    "text": "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+                    "score": 83.38660001754761,
+                    "metadata": {
+                        "source": "Reddit 4.pdf",
+                        "filename": "Reddit 4.pdf",
+                        "full_path": "inputs\\Reddit 4.pdf",
+                        "relative_path": "Reddit 4.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Miami Heat",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "MIA",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 4197,
+                        "chunk_id_in_doc": 5
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "Has there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)\n\"Main Character\" of these Playoffs?\nr/mlb ily a 3 m.\nWhat are Your Favorite Teams with Wasted Potential?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nHow do you choose what NBA team to become a fan of?\nEliminated East Playoff Teams (expectations for next season)\nrInba ily a 6 j\nEliminated West Playoff Teams (Expectations for next season)\nupvotes 13 commentaires\n[08/Lgi\nWhat is something you dislike about your favorite NBA team? AKER\nNBA playoffs comparison\nWhich teams become powerhouses in dynasty for you guys?\nThis is one of the most exciting weeks of regular season basketball l've seen in years.\nrInba ily a 2 m.\nBesides Erik Spoelstra, who are some of the best coaches at getting the most out of the talent on their\nrosters?\nWhat are your current playoff predictions?",
+                    "score": 79.54813241958618,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 17799,
+                        "chunk_id_in_doc": 21
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "people tune out way too many ads especially within the last minute; gambling references\neverywhere; free throw hunting; teams shooting 60 threes in a single game; no defense until\nplayoffs, poor refereeing; etc.\nLordBaneoftheSith ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nartist bc there's nothing to watch.\nSure; I'm vaguely concerned the NBA ratings because of what dipshit things it might lead\nAdam Silver to do, but it's not like if they were to spike he'd stop being willing to sell the\ntiniest bit of anything for whatever $ he can get.\n3 réponses supplémentaires\nBNKalt ~15 j\nlike my games being readily available on TV so being popular helps.\nScratchSeekero3 ~15 j\nThe only people that should care about ratings are ESPN. Which is ironic because they are directly the\nreason ratings would be down for this series They' 're costing themselves millions.\ntheskyopenedup -15 j",
+                    "score": 78.98871898651123,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 6845,
+                        "chunk_id_in_doc": 8
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 78.7598729133606,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 4.pdf",
+                    "text": "Now damn near every teams fights for a play in spot or to keep themselves in the 6th seed or\nabove: It has revitalized the last third of the season\nThen the play in games themselves are pretty fun too. Play ins have had nothing but positive\neffects for the NBA\nThe chances of a 6-8th seed making the Finals is slim. Should we exlude them from the\nplayoffs entirely too? Feels silly to base things off their chances of making the Finals.\niustmefishes ~12 j\nThe play-in is worthwhile for its own sake. It's a few mini-Game 7s amongst not-great but not -\ncompletely-awful teams which makes for a nice appetizer going into the playoffs. Personally\nfind it very interesting to see more flawed average teams being put in that situation as you\nget to learn things about teams and players you otherwise wouldn't; because they'd either\nmiss the playoffs entirely or get bounced quickly in the first round by a much better team_",
+                    "score": 78.44820022583008,
+                    "metadata": {
+                        "source": "Reddit 4.pdf",
+                        "filename": "Reddit 4.pdf",
+                        "full_path": "inputs\\Reddit 4.pdf",
+                        "relative_path": "Reddit 4.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Miami Heat",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "MIA",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 1676,
+                        "chunk_id_in_doc": 2
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les fans expriment principalement deux inquiétudes concernant le format des playoffs et du play-in NBA :\n\n1. **Injustice du play-in** : Certains estiment que les équipes à 1-2 matchs d'écart des 7e/8e places devraient automatiquement obtenir leur place en playoffs, sans risque de perdre leur position face à des équipes bien plus loin au classement (ex. : une équipe à 8 matchs derrière ayant encore une chance).\n\n2. **Impact sur la qualité des séries** : Des inquiétudes sont soulevées quant à la dilution de l'intérêt des playoffs, avec des séries moins compétitives si des équipes moins performantes obtiennent une place en raison du play-in, réduisant ainsi les chances de voir les meilleures équipes s'affronter en Finales."
+            }
+        }
+    },
+    {
+        "id": "Q028",
+        "question": "Quelles critiques les fans formulent-ils sur la profondeur des effectifs, le jeu physique et l'arbitrage ?",
+        "answer": "Les fans critiquent la **profondeur des effectifs** des équipes en playoffs, soulignant que *les équipes sans profondeur ont été exposées cette saison*. Concernant le **jeu physique**, certains estiment que les arbitres laissent trop de latitude aux équipes, tolérant un jeu physique excessif. Enfin, sur l’**arbitrage**, des commentaires indiquent que les officiels *laissent passer des contacts durs* en *avalant leurs sifflets*.",
+        "contexts": [
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "and injuring them. In fact the only reason either team won a game is due to taking out the elite\nplayers on Boston/GS.\nam not impressed in the slightest. It's bush league stuff due to a complete lack of skill on both\nrosters\nmoby323 Fm.\nThat's going a little overboard\nNotManyBuses ~1 m\nAm wrong though\nMannerSuperb AO -Lm.\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\n2 réponses supplémentaires\nfrankievejle\nBla bla bla the narrative that the Warriors aren't also playing extremely physical basketball is\ncrazy.\nWarriors fans have done a masterful job of complaining so much and so loudly that you have\npeople out here legit thinking the physicality is just one sided while they're playing some\npristine brand of basketball.\nNotManyBuses m.\nThey are; the difference is they have Steph.\nYou have Van Vleet.\nMannerSuperb AO -1m\nThat's on the officials more than the teams. If the refs are swallowing their whistles and letting",
+            "offense is no joke:\nAfficher plus de commentaires\nTeams without depth have been exposed in this year's playoffs\nWhat team do you absolutely not want to see in the playoffs?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nother in the Finals, is considered to be a snoozefest?\nrInba il y a\nWhich of the top 3 teams should be the most concerned?\nr/hockey 1 y a\nRank the 8 remaining teams in the playoffs from the one you most want to see win the Cup to the one\nyou would least want to see win the Cup\nr/nba ily a 16j\nWhich Teams that are done rebuilding do you see making sneaky playoff appearances?\nFans of current playoff/play-in teams: give me one reason your team will win their first round matchup\nAs we get closer to March; whos an underrated team you think can make noise in the postseason?\nr/nba ily a\nHas there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)",
+            "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:",
+            "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j"
+        ],
+        "ground_truth": "Critiques des fans sur la NBA (selon les données fournies) :\n\n1. Profondeur des effectifs\n\nFaits (statistiques) :\n- Manque de joueurs de qualité en rotation.\n\nOpinions (commentaires) :\n- « Teams without depth have been exposed in this year's playoffs. » (Les équipes sans profondeur ont été exposées lors des playoffs.)\n- « The Celtics probably just eats an injury year from Tatum and then run it back; but now it looks like they're gonna blow up the roster. » (Les Celtics risquent de subir une année de blessures de Tatum avant de tout reconstruire.)\n\n2. Jeu physique\n\nFaits (statistiques) :\n- Trop de contacts autorisés, favorisant les blessures.\n\nOpinions (commentaires) :\n- « It's bush league stuff due to a complete lack of skill on both rosters. » (C'est du niveau amateur à cause d'un manque total de talent dans les deux effectifs.)\n- « The Warriors aren't also playing extremely physical basketball is crazy. » (Les Warriors ne jouent pas non plus un basket extrêmement physique, c'est absurde.)\n- « If the refs are swallowing their whistles and letting [the physicality] happen, that's on the officials more than the teams. » (Si les arbitres laissent faire la violence, c'est de leur faute, pas celle des équipes.)\n\n3. Arbitrage\n\nFaits (statistiques) :\n- Décisions controversées, manque de cohérence dans les appels.\n\nOpinions (commentaires) :\n- « That's on the officials more than the teams. » (C'est la faute des arbitres, pas des équipes.)\n- « The narrative that the Warriors aren't also playing extremely physical basketball is crazy. » (La narration selon laquelle les Warriors ne jouent pas un basket violent est folle.) → Sous-entendu : les arbitres ferment les yeux sur certaines fautes.",
+        "metadata": {
+            "id": "Q028",
+            "question": "Quelles critiques les fans formulent-ils sur la profondeur des effectifs, le jeu physique et l'arbitrage ?",
+            "type": "qualitative_reddit",
+            "difficulty": "medium",
+            "noise": "none",
+            "source_expected": "Reddit",
+            "expected_route": "RAG",
+            "ground_truth": "Critiques des fans sur la NBA (selon les données fournies) :\n\n1. Profondeur des effectifs\n\nFaits (statistiques) :\n- Manque de joueurs de qualité en rotation.\n\nOpinions (commentaires) :\n- « Teams without depth have been exposed in this year's playoffs. » (Les équipes sans profondeur ont été exposées lors des playoffs.)\n- « The Celtics probably just eats an injury year from Tatum and then run it back; but now it looks like they're gonna blow up the roster. » (Les Celtics risquent de subir une année de blessures de Tatum avant de tout reconstruire.)\n\n2. Jeu physique\n\nFaits (statistiques) :\n- Trop de contacts autorisés, favorisant les blessures.\n\nOpinions (commentaires) :\n- « It's bush league stuff due to a complete lack of skill on both rosters. » (C'est du niveau amateur à cause d'un manque total de talent dans les deux effectifs.)\n- « The Warriors aren't also playing extremely physical basketball is crazy. » (Les Warriors ne jouent pas non plus un basket extrêmement physique, c'est absurde.)\n- « If the refs are swallowing their whistles and letting [the physicality] happen, that's on the officials more than the teams. » (Si les arbitres laissent faire la violence, c'est de leur faute, pas celle des équipes.)\n\n3. Arbitrage\n\nFaits (statistiques) :\n- Décisions controversées, manque de cohérence dans les appels.\n\nOpinions (commentaires) :\n- « That's on the officials more than the teams. » (C'est la faute des arbitres, pas des équipes.)\n- « The narrative that the Warriors aren't also playing extremely physical basketball is crazy. » (La narration selon laquelle les Warriors ne jouent pas un basket violent est folle.) → Sous-entendu : les arbitres ferment les yeux sur certaines fautes.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "RAG",
+            "sql_result": null,
+            "rag_chunks": [
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 76.9277811050415,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "and injuring them. In fact the only reason either team won a game is due to taking out the elite\nplayers on Boston/GS.\nam not impressed in the slightest. It's bush league stuff due to a complete lack of skill on both\nrosters\nmoby323 Fm.\nThat's going a little overboard\nNotManyBuses ~1 m\nAm wrong though\nMannerSuperb AO -Lm.\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\n2 réponses supplémentaires\nfrankievejle\nBla bla bla the narrative that the Warriors aren't also playing extremely physical basketball is\ncrazy.\nWarriors fans have done a masterful job of complaining so much and so loudly that you have\npeople out here legit thinking the physicality is just one sided while they're playing some\npristine brand of basketball.\nNotManyBuses m.\nThey are; the difference is they have Steph.\nYou have Van Vleet.\nMannerSuperb AO -1m\nThat's on the officials more than the teams. If the refs are swallowing their whistles and letting",
+                    "score": 76.89938545227051,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 7672,
+                        "chunk_id_in_doc": 9
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "offense is no joke:\nAfficher plus de commentaires\nTeams without depth have been exposed in this year's playoffs\nWhat team do you absolutely not want to see in the playoffs?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nother in the Finals, is considered to be a snoozefest?\nrInba il y a\nWhich of the top 3 teams should be the most concerned?\nr/hockey 1 y a\nRank the 8 remaining teams in the playoffs from the one you most want to see win the Cup to the one\nyou would least want to see win the Cup\nr/nba ily a 16j\nWhich Teams that are done rebuilding do you see making sneaky playoff appearances?\nFans of current playoff/play-in teams: give me one reason your team will win their first round matchup\nAs we get closer to March; whos an underrated team you think can make noise in the postseason?\nr/nba ily a\nHas there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)",
+                    "score": 76.24703645706177,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 16961,
+                        "chunk_id_in_doc": 20
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:",
+                    "score": 75.93644857406616,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 3516,
+                        "chunk_id_in_doc": 4
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+                    "score": 75.28577446937561,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 11148,
+                        "chunk_id_in_doc": 13
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Les fans critiquent la **profondeur des effectifs** des équipes en playoffs, soulignant que les équipes sans profondeur ont été exposées cette saison. Concernant le **jeu physique**, certains estiment que les arbitres laissent trop de latitude aux équipes, tolérant un jeu physique excessif. Enfin, sur l’**arbitrage**, des commentaires indiquent que les officiels \"avalent leurs sifflets\" (*swallowing their whistles*), laissant passer des contacts durs."
+            }
+        }
+    },
+    {
+        "id": "Q029",
+        "question": "Quel est le top 5 de joueurs ayant marqués le plus de points, et quelles opinions les fans Reddit expriment-ils sur certains de ces joueurs ?",
+        "answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander (2485 points)\n2. Anthony Edwards (2180 points)\n3. Nikola Jokić (2072 points)\n4. Giannis Antetokounmpo (2037 points)\n5. Jayson Tatum (1930 points)\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Critiqué pour son faible pourcentage de réussite aux lancers francs (FT%) qui impacte son *true shooting percentage* (TS%), malgré son efficacité en 2 points.\n- **Jayson Tatum** : Mentionné dans un débat sur la compétitivité des playoffs, avec des spéculations sur une possible explosion de l'effectif des Celtics.",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nORDER BY t.nombre_points_total DESC\nLIMIT 5;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0}\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+            "regular season: do not consider him a better playoff scorer than any of the 20 listed, personally.\nnhthelegend -10 j\nThe mailman doesn't deliver on Sunday's\nobk 74 -10j\nHe will make exceptions if his customers are a certain age though: The junior discount; if you\nwill.\nNonKolobian -10 j\nClassic Pippen\nbingbongninergong -10j\nProbably about 13 spots\n3s2ng -10j\nIt grinds my gear when see data in a table that is not sorted logically.\nISportsBettingRef ~10j Modifié il y a -9\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\n99'= 399\nKawhi Leonard 3133 112\nStephen Curry 4147 110\nJerry West 4457 110\nKareem Abdul-Jabbar 5762 109\nKevin Durant 4985 109\nCharles Barkley 2833 109\nDirk Nowitzki 3663 108\nLeBron James 8289 107\nShaquille O'Neal 5250 107\nWilt Chamberlain 3607 107\nNikola Jokic 2580 107\nMichael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103",
+            "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:"
+        ],
+        "ground_truth": "Top 5 marqueurs de points en NBA (saison régulière) :\n\n1. Shai Gilgeous-Alexander – 2485 points\n2. Anthony Edwards – 2180 points\n3. Nikola Jokić – 2072 points\n4. Giannis Antetokounmpo – 2037 points\n5. Jayson Tatum – 1930 points\n6. Devin Booker – 1920 points\n7. Tyler Herro – 1840 points\n8. Trae Young – 1839 points\n9. Cade Cunningham – 1827 points\n10. James Harden – 1801 points\n11. Karl-Anthony Towns – 1757 points\n12. Zach LaVine – 1724 points\n13. Jalen Green – 1722 points\n14. Stephen Curry – 1715 points\n15. DeMar DeRozan – 1709 points\n\nOpinions des fans Reddit sur certains joueurs :\n\n- Giannis Antetokounmpo : « Son FT% (et son volume élevé) tirent vraiment son TS% vers le bas, malgré son efficacité en 2 points. » (rayrayiscray) ; « Le 'mailman' ne livre pas le dimanche. » (nhthelegend), référence à son manque d'efficacité en playoffs.\n- Stephen Curry : « Reggie Miller est le premier choix le plus efficace de l'histoire des playoffs NBA. » (ISportsBettingRef).\n- James Harden : « Pourquoi avoir retiré les 108 points de Dirk ? » (dirtynashtyfilthy), débat sur les stats historiques.\n- Tim Duncan : « Duncan n'a jamais été efficace, malgré le récit. » (rajs1286).\n- Jayson Tatum : « Les deux meilleures équipes des playoffs (selon les stats) pourraient se rencontrer en Finales. » (Dakozi), discussion sur la compétitivité de la NBA.\n\nNote : Les opinions sont limitées aux extraits fournis. Aucune statistique supplémentaire n'a été inventée.",
+        "metadata": {
+            "id": "Q029",
+            "question": "Quel est le top 5 de joueurs ayant marqués le plus de points, et quelles opinions les fans Reddit expriment-ils sur certains de ces joueurs ?",
+            "type": "mixed_sql_reddit",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA + Reddit",
+            "expected_route": "BOTH",
+            "ground_truth": "Top 5 marqueurs de points en NBA (saison régulière) :\n\n1. Shai Gilgeous-Alexander – 2485 points\n2. Anthony Edwards – 2180 points\n3. Nikola Jokić – 2072 points\n4. Giannis Antetokounmpo – 2037 points\n5. Jayson Tatum – 1930 points\n6. Devin Booker – 1920 points\n7. Tyler Herro – 1840 points\n8. Trae Young – 1839 points\n9. Cade Cunningham – 1827 points\n10. James Harden – 1801 points\n11. Karl-Anthony Towns – 1757 points\n12. Zach LaVine – 1724 points\n13. Jalen Green – 1722 points\n14. Stephen Curry – 1715 points\n15. DeMar DeRozan – 1709 points\n\nOpinions des fans Reddit sur certains joueurs :\n\n- Giannis Antetokounmpo : « Son FT% (et son volume élevé) tirent vraiment son TS% vers le bas, malgré son efficacité en 2 points. » (rayrayiscray) ; « Le 'mailman' ne livre pas le dimanche. » (nhthelegend), référence à son manque d'efficacité en playoffs.\n- Stephen Curry : « Reggie Miller est le premier choix le plus efficace de l'histoire des playoffs NBA. » (ISportsBettingRef).\n- James Harden : « Pourquoi avoir retiré les 108 points de Dirk ? » (dirtynashtyfilthy), débat sur les stats historiques.\n- Tim Duncan : « Duncan n'a jamais été efficace, malgré le récit. » (rajs1286).\n- Jayson Tatum : « Les deux meilleures équipes des playoffs (selon les stats) pourraient se rencontrer en Finales. » (Dakozi), discussion sur la compétitivité de la NBA.\n\nNote : Les opinions sont limitées aux extraits fournis. Aucune statistique supplémentaire n'a été inventée.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "BOTH",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nORDER BY t.nombre_points_total DESC\nLIMIT 5;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0}\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "rag_chunks": [
+                {
+                    "source": "Reddit 3.pdf",
+                    "text": "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
+                    "score": 79.38923835754395,
+                    "metadata": {
+                        "source": "Reddit 3.pdf",
+                        "filename": "Reddit 3.pdf",
+                        "full_path": "inputs\\Reddit 3.pdf",
+                        "relative_path": "Reddit 3.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "WAS"
+                        ],
+                        "players": [
+                            "Giannis Antetokounmpo",
+                            "James Harden",
+                            "Kawhi Leonard",
+                            "Kevin Durant",
+                            "Klay Thompson",
+                            "Kyle Lowry",
+                            "LeBron James",
+                            "Stephen Curry"
+                        ],
+                        "start_index": 9245,
+                        "chunk_id_in_doc": 11
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 76.87609195709229,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+                    "score": 76.51957869529724,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 11148,
+                        "chunk_id_in_doc": 13
+                    }
+                },
+                {
+                    "source": "Reddit 3.pdf",
+                    "text": "regular season: do not consider him a better playoff scorer than any of the 20 listed, personally.\nnhthelegend -10 j\nThe mailman doesn't deliver on Sunday's\nobk 74 -10j\nHe will make exceptions if his customers are a certain age though: The junior discount; if you\nwill.\nNonKolobian -10 j\nClassic Pippen\nbingbongninergong -10j\nProbably about 13 spots\n3s2ng -10j\nIt grinds my gear when see data in a table that is not sorted logically.\nISportsBettingRef ~10j Modifié il y a -9\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\n99'= 399\nKawhi Leonard 3133 112\nStephen Curry 4147 110\nJerry West 4457 110\nKareem Abdul-Jabbar 5762 109\nKevin Durant 4985 109\nCharles Barkley 2833 109\nDirk Nowitzki 3663 108\nLeBron James 8289 107\nShaquille O'Neal 5250 107\nWilt Chamberlain 3607 107\nNikola Jokic 2580 107\nMichael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103",
+                    "score": 76.473069190979,
+                    "metadata": {
+                        "source": "Reddit 3.pdf",
+                        "filename": "Reddit 3.pdf",
+                        "full_path": "inputs\\Reddit 3.pdf",
+                        "relative_path": "Reddit 3.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "WAS"
+                        ],
+                        "players": [
+                            "Giannis Antetokounmpo",
+                            "James Harden",
+                            "Kawhi Leonard",
+                            "Kevin Durant",
+                            "Klay Thompson",
+                            "Kyle Lowry",
+                            "LeBron James",
+                            "Stephen Curry"
+                        ],
+                        "start_index": 8405,
+                        "chunk_id_in_doc": 10
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:",
+                    "score": 76.12965703010559,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 3516,
+                        "chunk_id_in_doc": 4
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander (2485 points)\n2. Anthony Edwards (2180 points)\n3. Nikola Jokić (2072 points)\n4. Giannis Antetokounmpo (2037 points)\n5. Jayson Tatum (1930 points)\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Critiqué pour son faible pourcentage de réussite aux lancers francs (FT%) qui impacte son *true shooting percentage* (TS%), malgré son efficacité en 2 points.\n- **Jayson Tatum** : Mentionné dans un débat sur la compétitivité des playoffs, avec des spéculations sur une possible explosion de l'effectif des Celtics."
+            }
+        }
+    },
+    {
+        "id": "Q030",
+        "question": "Combien de points Jayson Tatum a-t-il marqués, et quelles inquiétudes les fans Reddit expriment-ils concernant l'avenir des Celtics ?",
+        "answer": "Jayson Tatum a marqué **1930 points** en saison régulière.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la possibilité que l'équipe \"démonte\" son effectif (*\"blow up the roster\"*).",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+            "Respect. will always wonder 'what if' about last year's run without Giannis, but this year think the\ndifference is there.\nMannerSuperb AO -1m.\nPaolo and Franz have been a dynamic wing duo this whole series agaisnt one of the best defensive\nteams in basketball plus the defending champs. Yes the supporting cast has been laughably bad at\ntimes around them offensively but they guard their asses off and really giving the Celtics a fight\ndespite missing Suggs and the other Wagner brother. thkkk their floor spacers and average PG away\nfrom being an true contender\ngeorgiosauce\nMagic are down 3-1 despite injuring 3 Celtics starters along the way, they' 're solid trash\n22 réponses supplémentaires\nPeach TreeDish91\nYou really seem like the type of dude who spends 10 minutes watching the youtube highlights\nwhile checking the box score; then spends the next 60 minutes typing bs out the ass on reddit\n[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him",
+            "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+            "[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him\n2 réponses supplémentaires\nlegendofthededbug\nthepeachgod\nIndiana is gonna have a better chance at beating Cleveland than people will give them\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nSiakam is the most underrated player in the league as far as impact towards winning. If that team's\nclicking; which they seem to be with Hali dishing the way he is right now; they' re a tough out for\nanyone\nshhhhhhhwish\nBy far the toughest series last year for the Celtics. think we'll get a Celtics Indy rematch tbh.. no one\nwill see it coming but it wasn't a fluke Indy got there last year\nYankeeknickfan -1 m\nIt's impressive that they're finally not just scraping by a team that's injured and straight up\nDominating a worse team. Definitely better than last year\nBut the bucks are awful. Really don't get why dominating them says anything about Cleveland\nProvocativeHotTakes m."
+        ],
+        "ground_truth": "Réponse :\n\nFaits :\n- Jayson Tatum a marqué 1 930 points au total (source : résultats SQL).\n\nOpinions des fans Reddit sur l'avenir des Celtics :\n- Certains fans expriment des inquiétudes quant à la gestion de l'effectif des Celtics, évoquant la possibilité que l'équipe « fasse exploser son effectif » (« blow up the roster ») plutôt que de le conserver pour une nouvelle saison compétitive.\n- D'autres soulignent que les Celtics pourraient rencontrer des difficultés en cas de blessure de Tatum, une situation qui pourrait forcer une reconstruction (« eats an injury year from Tatum and then run it back »).\n\nLes autres commentaires Reddit ne concernent pas directement les Celtics ou leurs inquiétudes pour l'avenir.",
+        "metadata": {
+            "id": "Q030",
+            "question": "Combien de points Jayson Tatum a-t-il marqués, et quelles inquiétudes les fans Reddit expriment-ils concernant l'avenir des Celtics ?",
+            "type": "mixed_sql_reddit",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA + Reddit",
+            "expected_route": "BOTH",
+            "ground_truth": "Réponse :\n\nFaits :\n- Jayson Tatum a marqué 1 930 points au total (source : résultats SQL).\n\nOpinions des fans Reddit sur l'avenir des Celtics :\n- Certains fans expriment des inquiétudes quant à la gestion de l'effectif des Celtics, évoquant la possibilité que l'équipe « fasse exploser son effectif » (« blow up the roster ») plutôt que de le conserver pour une nouvelle saison compétitive.\n- D'autres soulignent que les Celtics pourraient rencontrer des difficultés en cas de blessure de Tatum, une situation qui pourrait forcer une reconstruction (« eats an injury year from Tatum and then run it back »).\n\nLes autres commentaires Reddit ne concernent pas directement les Celtics ou leurs inquiétudes pour l'avenir.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "BOTH",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
+            "rag_chunks": [
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 80.22966980934143,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+                    "score": 78.25483679771423,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 11148,
+                        "chunk_id_in_doc": 13
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "Respect. will always wonder 'what if' about last year's run without Giannis, but this year think the\ndifference is there.\nMannerSuperb AO -1m.\nPaolo and Franz have been a dynamic wing duo this whole series agaisnt one of the best defensive\nteams in basketball plus the defending champs. Yes the supporting cast has been laughably bad at\ntimes around them offensively but they guard their asses off and really giving the Celtics a fight\ndespite missing Suggs and the other Wagner brother. thkkk their floor spacers and average PG away\nfrom being an true contender\ngeorgiosauce\nMagic are down 3-1 despite injuring 3 Celtics starters along the way, they' 're solid trash\n22 réponses supplémentaires\nPeach TreeDish91\nYou really seem like the type of dude who spends 10 minutes watching the youtube highlights\nwhile checking the box score; then spends the next 60 minutes typing bs out the ass on reddit\n[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him",
+                    "score": 77.35671997070312,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 10143,
+                        "chunk_id_in_doc": 12
+                    }
+                },
+                {
+                    "source": "Reddit 4.pdf",
+                    "text": "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
+                    "score": 76.270592212677,
+                    "metadata": {
+                        "source": "Reddit 4.pdf",
+                        "filename": "Reddit 4.pdf",
+                        "full_path": "inputs\\Reddit 4.pdf",
+                        "relative_path": "Reddit 4.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Miami Heat",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "MIA",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 4197,
+                        "chunk_id_in_doc": 5
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him\n2 réponses supplémentaires\nlegendofthededbug\nthepeachgod\nIndiana is gonna have a better chance at beating Cleveland than people will give them\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nSiakam is the most underrated player in the league as far as impact towards winning. If that team's\nclicking; which they seem to be with Hali dishing the way he is right now; they' re a tough out for\nanyone\nshhhhhhhwish\nBy far the toughest series last year for the Celtics. think we'll get a Celtics Indy rematch tbh.. no one\nwill see it coming but it wasn't a fluke Indy got there last year\nYankeeknickfan -1 m\nIt's impressive that they're finally not just scraping by a team that's injured and straight up\nDominating a worse team. Definitely better than last year\nBut the bucks are awful. Really don't get why dominating them says anything about Cleveland\nProvocativeHotTakes m.",
+                    "score": 76.10989212989807,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 11042,
+                        "chunk_id_in_doc": 13
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Jayson Tatum a marqué **1930 points** en saison régulière.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la possibilité que l'équipe \"démonte\" son effectif (*\"blow up the roster\"*) après une saison où les blessures et les performances en playoffs ont soulevé des questions sur la durabilité du groupe."
+            }
+        }
+    },
+    {
+        "id": "Q031",
+        "question": "Que montrent les statistiques de points de Giannis Antetokounmpo et de Jayson Tatum, et quelles critiques Reddit sont formulées sur leur efficacité ou leur avenir ?",
+        "answer": "Giannis Antetokounmpo affiche une moyenne de **2037 points** avec un pourcentage de réussite aux tirs de **60,1%**, tandis que Jayson Tatum a marqué **1930 points** avec un pourcentage de réussite de **45,2%**. \n\nLes critiques Reddit sur leur efficacité ou leur avenir mentionnent principalement :\n- **Giannis** : Son efficacité aux lancers francs (61,7%) est critiquée pour son impact sur son *true shooting percentage* (*\"his ft% (and high volume of them) really brings down the overall ts%\"*).\n- **Tatum** : Son rôle offensif et son efficacité en tant que première option sont discutés, avec des remarques sur la dépendance des Celtics à son jeu malgré des lacunes dans l'effectif (*\"they guard their asses off but the supporting cast has been laughably bad\"*).",
+        "contexts": [
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
+            "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+            "Respect. will always wonder 'what if' about last year's run without Giannis, but this year think the\ndifference is there.\nMannerSuperb AO -1m.\nPaolo and Franz have been a dynamic wing duo this whole series agaisnt one of the best defensive\nteams in basketball plus the defending champs. Yes the supporting cast has been laughably bad at\ntimes around them offensively but they guard their asses off and really giving the Celtics a fight\ndespite missing Suggs and the other Wagner brother. thkkk their floor spacers and average PG away\nfrom being an true contender\ngeorgiosauce\nMagic are down 3-1 despite injuring 3 Celtics starters along the way, they' 're solid trash\n22 réponses supplémentaires\nPeach TreeDish91\nYou really seem like the type of dude who spends 10 minutes watching the youtube highlights\nwhile checking the box score; then spends the next 60 minutes typing bs out the ass on reddit\n[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him",
+            "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
+            "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+            "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:"
+        ],
+        "ground_truth": "Statistiques de points (faits) :\n\nGiannis Antetokounmpo :\n- Points moyens : 2037 (saison régulière)\n- Tirs réussis/tentés : 791/1320 (60,1 % de réussite)\n- 3 points : 22,2 % (peu efficace à longue distance)\n- Lancers francs : 61,7 % (faible efficacité)\n- Usage rate : 34,6 % (très élevé, porte l'attaque)\n- Net rating : +7,2 (impact positif sur l'équipe)\n\nJayson Tatum :\n- Points moyens : 1930\n- Tirs réussis/tentés : 662/1462 (45,2 % de réussite)\n- 3 points : 34,3 % (meilleur pourcentage des deux)\n- Lancers francs : 81,4 % (excellente efficacité)\n- Usage rate : 30,1 % (élevé mais moins que Giannis)\n- Net rating : +9,8 (impact supérieur à Giannis)\n\nCritiques sur Reddit (opinions) :\n\n1. Efficacité de Giannis :\n   - Certains soulignent que son pourcentage de lancers francs (61,7 %) et son faible pourcentage à 3 points (22,2 %) limitent son efficacité globale, malgré sa domination à mi-distance (rayrayiscray).\n   - Son turnover ratio (9,1 %) et son usage rate élevé (34,6 %) sont perçus comme des risques pour l'équipe en playoffs (MarkoSeke).\n2. Avenir de Tatum :\n   - Des fans s'interrogent sur la capacité des Celtics à conserver leur noyau après des blessures (Snakescipio).\n   - Certains critiquent le manque de polyvalence offensive de l'équipe autour de lui (Paolo and Franz).\n   - D'autres estiment que son pourcentage de réussite (45,2 %) est insuffisant pour un joueur star (TallnFrosty).\n3. Comparaisons historiques :\n   - Giannis est placé bas dans les classements d'efficacité en playoffs en raison de son faible TS% (True Shooting), impacté par ses lancers francs (rayrayiscray).\n   - Tatum est souvent comparé à des légendes, mais son manque de constance est pointé (IcyAuthorl).\n\nNote : Les critiques se concentrent surtout sur l'efficacité offensive (tirs, lancers francs) et l'impact en playoffs, avec des débats sur leur capacité à mener leur équipe vers un titre.",
+        "metadata": {
+            "id": "Q031",
+            "question": "Que montrent les statistiques de points de Giannis Antetokounmpo et de Jayson Tatum, et quelles critiques Reddit sont formulées sur leur efficacité ou leur avenir ?",
+            "type": "mixed_sql_reddit",
+            "difficulty": "complex",
+            "noise": "none",
+            "source_expected": "Données NBA + Reddit",
+            "expected_route": "BOTH",
+            "ground_truth": "Statistiques de points (faits) :\n\nGiannis Antetokounmpo :\n- Points moyens : 2037 (saison régulière)\n- Tirs réussis/tentés : 791/1320 (60,1 % de réussite)\n- 3 points : 22,2 % (peu efficace à longue distance)\n- Lancers francs : 61,7 % (faible efficacité)\n- Usage rate : 34,6 % (très élevé, porte l'attaque)\n- Net rating : +7,2 (impact positif sur l'équipe)\n\nJayson Tatum :\n- Points moyens : 1930\n- Tirs réussis/tentés : 662/1462 (45,2 % de réussite)\n- 3 points : 34,3 % (meilleur pourcentage des deux)\n- Lancers francs : 81,4 % (excellente efficacité)\n- Usage rate : 30,1 % (élevé mais moins que Giannis)\n- Net rating : +9,8 (impact supérieur à Giannis)\n\nCritiques sur Reddit (opinions) :\n\n1. Efficacité de Giannis :\n   - Certains soulignent que son pourcentage de lancers francs (61,7 %) et son faible pourcentage à 3 points (22,2 %) limitent son efficacité globale, malgré sa domination à mi-distance (rayrayiscray).\n   - Son turnover ratio (9,1 %) et son usage rate élevé (34,6 %) sont perçus comme des risques pour l'équipe en playoffs (MarkoSeke).\n2. Avenir de Tatum :\n   - Des fans s'interrogent sur la capacité des Celtics à conserver leur noyau après des blessures (Snakescipio).\n   - Certains critiquent le manque de polyvalence offensive de l'équipe autour de lui (Paolo and Franz).\n   - D'autres estiment que son pourcentage de réussite (45,2 %) est insuffisant pour un joueur star (TallnFrosty).\n3. Comparaisons historiques :\n   - Giannis est placé bas dans les classements d'efficacité en playoffs en raison de son faible TS% (True Shooting), impacté par ses lancers francs (rayrayiscray).\n   - Tatum est souvent comparé à des légendes, mais son manque de constance est pointé (IcyAuthorl).\n\nNote : Les critiques se concentrent surtout sur l'efficacité offensive (tirs, lancers francs) et l'impact en playoffs, avec des débats sur leur capacité à mener leur équipe vers un titre.",
+            "answerable": true,
+            "prototype": "prototype_ameliore_hybride",
+            "route": "BOTH",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
+            "rag_chunks": [
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
+                    "score": 80.24342656135559,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 12021,
+                        "chunk_id_in_doc": 14
+                    }
+                },
+                {
+                    "source": "Reddit 1.pdf",
+                    "text": "Respect. will always wonder 'what if' about last year's run without Giannis, but this year think the\ndifference is there.\nMannerSuperb AO -1m.\nPaolo and Franz have been a dynamic wing duo this whole series agaisnt one of the best defensive\nteams in basketball plus the defending champs. Yes the supporting cast has been laughably bad at\ntimes around them offensively but they guard their asses off and really giving the Celtics a fight\ndespite missing Suggs and the other Wagner brother. thkkk their floor spacers and average PG away\nfrom being an true contender\ngeorgiosauce\nMagic are down 3-1 despite injuring 3 Celtics starters along the way, they' 're solid trash\n22 réponses supplémentaires\nPeach TreeDish91\nYou really seem like the type of dude who spends 10 minutes watching the youtube highlights\nwhile checking the box score; then spends the next 60 minutes typing bs out the ass on reddit\n[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him",
+                    "score": 79.80828285217285,
+                    "metadata": {
+                        "source": "Reddit 1.pdf",
+                        "filename": "Reddit 1.pdf",
+                        "full_path": "inputs\\Reddit 1.pdf",
+                        "relative_path": "Reddit 1.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Golden State Warriors",
+                            "Minnesota Timberwolves",
+                            "Oklahoma City Thunder",
+                            "Orlando Magic",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "GSW",
+                            "MIN",
+                            "OKC",
+                            "ORL",
+                            "WAS"
+                        ],
+                        "players": [
+                            "Jaden Ivey",
+                            "Malik Beasley",
+                            "Tobias Harris",
+                            "Ty Jerome"
+                        ],
+                        "start_index": 10143,
+                        "chunk_id_in_doc": 12
+                    }
+                },
+                {
+                    "source": "Reddit 3.pdf",
+                    "text": "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
+                    "score": 78.84155511856079,
+                    "metadata": {
+                        "source": "Reddit 3.pdf",
+                        "filename": "Reddit 3.pdf",
+                        "full_path": "inputs\\Reddit 3.pdf",
+                        "relative_path": "Reddit 3.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "WAS"
+                        ],
+                        "players": [
+                            "Giannis Antetokounmpo",
+                            "James Harden",
+                            "Kawhi Leonard",
+                            "Kevin Durant",
+                            "Klay Thompson",
+                            "Kyle Lowry",
+                            "LeBron James",
+                            "Stephen Curry"
+                        ],
+                        "start_index": 9245,
+                        "chunk_id_in_doc": 11
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "important once Steph retires for example\ntachudda ~15 j\nYeah, root for players more than the laundry they are wearing\n2 réponses supplémentaires\nGodWhyPlease ~15 j\nThe Steelers are a horrible example they haven't had a losing season in 20 years_\nBut yeah; NFL has mastered it\nbegging_brother \"15 j\n\"Not losing\" rarely drives fan engagement. 2 decades of mediocrity from a small market\nteam ought to shrink the fan base It does in nearly every other case in every other sport.\nIn the NFL it doesn't at all.\nreponses supplémentaires\nJanal88sepsis -15 j\nAnd the hard cap makes ot easier for small market teams, nba needs to figure it's shit out on\nthat if they want parity\nSnakescipio -15 j\nThe second apron's as close to a hard cap as we're gonna get; and we're definitely in this\nage of parity right now. In previous years the Celtics probably just eats an injury year from\nTatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j",
+                    "score": 78.70341539382935,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 11148,
+                        "chunk_id_in_doc": 13
+                    }
+                },
+                {
+                    "source": "Reddit 2.pdf",
+                    "text": "not a skill, it's some bitch ass cheese: Like the kid who won at mortal kombat by spamming the leg\nsweep or uppercut. Yeah; you won; but everything thinks you're lame as fuck\ncaughtinthought ~15 j\nit's kind of a double-edged sword for the NBA one of the reasons it is so popular is due to its\ncharacter branding; but if those characters don't make it_\n[supprimé] ~15 j\ndon't really get why fans of the sport are obsessed with the ratings and popularity of the nba. Just enjoy\nbasketball\ncaptain_ahabb -15 j\nPeople use the ratings decline as a proxy for whatever aspect of the league they dislike\nCharming_Motor_919 ~15 j Modifié il y a -15 j\nThe worst is when it briefly became a proxy for politics. Exhausting.\nEdit: think some have misinterpreted what | said. will clarify. When people used NBA ratings to\nmake arguments about politics, found it to be exhausting:",
+                    "score": 78.10494899749756,
+                    "metadata": {
+                        "source": "Reddit 2.pdf",
+                        "filename": "Reddit 2.pdf",
+                        "full_path": "inputs\\Reddit 2.pdf",
+                        "relative_path": "Reddit 2.pdf",
+                        "category": "reddit",
+                        "content_type": "reddit",
+                        "file_extension": ".pdf",
+                        "teams": [
+                            "Oklahoma City Thunder",
+                            "Washington Wizards"
+                        ],
+                        "team_codes": [
+                            "OKC",
+                            "WAS"
+                        ],
+                        "players": [],
+                        "start_index": 3516,
+                        "chunk_id_in_doc": 4
+                    }
+                }
+            ],
+            "source_errors": [],
+            "pydantic_ai_control": {
+                "grounded_in_context": true,
+                "unsupported_claims": [],
+                "raw_answer": "Giannis Antetokounmpo affiche une moyenne de **2037 points** (60,1% de réussite aux tirs), tandis que Jayson Tatum a marqué **1930 points** (45,2% de réussite). Les critiques Reddit sur leur efficacité ou leur avenir soulignent principalement :\n- **Giannis** : Son efficacité aux lancers francs (61,7%) et son *true shooting percentage* (TS%) sont critiqués comme des points faibles malgré son jeu intérieur dominant (*\"his ft% (and high volume of them) really brings down the overall ts%\"*).\n- **Tatum** : Son rôle offensif est parfois remis en question, avec des débats sur son efficacité en tant que premier option (*\"TS rewards three point shooters\"* et *\"until Franz fixes his shooting, don't think 'dynamic' is the right word for him\"*). Certains soulignent aussi la dépendance des Celtics à son jeu malgré des lacunes dans l'effectif (*\"they guard their asses off but the supporting cast has been laughably bad\"*).\n\nAucune critique directe sur leur avenir n'est documentée dans les extraits fournis."
+            }
+        }
+    }
+]

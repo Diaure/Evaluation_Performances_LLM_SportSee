@@ -6,7 +6,7 @@
     "difficulty": "simple",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "1930",
+    "ground_truth": "Jayson Tatum a marqué 1930 points",
     "answerable": true
   },
   {
@@ -16,7 +16,7 @@
     "difficulty": "simple",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "626",
+    "ground_truth": "Jayson Tatum a pris 626 rebonds",
     "answerable": true
   },
   {
@@ -26,7 +26,7 @@
     "difficulty": "simple",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "432",
+    "ground_truth": "Jayson Tatum a réalisé 432 passes décisives",
     "answerable": true
   },
   {
@@ -36,7 +36,7 @@
     "difficulty": "simple",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "45.2%",
+    "ground_truth": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45.2%",
     "answerable": true
   },
   {
@@ -46,7 +46,7 @@
     "difficulty": "medium",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Shai Gilgeous-Alexander (2485), Anthony Edwards (2180) et Nikola Jokić (2072).",
+    "ground_truth": "Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points).",
     "answerable": true
   },
   {
@@ -56,7 +56,7 @@
     "difficulty": "simple",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Anthony Edwards, avec 2180 points contre 1930 pour Jayson Tatum.",
+    "ground_truth": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930 pour Jayson Tatum.",
     "answerable": true
   },
   {
@@ -66,7 +66,7 @@
     "difficulty": "medium",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Giannis Antetokounmpo avec 60.1% de FG.",
+    "ground_truth": "Giannis Antetokounmpo avec 60.1% possède le meilleur FG% parmi les 5 meilleurs marqueurs.",
     "answerable": true
   },
   {
@@ -106,7 +106,7 @@
     "difficulty": "medium",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+    "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737), Philadelphia 76ers (737).",
     "answerable": true
   },
   {
@@ -136,7 +136,7 @@
     "difficulty": "medium",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Detroit Pistons : 10292 points et 3834 rebonds. Milwaukee Bucks : 10016 points et 3875 rebonds.",
+    "ground_truth": "Detroit Pistons a marqué 10292 points et pris 3834 rebonds, tandis que Milwaukee Bucks a marqué 10016 points et pris 3875 rebonds.",
     "answerable": true
   },
   {
@@ -146,7 +146,7 @@
     "difficulty": "complex",
     "noise": "low",
     "source_expected": "Données NBA",
-    "ground_truth": "Les données ne définissent pas de critère permettant d'identifier une « meilleure équipe » toutes statistiques confondues. Les équipes arrivent en tête selon des statistiques différentes : Detroit Pistons en points, Houston Rockets en rebonds, Atlanta Hawks en passes décisives, Oklahoma City Thunder en interceptions et Dallas Mavericks en contres.",
+    "ground_truth": "Les données ne permettent pas de désigner une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini. Il faut préciser un indicateur à comparer ou examiner plusieurs statistiques séparément.",
     "answerable": false
   },
   {
@@ -176,7 +176,7 @@
     "difficulty": "complex",
     "noise": "none",
     "source_expected": "Données NBA",
-    "ground_truth": "Jayson Tatum : 1930 points, 626 rebonds, 432 passes décisives, 45.2% FG. Nikola Jokić : 2072 points, 889 rebonds, 714 passes décisives, 57.6% FG.",
+    "ground_truth": "Jayson Tatum marque 1930 points avec 45.2% de réussite aux tirs et 626 rebonds, et réalise 432 passes décisives . Nikola Jokić marque 2072 points avec 57.6% de réussite aux tirs et 889 rebonds, et réalise 714 passes décisives.",
     "answerable": true
   },
   {
@@ -206,7 +206,7 @@
     "difficulty": "simple",
     "noise": "low",
     "source_expected": "Données NBA",
-    "ground_truth": "1930",
+    "ground_truth": "Jayson Tatum a marqué 1930 points au total",
     "answerable": true
   },
   {
@@ -225,8 +225,8 @@
     "type": "unanswerable",
     "difficulty": "complex",
     "noise": "none",
-    "source_expected": null,
-    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne contiennent pas les statistiques match par match nécessaires pour identifier les cinq derniers matchs.",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs. La base contient des statistiques globales et non des statistiques détaillées pour chaque match. Il est donc impossible d'isoler les cinq matchs les plus récents et de calculer ou comparer les pourcentages correspondants.",
     "answerable": false
   },
   {
@@ -235,8 +235,8 @@
     "type": "unanswerable",
     "difficulty": "complex",
     "noise": "low",
-    "source_expected": null,
-    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne distinguent pas les performances à domicile et à l'extérieur.",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas de comparer les statistiques de rebonds à domicile et à l'extérieur, car elles ne permettent pas d'identifier explicitement le lieu des matchs. De plus, la question ne précise pas l'équipe à analyser. Une comparaison fiable nécessite des données permettant de distinguer les rebonds réalisés à domicile de ceux réalisés à l'extérieur, ainsi que l'identification de l'équipe concernée.",
     "answerable": false
   },
   {
@@ -245,8 +245,8 @@
     "type": "unanswerable",
     "difficulty": "complex",
     "noise": "none",
-    "source_expected": null,
-    "ground_truth": "Les données fournies ne permettent pas de répondre : elles ne fournissent pas les statistiques match par match permettant d'identifier le dernier match.",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match. La base contient des statistiques globales et non les points marqués par chaque joueur lors de chaque rencontre. Il est donc impossible d'identifier le dernier match de chaque joueur et de comparer leurs scores respectifs.",
     "answerable": false
   }
 ]

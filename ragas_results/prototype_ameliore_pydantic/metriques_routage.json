@@ -1,0 +1,22 @@
+{
+    "questions_avec_route_attendue": 31,
+    "routes_correctes": 31,
+    "accuracy_routage": 1.0,
+    "matrice_confusion": {
+        "SQL": {
+            "SQL": 25,
+            "RAG": 0,
+            "BOTH": 0
+        },
+        "RAG": {
+            "SQL": 0,
+            "RAG": 3,
+            "BOTH": 0
+        },
+        "BOTH": {
+            "SQL": 0,
+            "RAG": 0,
+            "BOTH": 3
+        }
+    }
+}

@@ -2,6 +2,8 @@ import os
 import re
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, inspect, text
+import unicodedata
+from sqlalchemy import inspect, text
 
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
@@ -132,6 +134,42 @@ FROM players
 WHERE age_du_joueur = (SELECT MIN(age_du_joueur) FROM players)
    OR age_du_joueur = (SELECT MAX(age_du_joueur) FROM players)
 ORDER BY age_du_joueur;
+
+exemple 9
+Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?
+SQL:
+SELECT
+    p.nom_du_joueur,
+    t.pourcentage_tirs_reussis
+FROM top_15_joueurs_points t
+JOIN players p ON t.player_id = p.player_id
+WHERE t.player_id IN (
+    SELECT player_id
+    FROM top_15_joueurs_points
+    ORDER BY nombre_points_total DESC
+    LIMIT 5)
+ORDER BY t.pourcentage_tirs_reussis DESC
+LIMIT 1;
+
+example 10
+Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?
+WITH classement_interceptions AS (
+    SELECT
+        t.nom_complet_equipe,
+        SUM(s.interceptions) AS total_interceptions,
+        RANK() OVER (ORDER BY SUM(s.interceptions) DESC) AS rang_interceptions
+    FROM teams t
+    JOIN players p ON p.team_id = t.team_id
+    LEFT JOIN stats s ON p.player_id = s.player_id
+    GROUP BY t.nom_complet_equipe
+)
+SELECT
+    nom_complet_equipe,
+    total_interceptions,
+    rang_interceptions
+FROM classement_interceptions
+WHERE rang_interceptions <= 5
+ORDER BY rang_interceptions, total_interceptions DESC;
 """
 
 # prompt pour générer les requêtes sql
@@ -154,6 +192,12 @@ Règles:
 9. Les informations d'équipe sont dans teams
 10. Le classement des 15 meilleurs marqueurs est dans top_15_joueurs_points
 11. Retourne uniquement le SQL, sans explication, sans markdown et sans ```sql.
+12. Le classement doit être effectué sur la colonne correspondant exactement au critère demandé dans la question.
+13. Pour une question portant sur le pourcentage de tirs réussis (FG%), utiliser pourcentage_tirs_reussis dans le ORDER BY, et non nombre_points_total. Pour classer par pourcentage décroissant, utiliser ORDER BY pourcentage_tirs_reussis DESC.
+14. Ne pas déduire la colonne de classement du nom de la table. Vérifier sa signification dans le schéma SQL et le dictionnaire des données.
+15. Avant de générer la requête, vérifier que la colonne utilisée dans le ORDER BY correspond bien au critère demandé.
+16. Si une question demande d'abord de sélectionner un sous-ensemble selon un critère, puis de classer ce sous-ensemble selon un autre critère, utiliser une sous-requête ou une CTE.
+17. Ne jamais ajouter un deuxième ORDER BY après un LIMIT dans une même requête SELECT. Pour effectuer un classement en plusieurs étapes, utiliser des niveaux de requête distincts.
 
 SCHÉMA DE LA BASE :
 {schema}
@@ -246,6 +290,88 @@ def execute_sql(query: str):
 
         return [dict(zip(columns, row)) for row in rows]
 
+# Controle des questions et validation d'existence de réponses fiables
+# normalisation des questions
+def normaliser_question(question: str) -> str:
+    """Normalise le texte pour faciliter la détection des cas connus."""
+    question = unicodedata.normalize("NFD", question.lower())
+    question = "".join(
+        caractere for caractere in question
+        if unicodedata.category(caractere) != "Mn"
+    )
+    return re.sub(r"\s+", " ", question).strip()
+
+# validation des noms de colonnes existantes
+def obtenir_colonnes() -> dict[str, set[str]]:
+    inspector = inspect(engine)
+    tables = [
+        "teams",
+        "players",
+        "matches",
+        "stats",
+        "top_15_joueurs_points",]
+
+    return {
+        table: {
+            colonne["name"].lower()
+            for colonne in inspector.get_columns(table)}
+        for table in tables}
+
+# vérifier si la question peut avoir une réponse fiable
+def verifier_capacite_question(question: str) -> str | None:
+    q = normaliser_question(question)
+    colonnes = obtenir_colonnes()
+
+    # Exemple Q15: aucun critère unique de "meilleure équipe"
+    if ("equipe" in q and any(expression in q for expression in [
+            "toutes statistiques confondues",
+            "toutes les statistiques confondues",
+            "meilleure equipe toutes statistiques",])):
+        return ("DONNEES_INSUFFISANTES: aucun critère unique de performance n'est défini. Demander un indicateur précis ou comparer plusieurs statistiques séparément.")
+
+    # Question Domicile / extérieur: exiger un indicateur de lieu explicite.
+    if ("domicile" in q or "exterieur" in q or "a la maison" in q):
+        colonnes_lieu = {
+            "domicile", "exterieur", "is_home", "home_away",
+            "lieu_match", "equipe_domicile", "equipe_exterieur",
+            "home_team_id", "away_team_id",}
+        
+        toutes_colonnes = set().union(*colonnes.values())
+        if not colonnes_lieu.intersection(toutes_colonnes):
+            return ("DONNEES_INSUFFISANTES: aucune colonne connue ne permet d'identifier explicitement le lieu du match. La comparaison domicile/extérieur est impossible.")
+
+    # questions sur des matchs précis ou séquence de matchs non disponible
+    motifs_match_specifique = [
+        # Dernier(s) match(s)
+        r"\bdernier(?:e|s|es)?\s+matchs?\b",
+        r"\bmatchs?\s+(?:precedent(?:e|s|es)?|recent(?:e|s|es)?)\b",
+
+        # Premier match
+        r"\bpremier(?:e)?\s+match\b",
+
+        # Match à un rang précis
+        r"\b(?:deuxieme|troisieme|quatrieme|cinquieme|"
+        r"sixieme|septieme|huitieme|neuvieme|dixieme)\s+match\b",
+        r"\b\d+(?:er|ere|e|eme)?\s+match\b",
+
+        # Plusieurs matchs consécutifs ou une analyse match par match
+        r"\bmatchs?\s+par\s+matchs?\b",
+        r"\bsur\s+(?:les?\s+)?\d+\s+matchs?\b",
+        r"\b(?:sur|lors de|pendant)\s+(?:son|leur|le)\s+match\b",]
+
+    
+    if any(re.search(motif, q) for motif in motifs_match_specifique):
+        return (
+            "DONNEES_INSUFFISANTES : la base contient des statistiques "
+            "globales et non des statistiques détaillées par match. Il est "
+            "impossible d'identifier les performances d'un joueur lors de "
+            "son premier, dernier ou n-ième match, ou sur une séquence "
+            "précise de matchs. Reformulez la question à partir des "
+            "statistiques globales disponibles.")
+
+    return None
+
+
 # transformation de la question en requete sql par langchain
 @tool
 def sql_tool(question: str) -> str:
@@ -254,8 +380,11 @@ def sql_tool(question: str) -> str:
     exécute cette requête dans PostgreSQL et retourne
     les résultats.
     """
-
+    refus = verifier_capacite_question(question)
     try:
+        if refus is not None:
+            return refus
+        
         # Génération du SQL
         sql_query = generer_sql(question)
 

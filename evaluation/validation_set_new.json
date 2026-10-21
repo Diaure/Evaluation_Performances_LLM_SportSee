@@ -1,0 +1,318 @@
+[
+  {
+    "id": "Q001",
+    "question": "Combien de points Jayson Tatum a-t-il marqués ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum a marqué 1930 points",
+    "answerable": true
+  },
+  {
+    "id": "Q002",
+    "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum a pris 626 rebonds",
+    "answerable": true
+  },
+  {
+    "id": "Q003",
+    "question": "Combien de passes décisives Jayson Tatum a-t-il réalisées ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum a réalisé 432 passes décisives",
+    "answerable": true
+  },
+  {
+    "id": "Q004",
+    "question": "Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?",
+    "type": "simple_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Le pourcentage de réussite aux tirs de Jayson Tatum est de 45.2%",
+    "answerable": true
+  },
+  {
+    "id": "Q005",
+    "question": "Quels sont les trois joueurs qui ont marqué le plus de points ?",
+    "type": "ranking_player",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Shai Gilgeous-Alexander (2485 points), Anthony Edwards (2180 points) et Nikola Jokić (2072 points).",
+    "answerable": true
+  },
+  {
+    "id": "Q006",
+    "question": "Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?",
+    "type": "comparison_player",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930 pour Jayson Tatum.",
+    "answerable": true
+  },
+  {
+    "id": "Q007",
+    "question": "Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",
+    "type": "ranking_player",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Giannis Antetokounmpo avec 60.1% possède le meilleur FG% parmi les 5 meilleurs marqueurs.",
+    "answerable": true
+  },
+  {
+    "id": "Q008",
+    "question": "Quelles sont les cinq équipes qui ont marqué le plus de points ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Analyse",
+    "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+    "answerable": true
+  },
+  {
+    "id": "Q009",
+    "question": "Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
+    "answerable": true
+  },
+  {
+    "id": "Q010",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
+    "answerable": true
+  },
+  {
+    "id": "Q011",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737), Philadelphia 76ers (737).",
+    "answerable": true
+  },
+  {
+    "id": "Q012",
+    "question": "Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?",
+    "type": "ranking_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
+    "answerable": true
+  },
+  {
+    "id": "Q013",
+    "question": "Quelle équipe possède le plus grand nombre de joueurs dans les données ?",
+    "type": "team",
+    "difficulty": "simple",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
+    "answerable": true
+  },
+  {
+    "id": "Q014",
+    "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
+    "type": "comparison_team",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Detroit Pistons a marqué 10292 points et pris 3834 rebonds, tandis que Milwaukee Bucks a marqué 10016 points et pris 3875 rebonds.",
+    "answerable": true
+  },
+  {
+    "id": "Q015",
+    "question": "Quelle est la meilleure équipe toutes statistiques confondues ?",
+    "type": "ambiguous_team",
+    "difficulty": "complex",
+    "noise": "low",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données ne permettent pas de désigner une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini. Il faut préciser un indicateur à comparer ou examiner plusieurs statistiques séparément.",
+    "answerable": false
+  },
+  {
+    "id": "Q016",
+    "question": "Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?",
+    "type": "multi_criteria_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Jokić (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
+    "answerable": true
+  },
+  {
+    "id": "Q017",
+    "question": "Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?",
+    "type": "multi_criteria_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
+    "answerable": true
+  },
+  {
+    "id": "Q018",
+    "question": "Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",
+    "type": "comparison_player",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum marque 1930 points avec 45.2% de réussite aux tirs et 626 rebonds, et réalise 432 passes décisives . Nikola Jokić marque 2072 points avec 57.6% de réussite aux tirs et 889 rebonds, et réalise 714 passes décisives.",
+    "answerable": true
+  },
+  {
+    "id": "Q019",
+    "question": "Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",
+    "type": "multi_criteria_team",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes décisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes décisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes décisives.",
+    "answerable": true
+  },
+  {
+    "id": "Q020",
+    "question": "Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",
+    "type": "multi_criteria_team",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes décisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
+    "answerable": true
+  },
+  {
+    "id": "Q021",
+    "question": "Tatum, il a mis combien de points au total ?",
+    "type": "noisy_reformulation",
+    "difficulty": "simple",
+    "noise": "low",
+    "source_expected": "Données NBA",
+    "ground_truth": "Jayson Tatum a marqué 1930 points au total",
+    "answerable": true
+  },
+  {
+    "id": "Q022",
+    "question": "C'est qui les 5 équipes qui ont le plus de points ?",
+    "type": "noisy_reformulation",
+    "difficulty": "medium",
+    "noise": "low",
+    "source_expected": "Analyse",
+    "ground_truth": "Detroit Pistons (10292), San Antonio Spurs (10198), Cleveland Cavaliers (10180), Milwaukee Bucks (10016), Dallas Mavericks (9970).",
+    "answerable": true
+  },
+  {
+    "id": "Q023",
+    "question": "Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs. La base contient des statistiques globales et non des statistiques détaillées pour chaque match. Il est donc impossible d'isoler les cinq matchs les plus récents et de calculer ou comparer les pourcentages correspondants.",
+    "answerable": false
+  },
+  {
+    "id": "Q024",
+    "question": "Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "low",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas de comparer les statistiques de rebonds à domicile et à l'extérieur, car elles ne permettent pas d'identifier explicitement le lieu des matchs. De plus, la question ne précise pas l'équipe à analyser. Une comparaison fiable nécessite des données permettant de distinguer les rebonds réalisés à domicile de ceux réalisés à l'extérieur, ainsi que l'identification de l'équipe concernée.",
+    "answerable": false
+  },
+  {
+    "id": "Q025",
+    "question": "Quel joueur a marqué le plus de points lors de son dernier match ?",
+    "type": "unanswerable",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA",
+    "ground_truth": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match. La base contient des statistiques globales et non les points marqués par chaque joueur lors de chaque rencontre. Il est donc impossible d'identifier le dernier match de chaque joueur et de comparer leurs scores respectifs.",
+    "answerable": false
+  },
+  {
+    "id": "Q026",
+    "question": "Quelles critiques ou inquiétudes les fans expriment-ils dans les discussions Reddit sur les performances de leur équipe ?",
+    "type": "qualitative_reddit",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Reddit",
+    "expected_route": "RAG",
+    "ground_truth": "Critiques et inquiétudes des fans sur Reddit concernant les performances de leur équipe :\n\nOpinions (issues des discussions Reddit) :\n\n1. Doute sur l'équité des playoffs :\n   - Certains fans expriment des suspicions sur la possibilité que les playoffs soient « arrangés » pour favoriser certaines équipes (ex. : « massive benefit to having KC go far »).\n   - Critique du système de play-in, jugé trop permissif pour les équipes à 7e/8e place, avec des écarts de seulement 1-2 matchs (« an 8-game behind team having a shot at the playoffs »).\n2. Inquiétudes sur la gestion des effectifs :\n   - Crainte que les Celtics de Boston, malgré leur statut de favori, ne parviennent pas à conserver leur noyau en raison des contraintes salariales (« they're gonna blow up the roster »).\n   - Remarque sur le manque de profondeur des équipes en playoffs, exposées par les blessures (« Teams without depth have been exposed »).\n3. Critiques sur le style de jeu et l'arbitrage :\n   - Accusations de jeu physique excessif et déséquilibré, notamment envers les Warriors, perçus comme se plaignant davantage (« Warriors fans have done a masterful job of complaining »).\n   - Mécontentement face à la tolérance des arbitres envers certaines équipes (« If the refs are swallowing their whistles »).\n4. Comparaisons avec d'autres ligues (NFL) :\n   - Frustration sur la popularité inégale entre NBA et NFL, où les petits marchés bénéficient d'une base de fans plus large (« NFL fans will watch other games because there's only so many a week »).\n   - Regret que la NBA ne parvienne pas à reproduire ce modèle pour renforcer l'engagement (« NBA needs to figure its shit out »).\n\nFaits (non disponibles dans les extraits) : Aucune statistique ou donnée factuelle n'est mentionnée dans les discussions fournies.\n\nSynthèse : Les fans expriment surtout des craintes structurelles (play-in, gestion des effectifs) et des critiques sur l'équité perçue (arbitrage, équilibre compétitif), avec une comparaison récurrente à la NFL pour souligner les lacunes de la NBA en termes d'engagement et de parité.",
+    "answerable": true
+  },
+  {
+    "id": "Q027",
+    "question": "Quelles inquiétudes les fans expriment-ils au sujet du format des playoffs et du play-in NBA ?",
+    "type": "qualitative_reddit",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Reddit",
+    "expected_route": "RAG",
+    "ground_truth": "Les discussions Reddit présentent des opinions divergentes sur l'équité du tournoi de play-in NBA :\n\n1. Critiques concernant l'écart au classement :\n   - Certains internautes estiment que le play-in devrait être organisé lorsque les équipes classées 7e et 8e ne devancent les équipes classées 9e et 10e que d'un ou deux matchs\n   - En revanche, ils considèrent qu'une avance d'environ quatre matchs devrait permettre aux équipes concernées de conserver leur place, sans devoir disputer le play-in\n   - Un commentaire critique également la possibilité qu'une équipe située huit matchs derrière puisse encore accéder aux playoffs.\n2. Arguments en faveur du play-in :\n   - d'autres internautes estiment que ce dispositif a revitalisé le dernier tiers de la saison régulière, en maintenant davantage d'équipes en compétition\n   - Certains apprécient également le suspense des matchs de play-in et les occasions supplémentaires d'observer des équipes qui auraient autrement manqué les playoffs ou été éliminées rapidement au premier tour.\n\nBilan: les opinions sont partagées. Les critiques portent principalement sur l'équité de la qualification lorsque les écarts au classement sont importants, tandis que les avis favorables mettent en avant le suspense et l'intérêt sportif en fin de saison.",
+    "answerable": true
+  },
+  {
+    "id": "Q028",
+    "question": "Quelles critiques les fans formulent-ils sur la profondeur des effectifs, le jeu physique et l'arbitrage ?",
+    "type": "qualitative_reddit",
+    "difficulty": "medium",
+    "noise": "none",
+    "source_expected": "Reddit",
+    "expected_route": "RAG",
+    "ground_truth": "Critiques des fans sur la NBA (selon les données fournies) :\n\n1. Profondeur des effectifs\n\nFaits (statistiques) :\n- Manque de joueurs de qualité en rotation.\n\nOpinions (commentaires) :\n- « Teams without depth have been exposed in this year's playoffs. » (Les équipes sans profondeur ont été exposées lors des playoffs.)\n- « The Celtics probably just eats an injury year from Tatum and then run it back; but now it looks like they're gonna blow up the roster. » (Les Celtics risquent de subir une année de blessures de Tatum avant de tout reconstruire.)\n\n2. Jeu physique\n\nFaits (statistiques) :\n- Trop de contacts autorisés, favorisant les blessures.\n\nOpinions (commentaires) :\n- « It's bush league stuff due to a complete lack of skill on both rosters. » (C'est du niveau amateur à cause d'un manque total de talent dans les deux effectifs.)\n- « The Warriors aren't also playing extremely physical basketball is crazy. » (Les Warriors ne jouent pas non plus un basket extrêmement physique, c'est absurde.)\n- « If the refs are swallowing their whistles and letting [the physicality] happen, that's on the officials more than the teams. » (Si les arbitres laissent faire la violence, c'est de leur faute, pas celle des équipes.)\n\n3. Arbitrage\n\nFaits (statistiques) :\n- Décisions controversées, manque de cohérence dans les appels.\n\nOpinions (commentaires) :\n- « That's on the officials more than the teams. » (C'est la faute des arbitres, pas des équipes.)\n- « The narrative that the Warriors aren't also playing extremely physical basketball is crazy. » (La narration selon laquelle les Warriors ne jouent pas un basket violent est folle.) → Sous-entendu : les arbitres ferment les yeux sur certaines fautes.",
+    "answerable": true
+  },
+  {
+    "id": "Q029",
+    "question": "Quel est le top 5 de joueurs ayant marqués le plus de points, et quelles opinions les fans Reddit expriment-ils sur certains de ces joueurs ?",
+    "type": "mixed_sql_reddit",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA + Reddit",
+    "expected_route": "BOTH",
+    "ground_truth": "Top 5 marqueurs de points en NBA (saison régulière) :\n\n1. Shai Gilgeous-Alexander – 2485 points\n2. Anthony Edwards – 2180 points\n3. Nikola Jokić – 2072 points\n4. Giannis Antetokounmpo – 2037 points\n5. Jayson Tatum – 1930 points\n6. Devin Booker – 1920 points\n7. Tyler Herro – 1840 points\n8. Trae Young – 1839 points\n9. Cade Cunningham – 1827 points\n10. James Harden – 1801 points\n11. Karl-Anthony Towns – 1757 points\n12. Zach LaVine – 1724 points\n13. Jalen Green – 1722 points\n14. Stephen Curry – 1715 points\n15. DeMar DeRozan – 1709 points\n\nOpinions des fans Reddit sur certains joueurs :\n\n- Giannis Antetokounmpo : « Son FT% (et son volume élevé) tirent vraiment son TS% vers le bas, malgré son efficacité en 2 points. » (rayrayiscray) ; « Le 'mailman' ne livre pas le dimanche. » (nhthelegend), référence à son manque d'efficacité en playoffs.\n- Stephen Curry : « Reggie Miller est le premier choix le plus efficace de l'histoire des playoffs NBA. » (ISportsBettingRef).\n- James Harden : « Pourquoi avoir retiré les 108 points de Dirk ? » (dirtynashtyfilthy), débat sur les stats historiques.\n- Tim Duncan : « Duncan n'a jamais été efficace, malgré le récit. » (rajs1286).\n- Jayson Tatum : « Les deux meilleures équipes des playoffs (selon les stats) pourraient se rencontrer en Finales. » (Dakozi), discussion sur la compétitivité de la NBA.\n\nNote : Les opinions sont limitées aux extraits fournis. Aucune statistique supplémentaire n'a été inventée.",
+    "answerable": true
+  },
+  {
+    "id": "Q030",
+    "question": "Combien de points Jayson Tatum a-t-il marqués, et quelles inquiétudes les fans Reddit expriment-ils concernant l'avenir des Celtics ?",
+    "type": "mixed_sql_reddit",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA + Reddit",
+    "expected_route": "BOTH",
+    "ground_truth": "Réponse :\n\nFaits :\n- Jayson Tatum a marqué 1 930 points au total (source : résultats SQL).\n\nOpinions des fans Reddit sur l'avenir des Celtics :\n- Certains fans expriment des inquiétudes quant à la gestion de l'effectif des Celtics, évoquant la possibilité que l'équipe « fasse exploser son effectif » (« blow up the roster ») plutôt que de le conserver pour une nouvelle saison compétitive.\n- D'autres soulignent que les Celtics pourraient rencontrer des difficultés en cas de blessure de Tatum, une situation qui pourrait forcer une reconstruction (« eats an injury year from Tatum and then run it back »).\n\nLes autres commentaires Reddit ne concernent pas directement les Celtics ou leurs inquiétudes pour l'avenir.",
+    "answerable": true
+  },
+  {
+    "id": "Q031",
+    "question": "Que montrent les statistiques de points de Giannis Antetokounmpo et de Jayson Tatum, et quelles critiques Reddit sont formulées sur leur efficacité ou leur avenir ?",
+    "type": "mixed_sql_reddit",
+    "difficulty": "complex",
+    "noise": "none",
+    "source_expected": "Données NBA + Reddit",
+    "expected_route": "BOTH",
+    "ground_truth": "Statistiques de points (faits) :\n\nGiannis Antetokounmpo :\n- Points moyens : 2037 (saison régulière)\n- Tirs réussis/tentés : 791/1320 (60,1 % de réussite)\n- 3 points : 22,2 % (peu efficace à longue distance)\n- Lancers francs : 61,7 % (faible efficacité)\n- Usage rate : 34,6 % (très élevé, porte l'attaque)\n- Net rating : +7,2 (impact positif sur l'équipe)\n\nJayson Tatum :\n- Points moyens : 1930\n- Tirs réussis/tentés : 662/1462 (45,2 % de réussite)\n- 3 points : 34,3 % (meilleur pourcentage des deux)\n- Lancers francs : 81,4 % (excellente efficacité)\n- Usage rate : 30,1 % (élevé mais moins que Giannis)\n- Net rating : +9,8 (impact supérieur à Giannis)\n\nCritiques sur Reddit (opinions) :\n\n1. Efficacité de Giannis :\n   - Certains soulignent que son pourcentage de lancers francs (61,7 %) et son faible pourcentage à 3 points (22,2 %) limitent son efficacité globale, malgré sa domination à mi-distance (rayrayiscray).\n   - Son turnover ratio (9,1 %) et son usage rate élevé (34,6 %) sont perçus comme des risques pour l'équipe en playoffs (MarkoSeke).\n2. Avenir de Tatum :\n   - Des fans s'interrogent sur la capacité des Celtics à conserver leur noyau après des blessures (Snakescipio).\n   - Certains critiquent le manque de polyvalence offensive de l'équipe autour de lui (Paolo and Franz).\n   - D'autres estiment que son pourcentage de réussite (45,2 %) est insuffisant pour un joueur star (TallnFrosty).\n3. Comparaisons historiques :\n   - Giannis est placé bas dans les classements d'efficacité en playoffs en raison de son faible TS% (True Shooting), impacté par ses lancers francs (rayrayiscray).\n   - Tatum est souvent comparé à des légendes, mais son manque de constance est pointé (IcyAuthorl).\n\nNote : Les critiques se concentrent surtout sur l'efficacité offensive (tirs, lancers francs) et l'impact en playoffs, avec des débats sur leur capacité à mener leur équipe vers un titre.",
+    "answerable": true
+  }
+]

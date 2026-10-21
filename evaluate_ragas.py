@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from typing import Any
 
-from utils.vector_store import VectorStoreManager
+from utils.vector_store_initial import VectorStoreManager
 
 # Configuration projet mistral
 from utils.config import (
@@ -149,7 +149,7 @@ class MistralRagasEmbeddings(BaseRagasEmbeddings):
 
 
 # Charger le dataset d’évaluation
-def load_evaluation_set(path="./evaluation/validation_set.json"):
+def load_evaluation_set(path="./evaluation/validation_set_initial.json"):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -302,6 +302,9 @@ def build_ragas_dataset(eval_set, vector_store_manager):
                 for chunk in validated_chunks])
         else:
             context_str = "Aucune information pertinente trouvée dans la base de connaissances."
+
+        if not validated_chunks:
+            context_str = "Aucun chunk récupéré pour la question: %s, question"
 
         # Génération du prototype avant controle pydantic
         reponse_raw = generate_reponse_prototype(question, context_str)
