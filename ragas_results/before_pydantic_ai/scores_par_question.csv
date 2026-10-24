@@ -1,26 +1,26 @@
-﻿question_id,question,answer_relevancy,answer_correctness,context_precision,context_recall,faithfulness
-Q001,Combien de points Jayson Tatum a-t-il marqués ?,0.8269093652875327,0.21734671440400713,0.0,,0.42857142857142855
-Q002,Combien de rebonds Jayson Tatum a-t-il pris ?,0.79087196074845,0.21526780565006176,0.0,,0.0
-Q003,Combien de passes décisives Jayson Tatum a-t-il réalisées ?,0.0,0.2217741224578309,0.0,,0.3333333333333333
-Q004,Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?,0.0,0.22334169036304835,0.0,,
-Q005,Quels sont les trois joueurs qui ont marqué le plus de points ?,0.7933231987475826,0.3188347108709121,0.0,0.0,0.8333333333333334
-Q006,Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?,0.895119047221771,0.5256854423942217,0.249999999975,,1.0
-Q007,"Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",0.8356955594677746,0.2141059087723197,0.9999999999,,0.8571428571428571
-Q008,Quelles sont les cinq équipes qui ont marqué le plus de points ?,0.7832329865109562,0.19060319308681567,0.0,,0.7272727272727273
-Q009,Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?,0.0,0.18313537568837007,0.0,,1.0
-Q010,Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?,0.0,0.18354469303209797,0.0,,
-Q011,Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?,0.0,0.18652392485115854,0.0,,
-Q012,Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?,0.0,0.18236615018737076,0.0,,
-Q013,Quelle équipe possède le plus grand nombre de joueurs dans les données ?,0.8060434330113476,0.36396496258955485,0.0,,0.4
-Q014,Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.,0.794986502224909,0.2252641634222946,0.0,,0.08333333333333333
-Q015,Quelle est la meilleure équipe toutes statistiques confondues ?,0.7590277212276488,0.2062904863600394,0.5833333333041666,,0.0
-Q016,Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?,0.8202930934133379,0.2760817338680044,0.249999999975,,0.8
-Q017,Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?,0.0,0.21249778125659452,0.0,,0.75
-Q018,"Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",0.8862573733203888,0.2643626361664147,0.3333333333,0.5,0.625
-Q019,"Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",0.7574256728873173,0.20596241843116725,0.0,,0.1
-Q020,"Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",0.7286677334241575,0.3120431304335178,0.0,0.0,0.0
-Q021,"Tatum, il a mis combien de points au total ?",0.8009422510370471,0.2183891018973113,0.0,,0.3333333333333333
-Q022,C'est qui les 5 équipes qui ont le plus de points ?,0.7564627610199105,0.1875909509284669,0.0,,0.6
-Q023,Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?,0.0,0.22553079040279486,0.9999999999,,0.14285714285714285
-Q024,Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.,0.8326041595395625,0.36895365701151117,0.36666666664833336,,0.0
-Q025,Quel joueur a marqué le plus de points lors de son dernier match ?,0.754462208089449,0.2113442205092342,,,
+﻿question_id,question,answer_relevancy,answer_correctness,context_precision,context_recall,faithfulness,answer_similarity,context_entity_recall
+Q001,Combien de points Jayson Tatum a-t-il marqués ?,0.0,0.2112013677280955,0.0,,1.0,0.844805470912382,0.0
+Q002,Combien de rebonds Jayson Tatum a-t-il pris ?,0.7910264277006113,0.3196991436917718,0.0,,0.0,0.8502251461956587,0.0
+Q003,Combien de passes décisives Jayson Tatum a-t-il réalisées ?,0.0,0.2182847567019053,0.0,,0.0,0.8731390268076212,0.0
+Q004,Quel est le pourcentage de réussite aux tirs de Jayson Tatum ?,0.0,0.2227145829586297,0.3333333333,,1.0,0.8909252677534394,0.0
+Q005,Quels sont les trois joueurs qui ont marqué le plus de points ?,0.7805764316290851,0.2918681307755408,0.0,1.0,0.5714285714285714,0.8674725231021632,0.3333333322222222
+Q006,Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?,0.7377836809290783,0.4916586111577456,0.249999999975,,0.8,0.9077039391434895,0.49999999875
+Q007,"Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",0.8456745346238302,0.2131644750304048,0.99999999995,,0.75,0.8526579001216192,0.249999999375
+Q008,Quelles sont les cinq équipes qui ont marqué le plus de points ?,0.7496532692925492,0.1897828802444566,0.0,,0.6,0.7591315209778264,0.9999999980000001
+Q009,Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?,0.0,0.18911468546853435,0.0,,0.25,0.7564587418741374,0.9999999980000001
+Q010,Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?,0.0,0.18278297402890153,,,1.0,0.7311318961156061,0.9999999980000001
+Q011,Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?,0.0,0.18394404378836238,0.0,,,0.7357761751534495,0.9999999983333333
+Q012,Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?,0.0,0.18490572675949105,0.0,,,0.7396229070379642,0.9999999980000001
+Q013,Quelle équipe possède le plus grand nombre de joueurs dans les données ?,0.8079391652409862,0.3991007099187236,0.0,,0.8,0.8464340918045781,0.9999999900000002
+Q014,Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.,0.9112812013022742,0.22066342331635136,0.0,,0.2,0.8826536932654054,0.16666666638888888
+Q015,Quelle est la meilleure équipe toutes statistiques confondues ?,0.7271219545327714,0.20909613075841435,,,0.625,0.8363845230336574,0.0
+Q016,Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?,0.8439583497674321,0.3500681801269301,0.0,,0.2,0.8710447661350659,0.1111111109876543
+Q017,Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?,0.0,0.32575517501361173,0.0,,0.5,0.8414507151488896,0.0
+Q018,"Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",0.8582815618135347,0.2952657900338146,0.3333333333,1.0,0.85,0.8570110451669459,0.18181818165289254
+Q019,"Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",0.7550661048134424,0.20671602272929734,0.0,0.0,0.3333333333333333,0.8268822535936818,0.0
+Q020,"Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",0.7739857972820313,0.3896193654222133,0.0,,0.0,0.8525951087476769,0.49999999949999996
+Q021,"Tatum, il a mis combien de points au total ?",0.0,0.22164483343375807,0.0,,0.5,0.885833405210525,0.0
+Q022,C'est qui les 5 équipes qui ont le plus de points ?,0.7565000348497721,0.188808977846467,,,0.5,0.755235911385868,0.9999999980000001
+Q023,Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?,0.0,0.227977281819237,0.699999999965,,0.2857142857142857,0.911909127276948,0.0
+Q024,Compare les statistiques de rebonds de l'équipe à domicile et à l'extérieur.,0.8111574894804027,0.22206622068693121,0.3333333333,0.3333333333333333,,0.8882648827477249,0.0
+Q025,Quel joueur a marqué le plus de points lors de son dernier match ?,0.0,0.22689786129292738,,,1.0,0.9072390372676136,0.0

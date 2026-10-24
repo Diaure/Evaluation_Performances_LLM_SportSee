@@ -2,9 +2,9 @@
     {
         "id": "Q001",
         "question": "Combien de points Jayson Tatum a-t-il marqués ?",
-        "answer": "Jayson Tatum a marqué 1930 points.",
+        "answer": "Jayson Tatum a marqué **1930 points**.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}"
         ],
         "ground_truth": "Jayson Tatum a marqué 1930 points",
         "metadata": {
@@ -18,13 +18,13 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Jayson Tatum a marqué 1930 points."
+                "raw_answer": "Jayson Tatum a marqué **1930 points**."
             }
         }
     },
@@ -33,7 +33,7 @@
         "question": "Combien de rebonds Jayson Tatum a-t-il pris ?",
         "answer": "Jayson Tatum a pris **626 rebonds** au total.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}"
         ],
         "ground_truth": "Jayson Tatum a pris 626 rebonds",
         "metadata": {
@@ -47,7 +47,7 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    s.rebonds_totaux\nFROM players p\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'rebonds_totaux': 626.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
@@ -147,7 +147,7 @@
     {
         "id": "Q006",
         "question": "Qui a marqué le plus de points entre Jayson Tatum et Anthony Edwards ?",
-        "answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930.",
+        "answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec un total de 2180 points contre 1930.",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Jayson Tatum%' OR p.nom_du_joueur LIKE '%Anthony Edwards%'\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}"
         ],
@@ -169,14 +169,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec 2180 points contre 1930."
+                "raw_answer": "Anthony Edwards a marqué plus de points que Jayson Tatum avec un total de 2180 points contre 1930."
             }
         }
     },
     {
         "id": "Q007",
         "question": "Parmi les cinq joueurs ayant marqué le plus de points, lequel possède le meilleur FG% ?",
-        "answer": "Giannis Antetokounmpo possède le meilleur FG% parmi les cinq joueurs ayant marqué le plus de points, avec un pourcentage de tirs réussis de 60.1.",
+        "answer": "Giannis Antetokounmpo possède le meilleur FG% (60.1%) parmi les cinq joueurs ayant marqué le plus de points.",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.player_id IN (\n    SELECT player_id\n    FROM top_15_joueurs_points\n    ORDER BY nombre_points_total DESC\n    LIMIT 5)\nORDER BY t.pourcentage_tirs_reussis DESC\nLIMIT 1;\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'pourcentage_tirs_reussis': 60.1}"
         ],
@@ -198,14 +198,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Giannis Antetokounmpo possède le meilleur FG% parmi les cinq joueurs ayant marqué le plus de points, avec un pourcentage de tirs réussis de 60.1."
+                "raw_answer": "Giannis Antetokounmpo possède le meilleur FG% (60.1%) parmi les cinq joueurs ayant marqué le plus de points."
             }
         }
     },
     {
         "id": "Q008",
         "question": "Quelles sont les cinq équipes qui ont marqué le plus de points ?",
-        "answer": "Les cinq équipes ayant marqué le plus de points sont :\n1. Detroit Pistons (10 292 points)\n2. San Antonio Spurs (10 198 points)\n3. Cleveland Cavaliers (10 180 points)\n4. Milwaukee Bucks (10 016 points)\n5. Dallas Mavericks (9 970 points)",
+        "answer": "**Classement des 5 premiers résultats :**\n\n1. **Detroit Pistons** — 10292\n2. **San Antonio Spurs** — 10198\n3. **Cleveland Cavaliers** — 10180\n4. **Milwaukee Bucks** — 10016\n5. **Dallas Mavericks** — 9970",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}"
         ],
@@ -234,9 +234,9 @@
     {
         "id": "Q009",
         "question": "Quelles sont les cinq équipes qui ont capté le plus de rebonds au total ?",
-        "answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n1. Houston Rockets (4067 rebonds)\n2. Sacramento Kings (3977 rebonds)\n3. Milwaukee Bucks (3875 rebonds)\n4. Dallas Mavericks (3863 rebonds)\n5. Detroit Pistons (3834 rebonds)",
+        "answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n\n1. **Houston Rockets** – 4067 rebonds\n2. **Sacramento Kings** – 3977 rebonds\n3. **Milwaukee Bucks** – 3875 rebonds\n4. **Dallas Mavericks** – 3863 rebonds\n5. **Detroit Pistons** – 3834 rebonds",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.rebonds_totaux) as Total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.rebonds_totaux) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nWITH classement_rebonds AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.rebonds_totaux) AS total_rebonds,\n        RANK() OVER (ORDER BY SUM(s.rebonds_totaux) DESC) AS rang_rebonds\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_rebonds,\n    rang_rebonds\nFROM classement_rebonds\nWHERE rang_rebonds <= 5\nORDER BY rang_rebonds, total_rebonds DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0, 'rang_rebonds': 1}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0, 'rang_rebonds': 2}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0, 'rang_rebonds': 3}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0, 'rang_rebonds': 4}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0, 'rang_rebonds': 5}"
         ],
         "ground_truth": "Houston Rockets (4067), Sacramento Kings (3977), Milwaukee Bucks (3875), Dallas Mavericks (3863), Detroit Pistons (3834).",
         "metadata": {
@@ -250,22 +250,22 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.rebonds_totaux) as Total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.rebonds_totaux) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0}",
+            "sql_result": "Requête SQL exécutée :\nWITH classement_rebonds AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.rebonds_totaux) AS total_rebonds,\n        RANK() OVER (ORDER BY SUM(s.rebonds_totaux) DESC) AS rang_rebonds\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_rebonds,\n    rang_rebonds\nFROM classement_rebonds\nWHERE rang_rebonds <= 5\nORDER BY rang_rebonds, total_rebonds DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Houston Rockets', 'total_rebonds': 4067.0, 'rang_rebonds': 1}\n{'nom_complet_equipe': 'Sacramento Kings', 'total_rebonds': 3977.0, 'rang_rebonds': 2}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_rebonds': 3875.0, 'rang_rebonds': 3}\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_rebonds': 3863.0, 'rang_rebonds': 4}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_rebonds': 3834.0, 'rang_rebonds': 5}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n1. Houston Rockets (4067 rebonds)\n2. Sacramento Kings (3977 rebonds)\n3. Milwaukee Bucks (3875 rebonds)\n4. Dallas Mavericks (3863 rebonds)\n5. Detroit Pistons (3834 rebonds)"
+                "raw_answer": "Les cinq équipes ayant capté le plus de rebonds au total sont :\n\n1. **Houston Rockets** – 4067 rebonds\n2. **Sacramento Kings** – 3977 rebonds\n3. **Milwaukee Bucks** – 3875 rebonds\n4. **Dallas Mavericks** – 3863 rebonds\n5. **Detroit Pistons** – 3834 rebonds"
             }
         }
     },
     {
         "id": "Q010",
         "question": "Quelles sont les cinq équipes qui ont réalisé le plus de passes décisives au total ?",
-        "answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)",
+        "answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.passes_decisives) as Total_passes_decisives\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.passes_decisives) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nWITH classement_passes AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.passes_decisives) AS total_passes_decisives,\n        RANK() OVER (ORDER BY SUM(s.passes_decisives) DESC) AS rang_passes\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_passes_decisives,\n    rang_passes\nFROM classement_passes\nWHERE rang_passes <= 5\nORDER BY rang_passes, total_passes_decisives DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0, 'rang_passes': 1}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0, 'rang_passes': 2}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0, 'rang_passes': 3}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0, 'rang_passes': 4}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'rang_passes': 5}"
         ],
         "ground_truth": "Atlanta Hawks (2565), Denver Nuggets (2538), San Antonio Spurs (2503), Phoenix Suns (2465), Detroit Pistons (2444).",
         "metadata": {
@@ -279,24 +279,24 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.passes_decisives) as Total_passes_decisives\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.passes_decisives) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0}",
+            "sql_result": "Requête SQL exécutée :\nWITH classement_passes AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.passes_decisives) AS total_passes_decisives,\n        RANK() OVER (ORDER BY SUM(s.passes_decisives) DESC) AS rang_passes\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_passes_decisives,\n    rang_passes\nFROM classement_passes\nWHERE rang_passes <= 5\nORDER BY rang_passes, total_passes_decisives DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_passes_decisives': 2565.0, 'rang_passes': 1}\n{'nom_complet_equipe': 'Denver Nuggets', 'total_passes_decisives': 2538.0, 'rang_passes': 2}\n{'nom_complet_equipe': 'San Antonio Spurs', 'total_passes_decisives': 2503.0, 'rang_passes': 3}\n{'nom_complet_equipe': 'Phoenix Suns', 'total_passes_decisives': 2465.0, 'rang_passes': 4}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'rang_passes': 5}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)"
+                "raw_answer": "Les cinq équipes ayant réalisé le plus de passes décisives au total sont :\n1. Atlanta Hawks (2565 passes décisives)\n2. Denver Nuggets (2538 passes décisives)\n3. San Antonio Spurs (2503 passes décisives)\n4. Phoenix Suns (2465 passes décisives)\n5. Detroit Pistons (2444 passes décisives)"
             }
         }
     },
     {
         "id": "Q011",
         "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
-        "answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n\n1. Oklahoma City Thunder (840)\n2. Atlanta Hawks (818)\n3. Los Angeles Clippers (744)\n4. Miami Heat (742)\n5. Philadelphia 76ers (737)",
+        "answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n- Oklahoma City Thunder (840)\n- Atlanta Hawks (818)\n- Los Angeles Clippers (744)\n- Miami Heat (742)\n- Orlando Magic (737)\n- Philadelphia 76ers (737)",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.interceptions) as total_interceptions\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.interceptions) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nWITH classement_interceptions AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.interceptions) AS total_interceptions,\n        RANK() OVER (ORDER BY SUM(s.interceptions) DESC) AS rang_interceptions\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_interceptions\nFROM classement_interceptions\nWHERE rang_interceptions <= 5\nORDER BY rang_interceptions, total_interceptions DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_interceptions': 737.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}"
         ],
-        "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+        "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737), Philadelphia 76ers (737).",
         "metadata": {
             "id": "Q011",
             "question": "Quelles sont les cinq équipes qui ont réalisé le plus d'interceptions au total ?",
@@ -304,26 +304,26 @@
             "difficulty": "medium",
             "noise": "none",
             "source_expected": "Données NBA",
-            "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737).",
+            "ground_truth": "Oklahoma City Thunder (840), Atlanta Hawks (818), Los Angeles Clippers (744), Miami Heat (742), Orlando Magic (737), Philadelphia 76ers (737).",
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.interceptions) as total_interceptions\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.interceptions) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}",
+            "sql_result": "Requête SQL exécutée :\nWITH classement_interceptions AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.interceptions) AS total_interceptions,\n        RANK() OVER (ORDER BY SUM(s.interceptions) DESC) AS rang_interceptions\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_interceptions\nFROM classement_interceptions\nWHERE rang_interceptions <= 5\nORDER BY rang_interceptions, total_interceptions DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_interceptions': 840.0}\n{'nom_complet_equipe': 'Atlanta Hawks', 'total_interceptions': 818.0}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'total_interceptions': 744.0}\n{'nom_complet_equipe': 'Miami Heat', 'total_interceptions': 742.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_interceptions': 737.0}\n{'nom_complet_equipe': 'Philadelphia 76ers', 'total_interceptions': 737.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n\n1. Oklahoma City Thunder (840)\n2. Atlanta Hawks (818)\n3. Los Angeles Clippers (744)\n4. Miami Heat (742)\n5. Philadelphia 76ers (737)"
+                "raw_answer": "Les cinq équipes ayant réalisé le plus d'interceptions au total sont :\n- Oklahoma City Thunder (840)\n- Atlanta Hawks (818)\n- Los Angeles Clippers (744)\n- Miami Heat (742)\n- Orlando Magic et Philadelphia 76ers (737)"
             }
         }
     },
     {
         "id": "Q012",
         "question": "Quelles sont les cinq équipes qui ont réalisé le plus de contres au total ?",
-        "answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)",
+        "answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.contres) as Total_contres\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.contres) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nWITH classement_contres AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.contres) AS total_contres,\n        RANK() OVER (ORDER BY SUM(s.contres) DESC) AS rang_contres\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_contres,\n    rang_contres\nFROM classement_contres\nWHERE rang_contres <= 5\nORDER BY rang_contres, total_contres DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0, 'rang_contres': 1}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0, 'rang_contres': 2}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0, 'rang_contres': 3}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0, 'rang_contres': 4}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0, 'rang_contres': 5}"
         ],
         "ground_truth": "Dallas Mavericks (568), Orlando Magic (486), Boston Celtics (466), Detroit Pistons (460), Oklahoma City Thunder (458).",
         "metadata": {
@@ -337,22 +337,22 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(s.contres) as Total_contres\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY sum(s.contres) DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0}",
+            "sql_result": "Requête SQL exécutée :\nWITH classement_contres AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(s.contres) AS total_contres,\n        RANK() OVER (ORDER BY SUM(s.contres) DESC) AS rang_contres\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    LEFT JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n)\nSELECT\n    nom_complet_equipe,\n    total_contres,\n    rang_contres\nFROM classement_contres\nWHERE rang_contres <= 5\nORDER BY rang_contres, total_contres DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Dallas Mavericks', 'total_contres': 568.0, 'rang_contres': 1}\n{'nom_complet_equipe': 'Orlando Magic', 'total_contres': 486.0, 'rang_contres': 2}\n{'nom_complet_equipe': 'Boston Celtics', 'total_contres': 466.0, 'rang_contres': 3}\n{'nom_complet_equipe': 'Detroit Pistons', 'total_contres': 460.0, 'rang_contres': 4}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'total_contres': 458.0, 'rang_contres': 5}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)"
+                "raw_answer": "Les cinq équipes ayant réalisé le plus de contres au total sont :\n1. Dallas Mavericks (568 contres)\n2. Orlando Magic (486 contres)\n3. Boston Celtics (466 contres)\n4. Detroit Pistons (460 contres)\n5. Oklahoma City Thunder (458 contres)"
             }
         }
     },
     {
         "id": "Q013",
         "question": "Quelle équipe possède le plus grand nombre de joueurs dans les données ?",
-        "answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les Philadelphia 76ers avec 23 joueurs.",
+        "answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les **Philadelphia 76ers** avec **23 joueurs**.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}\n{'nom_complet_equipe': 'Charlotte Hornets', 'nombre_de_joueurs': 22}\n{'nom_complet_equipe': 'New Orleans Pelicans', 'nombre_de_joueurs': 22}\n{'nom_complet_equipe': 'Toronto Raptors', 'nombre_de_joueurs': 21}\n{'nom_complet_equipe': 'Chicago Bulls', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Brooklyn Nets', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Minnesota Timberwolves', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Los Angeles Lakers', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Indiana Pacers', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Miami Heat', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'New York Knicks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Washington Wizards', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Sacramento Kings', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Portland Trail Blazers', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Utah Jazz', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Memphis Grizzlies', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Phoenix Suns', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Atlanta Hawks', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Houston Rockets', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Orlando Magic', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Denver Nuggets', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Golden State Warriors', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Boston Celtics', 'nombre_de_joueurs': 17}"
         ],
         "ground_truth": "Philadelphia 76ers, avec 23 joueurs.",
         "metadata": {
@@ -366,13 +366,13 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    COUNT(p.player_id) AS nombre_de_joueurs\nFROM teams t\nLEFT JOIN players p ON t.team_id = p.team_id\nGROUP BY t.nom_complet_equipe\nORDER BY nombre_de_joueurs DESC;\n\nRésultats :\n{'nom_complet_equipe': 'Philadelphia 76ers', 'nombre_de_joueurs': 23}\n{'nom_complet_equipe': 'Charlotte Hornets', 'nombre_de_joueurs': 22}\n{'nom_complet_equipe': 'New Orleans Pelicans', 'nombre_de_joueurs': 22}\n{'nom_complet_equipe': 'Toronto Raptors', 'nombre_de_joueurs': 21}\n{'nom_complet_equipe': 'Chicago Bulls', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Brooklyn Nets', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Minnesota Timberwolves', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Los Angeles Lakers', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Indiana Pacers', 'nombre_de_joueurs': 20}\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Miami Heat', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'New York Knicks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Washington Wizards', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Sacramento Kings', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'Portland Trail Blazers', 'nombre_de_joueurs': 19}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Utah Jazz', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Memphis Grizzlies', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Oklahoma City Thunder', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Phoenix Suns', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Atlanta Hawks', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Houston Rockets', 'nombre_de_joueurs': 18}\n{'nom_complet_equipe': 'Orlando Magic', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Denver Nuggets', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Los Angeles Clippers', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Golden State Warriors', 'nombre_de_joueurs': 17}\n{'nom_complet_equipe': 'Boston Celtics', 'nombre_de_joueurs': 17}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les Philadelphia 76ers avec 23 joueurs."
+                "raw_answer": "L'équipe avec le plus grand nombre de joueurs dans les données est les **Philadelphia 76ers** avec **23 joueurs**."
             }
         }
     },
@@ -381,7 +381,7 @@
         "question": "Compare les Detroit Pistons et les Milwaukee Bucks en nombre total de points et de rebonds.",
         "answer": "Les Detroit Pistons ont marqué 10 292 points et capté 3 834 rebonds, tandis que les Milwaukee Bucks ont marqué 10 016 points et capté 3 875 rebonds.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(m.points_moyens) as total_points,\n    sum(s.rebonds_totaux) as total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}"
         ],
         "ground_truth": "Detroit Pistons a marqué 10292 points et pris 3834 rebonds, tandis que Milwaukee Bucks a marqué 10016 points et pris 3875 rebonds.",
         "metadata": {
@@ -395,7 +395,7 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    sum(m.points_moyens) as total_points,\n    sum(s.rebonds_totaux) as total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON p.team_id = t.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nom_complet_equipe IN ('Detroit Pistons', 'Milwaukee Bucks')\nGROUP BY t.nom_complet_equipe;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_points': 10292.0, 'total_rebonds': 3834.0}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'total_points': 10016.0, 'total_rebonds': 3875.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
@@ -408,7 +408,7 @@
     {
         "id": "Q015",
         "question": "Quelle est la meilleure équipe toutes statistiques confondues ?",
-        "answer": "Les données disponibles ne permettent pas de déterminer la meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte.",
+        "answer": "Les données disponibles ne permettent pas de déterminer une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte.",
         "contexts": [
             "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES: aucun critère unique de performance n'est défini. Demander un indicateur précis ou comparer plusieurs statistiques séparément."
         ],
@@ -430,16 +430,16 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les données disponibles ne permettent pas de déterminer la meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte."
+                "raw_answer": "Les données disponibles ne permettent pas de déterminer une meilleure équipe toutes statistiques confondues, car aucun critère unique de performance n'est défini dans le contexte."
             }
         }
     },
     {
         "id": "Q016",
         "question": "Quels joueurs ont marqué plus de 1900 points et ont un FG% supérieur à 50% ?",
-        "answer": "Shai Gilgeous-Alexander, Nikola Jokić et Giannis Antetokounmpo ont marqué plus de 1900 points avec un FG% supérieur à 50%.",
+        "answer": "Shai Gilgeous-Alexander (2485 points, 51,9% FG), Nikola Jokić (2072 points, 57,6% FG) et Giannis Antetokounmpo (2037 points, 60,1% FG) ont marqué plus de 1900 points avec un pourcentage de tirs réussis supérieur à 50%.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC, t.pourcentage_tirs_reussis DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}"
         ],
         "ground_truth": "Shai Gilgeous-Alexander (2485 points, 51.9% FG), Nikola Jokić (2072 points, 57.6% FG) et Giannis Antetokounmpo (2037 points, 60.1% FG).",
         "metadata": {
@@ -453,22 +453,22 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    t.pourcentage_tirs_reussis\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE t.nombre_points_total > 1900\nAND t.pourcentage_tirs_reussis > 50\nORDER BY t.nombre_points_total DESC, t.pourcentage_tirs_reussis DESC;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0, 'pourcentage_tirs_reussis': 51.9}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'pourcentage_tirs_reussis': 57.6}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'pourcentage_tirs_reussis': 60.1}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Shai Gilgeous-Alexander, Nikola Jokić et Giannis Antetokounmpo ont marqué plus de 1900 points avec un FG% supérieur à 50%."
+                "raw_answer": "Shai Gilgeous-Alexander (2485 points, 51,9% FG), Nikola Jokić (2072 points, 57,6% FG) et Giannis Antetokounmpo (2037 points, 60,1% FG) ont marqué plus de 1900 points avec un pourcentage de tirs réussis supérieur à 50%."
             }
         }
     },
     {
         "id": "Q017",
         "question": "Quels joueurs ont à la fois plus de 2000 points et plus de 700 rebonds ?",
-        "answer": "Nikola Jokić et Giannis Antetokounmpo.",
+        "answer": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds) sont les joueurs ayant à la fois plus de 2000 points et plus de 700 rebonds.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC, s.rebonds_totaux DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}"
         ],
         "ground_truth": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds).",
         "metadata": {
@@ -482,22 +482,22 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total,\n    s.rebonds_totaux\nFROM players p\nJOIN top_15_joueurs_points t ON p.player_id = t.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE t.nombre_points_total > 2000\nAND s.rebonds_totaux > 700\nORDER BY t.nombre_points_total DESC, s.rebonds_totaux DESC;\n\nRésultats :\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0, 'rebonds_totaux': 889.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0, 'rebonds_totaux': 797.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Nikola Jokić et Giannis Antetokounmpo."
+                "raw_answer": "Nikola Jokić (2072 points, 889 rebonds) et Giannis Antetokounmpo (2037 points, 797 rebonds) sont les joueurs ayant à la fois plus de 2000 points et plus de 700 rebonds."
             }
         }
     },
     {
         "id": "Q018",
         "question": "Compare les performances de Jayson Tatum et Nikola Jokić en points, rebonds, passes décisives et pourcentage aux tirs.",
-        "answer": "Jayson Tatum a une moyenne de 1930 points, 626 rebonds, 432 passes décisives et un pourcentage de tirs de 45,2 %. Nikola Jokić a une moyenne de 2072 points, 889 rebonds, 714 passes décisives et un pourcentage de tirs de 57,6 %.",
+        "answer": "Jayson Tatum : 1930 points, 626 rebonds, 432 passes décisives, 45,2 % de réussite aux tirs.\nNikola Jokić : 2072 points, 889 rebonds, 714 passes décisives, 57,6 % de réussite aux tirs.",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\nGROUP BY p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\ngroup by p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}"
         ],
         "ground_truth": "Jayson Tatum marque 1930 points avec 45.2% de réussite aux tirs et 626 rebonds, et réalise 432 passes décisives . Nikola Jokić marque 2072 points avec 57.6% de réussite aux tirs et 889 rebonds, et réalise 714 passes décisives.",
         "metadata": {
@@ -511,13 +511,13 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\nGROUP BY p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    sum(m.points_moyens) as points_moyens,\n    sum(s.rebonds_totaux) as rebonds_totaux,\n    sum(s.passes_decisives) as passes_decisives,\n    avg(m.pourcentage_reussite) as pourcentage_tirs\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur like '%Tatum%' or p.nom_du_joueur like '%Jokić%'\ngroup by p.nom_du_joueur;\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'pourcentage_tirs': 45.2}\n{'nom_du_joueur': 'Nikola Jokić', 'points_moyens': 2072.0, 'rebonds_totaux': 889.0, 'passes_decisives': 714.0, 'pourcentage_tirs': 57.6}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Jayson Tatum a une moyenne de 1930 points, 626 rebonds, 432 passes décisives et un pourcentage de tirs de 45,2 %. Nikola Jokić a une moyenne de 2072 points, 889 rebonds, 714 passes décisives et un pourcentage de tirs de 57,6 %."
+                "raw_answer": "Jayson Tatum : 1930 points, 626 rebonds, 432 passes décisives, 45,2 % de réussite aux tirs.\nNikola Jokić : 2072 points, 889 rebonds, 714 passes décisives, 57,6 % de réussite aux tirs."
             }
         }
     },
@@ -526,7 +526,7 @@
         "question": "Quelles sont les trois équipes qui ont marqué le plus de points, et combien de rebonds et de passes décisives chacune a-t-elle réalisés ?",
         "answer": "Les trois équipes ayant marqué le plus de points sont les **Detroit Pistons** (10 292 points, 3 834 rebonds, 2 444 passes décisives), les **San Antonio Spurs** (10 198 points, 3 669 rebonds, 2 503 passes décisives) et les **Cleveland Cavaliers** (10 180 points, 3 784 rebonds, 2 203 passes décisives).",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe,\n    sum(s.rebonds_totaux) as total_rebonds,\n    sum(s.passes_decisives) as total_passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292, 'total_rebonds': 3834.0, 'total_passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198, 'total_rebonds': 3669.0, 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180, 'total_rebonds': 3784.0, 'total_passes_decisives': 2203.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe AS points_totaux,\n    SUM(s.rebonds_totaux) AS rebonds_totaux,\n    SUM(s.passes_decisives) AS passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'points_totaux': 10292, 'rebonds_totaux': 3834.0, 'passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'points_totaux': 10198, 'rebonds_totaux': 3669.0, 'passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'points_totaux': 10180, 'rebonds_totaux': 3784.0, 'passes_decisives': 2203.0}"
         ],
         "ground_truth": "Detroit Pistons : 10292 points, 3834 rebonds, 2444 passes décisives. San Antonio Spurs : 10198 points, 3669 rebonds, 2503 passes décisives. Cleveland Cavaliers : 10180 points, 3784 rebonds, 2203 passes décisives.",
         "metadata": {
@@ -540,7 +540,7 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe,\n    sum(s.rebonds_totaux) as total_rebonds,\n    sum(s.passes_decisives) as total_passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292, 'total_rebonds': 3834.0, 'total_passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198, 'total_rebonds': 3669.0, 'total_passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180, 'total_rebonds': 3784.0, 'total_passes_decisives': 2203.0}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    t.nombre_points_total_par_equipe AS points_totaux,\n    SUM(s.rebonds_totaux) AS rebonds_totaux,\n    SUM(s.passes_decisives) AS passes_decisives\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe, t.nombre_points_total_par_equipe\nORDER BY t.nombre_points_total_par_equipe DESC\nLIMIT 3;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'points_totaux': 10292, 'rebonds_totaux': 3834.0, 'passes_decisives': 2444.0}\n{'nom_complet_equipe': 'San Antonio Spurs', 'points_totaux': 10198, 'rebonds_totaux': 3669.0, 'passes_decisives': 2503.0}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'points_totaux': 10180, 'rebonds_totaux': 3784.0, 'passes_decisives': 2203.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
@@ -553,9 +553,9 @@
     {
         "id": "Q020",
         "question": "Quelle équipe arrive en tête pour chacune des statistiques suivantes : points, rebonds, passes décisives, interceptions et contres ?",
-        "answer": "L'équipe en tête pour les points, rebonds, passes décisives, interceptions et contres est les Detroit Pistons.",
+        "answer": "Points : Detroit Pistons (10292.0)\nRebonds : Houston Rockets (4067.0)\nPasses décisives : Atlanta Hawks (2565.0)\nInterceptions : Oklahoma City Thunder (840.0)\nContres : Dallas Mavericks (568.0)",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(s.passes_decisives) AS total_passes_decisives,\n    SUM(s.interceptions) AS total_interceptions,\n    SUM(s.contres) AS total_contres,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY\n    total_points DESC,\n    total_rebonds DESC,\n    total_passes_decisives DESC,\n    total_interceptions DESC,\n    total_contres DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'total_interceptions': 717.0, 'total_contres': 460.0, 'total_points': 10292.0, 'total_rebonds': 3834.0}"
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nWITH stats_equipes AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(m.points_moyens) AS total_points,\n        SUM(s.rebonds_totaux) AS total_rebonds,\n        SUM(s.passes_decisives) AS total_passes,\n        SUM(s.interceptions) AS total_interceptions,\n        SUM(s.contres) AS total_contres\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    JOIN matches m ON p.player_id = m.player_id\n    JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n),\nclassement_points AS (\n    SELECT\n        nom_complet_equipe,\n        total_points,\n        RANK() OVER (ORDER BY total_points DESC) AS rang_points\n    FROM stats_equipes\n),\nclassement_rebonds AS (\n    SELECT\n        nom_complet_equipe,\n        total_rebonds,\n        RANK() OVER (ORDER BY total_rebonds DESC) AS rang_rebonds\n    FROM stats_equipes\n),\nclassement_passes AS (\n    SELECT\n        nom_complet_equipe,\n        total_passes,\n        RANK() OVER (ORDER BY total_passes DESC) AS rang_passes\n    FROM stats_equipes\n),\nclassement_interceptions AS (\n    SELECT\n        nom_complet_equipe,\n        total_interceptions,\n        RANK() OVER (ORDER BY total_interceptions DESC) AS rang_interceptions\n    FROM stats_equipes\n),\nclassement_contres AS (\n    SELECT\n        nom_complet_equipe,\n        total_contres,\n        RANK() OVER (ORDER BY total_contres DESC) AS rang_contres\n    FROM stats_equipes\n)\nSELECT\n    'Points' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_points AS valeur\nFROM classement_points ce\nWHERE ce.rang_points = 1\n\nUNION ALL\n\nSELECT\n    'Rebonds' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_rebonds AS valeur\nFROM classement_rebonds ce\nWHERE ce.rang_rebonds = 1\n\nUNION ALL\n\nSELECT\n    'Passes décisives' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_passes AS valeur\nFROM classement_passes ce\nWHERE ce.rang_passes = 1\n\nUNION ALL\n\nSELECT\n    'Interceptions' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_interceptions AS valeur\nFROM classement_interceptions ce\nWHERE ce.rang_interceptions = 1\n\nUNION ALL\n\nSELECT\n    'Contres' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_contres AS valeur\nFROM classement_contres ce\nWHERE ce.rang_contres = 1;\n\nRésultats :\n{'statistique': 'Points', 'equipe': 'Detroit Pistons', 'valeur': 10292.0}\n{'statistique': 'Rebonds', 'equipe': 'Houston Rockets', 'valeur': 4067.0}\n{'statistique': 'Passes décisives', 'equipe': 'Atlanta Hawks', 'valeur': 2565.0}\n{'statistique': 'Interceptions', 'equipe': 'Oklahoma City Thunder', 'valeur': 840.0}\n{'statistique': 'Contres', 'equipe': 'Dallas Mavericks', 'valeur': 568.0}"
         ],
         "ground_truth": "Points : Detroit Pistons (10292). Rebonds : Houston Rockets (4067). Passes décisives : Atlanta Hawks (2565). Interceptions : Oklahoma City Thunder (840). Contres : Dallas Mavericks (568).",
         "metadata": {
@@ -569,20 +569,20 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "SQL",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    t.nom_complet_equipe,\n    SUM(s.passes_decisives) AS total_passes_decisives,\n    SUM(s.interceptions) AS total_interceptions,\n    SUM(s.contres) AS total_contres,\n    SUM(m.points_moyens) AS total_points,\n    SUM(s.rebonds_totaux) AS total_rebonds\nFROM teams t\nJOIN players p ON t.team_id = p.team_id\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nGROUP BY t.nom_complet_equipe\nORDER BY\n    total_points DESC,\n    total_rebonds DESC,\n    total_passes_decisives DESC,\n    total_interceptions DESC,\n    total_contres DESC\nLIMIT 1;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'total_passes_decisives': 2444.0, 'total_interceptions': 717.0, 'total_contres': 460.0, 'total_points': 10292.0, 'total_rebonds': 3834.0}",
+            "sql_result": "Requête SQL exécutée :\nWITH stats_equipes AS (\n    SELECT\n        t.nom_complet_equipe,\n        SUM(m.points_moyens) AS total_points,\n        SUM(s.rebonds_totaux) AS total_rebonds,\n        SUM(s.passes_decisives) AS total_passes,\n        SUM(s.interceptions) AS total_interceptions,\n        SUM(s.contres) AS total_contres\n    FROM teams t\n    JOIN players p ON p.team_id = t.team_id\n    JOIN matches m ON p.player_id = m.player_id\n    JOIN stats s ON p.player_id = s.player_id\n    GROUP BY t.nom_complet_equipe\n),\nclassement_points AS (\n    SELECT\n        nom_complet_equipe,\n        total_points,\n        RANK() OVER (ORDER BY total_points DESC) AS rang_points\n    FROM stats_equipes\n),\nclassement_rebonds AS (\n    SELECT\n        nom_complet_equipe,\n        total_rebonds,\n        RANK() OVER (ORDER BY total_rebonds DESC) AS rang_rebonds\n    FROM stats_equipes\n),\nclassement_passes AS (\n    SELECT\n        nom_complet_equipe,\n        total_passes,\n        RANK() OVER (ORDER BY total_passes DESC) AS rang_passes\n    FROM stats_equipes\n),\nclassement_interceptions AS (\n    SELECT\n        nom_complet_equipe,\n        total_interceptions,\n        RANK() OVER (ORDER BY total_interceptions DESC) AS rang_interceptions\n    FROM stats_equipes\n),\nclassement_contres AS (\n    SELECT\n        nom_complet_equipe,\n        total_contres,\n        RANK() OVER (ORDER BY total_contres DESC) AS rang_contres\n    FROM stats_equipes\n)\nSELECT\n    'Points' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_points AS valeur\nFROM classement_points ce\nWHERE ce.rang_points = 1\n\nUNION ALL\n\nSELECT\n    'Rebonds' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_rebonds AS valeur\nFROM classement_rebonds ce\nWHERE ce.rang_rebonds = 1\n\nUNION ALL\n\nSELECT\n    'Passes décisives' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_passes AS valeur\nFROM classement_passes ce\nWHERE ce.rang_passes = 1\n\nUNION ALL\n\nSELECT\n    'Interceptions' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_interceptions AS valeur\nFROM classement_interceptions ce\nWHERE ce.rang_interceptions = 1\n\nUNION ALL\n\nSELECT\n    'Contres' AS statistique,\n    ce.nom_complet_equipe AS equipe,\n    ce.total_contres AS valeur\nFROM classement_contres ce\nWHERE ce.rang_contres = 1;\n\nRésultats :\n{'statistique': 'Points', 'equipe': 'Detroit Pistons', 'valeur': 10292.0}\n{'statistique': 'Rebonds', 'equipe': 'Houston Rockets', 'valeur': 4067.0}\n{'statistique': 'Passes décisives', 'equipe': 'Atlanta Hawks', 'valeur': 2565.0}\n{'statistique': 'Interceptions', 'equipe': 'Oklahoma City Thunder', 'valeur': 840.0}\n{'statistique': 'Contres', 'equipe': 'Dallas Mavericks', 'valeur': 568.0}",
             "rag_chunks": [],
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "L'équipe en tête pour les points, rebonds, passes décisives, interceptions et contres est les Detroit Pistons."
+                "raw_answer": "Points : Detroit Pistons (10292.0)\nRebonds : Houston Rockets (4067.0)\nPasses décisives : Atlanta Hawks (2565.0)\nInterceptions : Oklahoma City Thunder (840.0)\nContres : Dallas Mavericks (568.0)"
             }
         }
     },
     {
         "id": "Q021",
         "question": "Tatum, il a mis combien de points au total ?",
-        "answer": "Jayson Tatum a marqué un total de 1930 points.",
+        "answer": "Jayson Tatum a marqué un total de **1930 points**.",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}"
         ],
@@ -604,14 +604,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Jayson Tatum a marqué un total de 1930 points."
+                "raw_answer": "Jayson Tatum a marqué un total de **1930 points**."
             }
         }
     },
     {
         "id": "Q022",
         "question": "C'est qui les 5 équipes qui ont le plus de points ?",
-        "answer": "Les 5 équipes avec le plus de points sont :\n1. Detroit Pistons (10292 points)\n2. San Antonio Spurs (10198 points)\n3. Cleveland Cavaliers (10180 points)\n4. Milwaukee Bucks (10016 points)\n5. Dallas Mavericks (9970 points)",
+        "answer": "**Classement des 5 premiers résultats :**\n\n1. **Detroit Pistons** — 10292\n2. **San Antonio Spurs** — 10198\n3. **Cleveland Cavaliers** — 10180\n4. **Milwaukee Bucks** — 10016\n5. **Dallas Mavericks** — 9970",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    nom_complet_equipe,\n    nombre_points_total_par_equipe\nFROM teams\nORDER BY nombre_points_total_par_equipe DESC\nLIMIT 5;\n\nRésultats :\n{'nom_complet_equipe': 'Detroit Pistons', 'nombre_points_total_par_equipe': 10292}\n{'nom_complet_equipe': 'San Antonio Spurs', 'nombre_points_total_par_equipe': 10198}\n{'nom_complet_equipe': 'Cleveland Cavaliers', 'nombre_points_total_par_equipe': 10180}\n{'nom_complet_equipe': 'Milwaukee Bucks', 'nombre_points_total_par_equipe': 10016}\n{'nom_complet_equipe': 'Dallas Mavericks', 'nombre_points_total_par_equipe': 9970}"
         ],
@@ -633,14 +633,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les 5 équipes avec le plus de points sont :\n1. Detroit Pistons (10292 points)\n2. San Antonio Spurs (10198 points)\n3. Cleveland Cavaliers (10180 points)\n4. Milwaukee Bucks (10016 points)\n5. Dallas Mavericks (9970 points)"
+                "raw_answer": "Les 5 équipes avec le plus de points sont :\n1. Detroit Pistons (10 292 points)\n2. San Antonio Spurs (10 198 points)\n3. Cleveland Cavaliers (10 180 points)\n4. Milwaukee Bucks (10 016 points)\n5. Dallas Mavericks (9 970 points)"
             }
         }
     },
     {
         "id": "Q023",
         "question": "Quel joueur a le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs ?",
-        "answer": "Les données disponibles ne permettent pas de déterminer le joueur avec le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par séquence de matchs.",
+        "answer": "Les données disponibles ne permettent pas de déterminer le pourcentage de réussite à trois points d'un joueur sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par match.",
         "contexts": [
             "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles."
         ],
@@ -662,7 +662,7 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les données disponibles ne permettent pas de déterminer le joueur avec le meilleur pourcentage de réussite à trois points sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par séquence de matchs."
+                "raw_answer": "Les données disponibles ne permettent pas de déterminer le pourcentage de réussite à trois points d'un joueur sur ses cinq derniers matchs, car la base ne fournit que des statistiques globales et non des performances par match."
             }
         }
     },
@@ -698,7 +698,7 @@
     {
         "id": "Q025",
         "question": "Quel joueur a marqué le plus de points lors de son dernier match ?",
-        "answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match.",
+        "answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match, car la base ne contient que des statistiques globales et non des performances par match.",
         "contexts": [
             "RÉSULTATS SQL :\nDONNEES_INSUFFISANTES : la base contient des statistiques globales et non des statistiques détaillées par match. Il est impossible d'identifier les performances d'un joueur lors de son premier, dernier ou n-ième match, ou sur une séquence précise de matchs. Reformulez la question à partir des statistiques globales disponibles."
         ],
@@ -720,14 +720,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match."
+                "raw_answer": "Les données disponibles ne permettent pas d'identifier le joueur ayant marqué le plus de points lors de son dernier match, car la base ne contient que des statistiques globales et non des performances par match."
             }
         }
     },
     {
         "id": "Q026",
         "question": "Quelles critiques ou inquiétudes les fans expriment-ils dans les discussions Reddit sur les performances de leur équipe ?",
-        "answer": "Les fans expriment des inquiétudes sur la gestion des effectifs des Celtics, évoquant la possibilité de \"faire exploser leur effectif\" (*blow up the roster*) après une saison réussie. Certains critiquent également le manque de profondeur des équipes en playoffs, soulignant que les équipes sans réserves solides ont été exposées. D'autres discussions mentionnent des frustrations liées à l'arbitrage perçu comme partial.",
+        "answer": "Les fans expriment des inquiétudes concernant la gestion des effectifs, la compétitivité des séries éliminatoires et la violence physique dans les matchs. Par exemple, certains fans critiquent la tendance à \"faire exploser\" les effectifs (comme évoqué pour les Celtics) et soulignent les problèmes de profondeur des équipes en playoffs. D'autres discutent de l'équité et de la compétitivité des séries, comme la possibilité que des équipes moins méritantes accèdent aux playoffs grâce au format actuel. Enfin, des inquiétudes sont également soulevées concernant la violence physique excessive dans les matchs, notamment lors des playoffs.",
         "contexts": [
             "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
             "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
@@ -902,14 +902,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les fans expriment des inquiétudes sur la gestion des effectifs et la compétitivité des équipes, notamment pour les Celtics qui pourraient \"faire exploser leur effectif\" (*blow up the roster*) après une saison réussie. Certains critiquent aussi le manque de profondeur des équipes en playoffs, soulignant que les équipes sans réserves solides ont été exposées. D'autres discussions mentionnent des frustrations liées à l'arbitrage perçu comme partial et à la difficulté de rivaliser avec des équipes comme les Warriors, jugées trop physiques."
+                "raw_answer": "Les fans expriment des inquiétudes concernant la gestion des effectifs, la compétitivité des séries éliminatoires et la violence physique dans les matchs."
             }
         }
     },
     {
         "id": "Q027",
         "question": "Quelles inquiétudes les fans expriment-ils au sujet du format des playoffs et du play-in NBA ?",
-        "answer": "Les fans expriment principalement une inquiétude concernant le format des playoffs et du play-in NBA : **l'injustice perçue du play-in**. Certains estiment que les équipes à seulement 1-2 matchs d'écart des 7e et 8e places devraient automatiquement obtenir leur place en playoffs, sans risque de perdre leur position face à des équipes bien plus loin au classement (par exemple, une équipe à 8 matchs derrière ayant encore une chance de se qualifier).",
+        "answer": "Les fans expriment principalement deux inquiétudes concernant le format des playoffs et du play-in NBA :\n\n1. **Injustice du play-in** : Certains estiment que les équipes classées 7e et 8e avec seulement 1-2 matchs d'avance sur les 9e et 10e ne devraient pas avoir à participer au play-in, tandis que les équipes à 4 matchs ou plus d'avance devraient avoir leur place en playoffs déjà verrouillée. Ils critiquent aussi qu'une équipe à 8 matchs derrière puisse encore espérer une qualification via le play-in.\n\n2. **Impact sur la qualité des séries** : Des inquiétudes sont soulevées quant à la dilution de la compétitivité, avec des séries finales potentiellement moins attractives si les deux meilleures équipes statistiques ont des chances de s'affronter, ou si des équipes \"moyennes\" accèdent aux playoffs via le play-in, réduisant l'intérêt des premières rondes.",
         "contexts": [
             "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
             "Has there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)\n\"Main Character\" of these Playoffs?\nr/mlb ily a 3 m.\nWhat are Your Favorite Teams with Wasted Potential?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nHow do you choose what NBA team to become a fan of?\nEliminated East Playoff Teams (expectations for next season)\nrInba ily a 6 j\nEliminated West Playoff Teams (Expectations for next season)\nupvotes 13 commentaires\n[08/Lgi\nWhat is something you dislike about your favorite NBA team? AKER\nNBA playoffs comparison\nWhich teams become powerhouses in dynasty for you guys?\nThis is one of the most exciting weeks of regular season basketball l've seen in years.\nrInba ily a 2 m.\nBesides Erik Spoelstra, who are some of the best coaches at getting the most out of the talent on their\nrosters?\nWhat are your current playoff predictions?",
@@ -935,7 +935,7 @@
                 {
                     "source": "Reddit 4.pdf",
                     "text": "They should just implement the play-in if the 7th and 8th seed is just 1-2 games ahead of the\n9th and 1Oth.\nIf the 7th seed is 4 or so games ahead, their spot should already be locked in. Same with the\n8th, if they are games ahead their spots should already be locked in.\nIt just doesn't make sense that an 8-game behind team having a shot at the play-offs.\n[supprimé] -12 j\nelbosston -12 j\nIt's harder in basketball because usually the \"better team goes to the finals as basketball has less variance\nthan hockey due to how much harder it is to score in hockey\nsomeguy_3112 -12 j Modifié il y a -12j\n2023 Heat Edit: just noticed that you asked for a team that had the home advantage in the finals. My bad\nkalebglover -12 j\n12/06/2025 13:12 Which NBA team did not have home court advantage until the NBA Finals? rInba\nu 24 < Repondre\nsomeguy_3112 -12 j\nYeah missed that they asked for a team with home advantage in the finals, just edited my\ncomment\nDemonsReturns7 -12 j",
-                    "score": 83.38660001754761,
+                    "score": 83.43868255615234,
                     "metadata": {
                         "source": "Reddit 4.pdf",
                         "filename": "Reddit 4.pdf",
@@ -960,7 +960,7 @@
                 {
                     "source": "Reddit 1.pdf",
                     "text": "Has there ever been a team playing just 6 guys like the Knicks are in the playoffs?\nNBA Teams That Never Met in the Playoffs (Same Conference)\n\"Main Character\" of these Playoffs?\nr/mlb ily a 3 m.\nWhat are Your Favorite Teams with Wasted Potential?\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\nHow do you choose what NBA team to become a fan of?\nEliminated East Playoff Teams (expectations for next season)\nrInba ily a 6 j\nEliminated West Playoff Teams (Expectations for next season)\nupvotes 13 commentaires\n[08/Lgi\nWhat is something you dislike about your favorite NBA team? AKER\nNBA playoffs comparison\nWhich teams become powerhouses in dynasty for you guys?\nThis is one of the most exciting weeks of regular season basketball l've seen in years.\nrInba ily a 2 m.\nBesides Erik Spoelstra, who are some of the best coaches at getting the most out of the talent on their\nrosters?\nWhat are your current playoff predictions?",
-                    "score": 79.54813241958618,
+                    "score": 79.60448861122131,
                     "metadata": {
                         "source": "Reddit 1.pdf",
                         "filename": "Reddit 1.pdf",
@@ -996,7 +996,7 @@
                 {
                     "source": "Reddit 2.pdf",
                     "text": "people tune out way too many ads especially within the last minute; gambling references\neverywhere; free throw hunting; teams shooting 60 threes in a single game; no defense until\nplayoffs, poor refereeing; etc.\nLordBaneoftheSith ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nartist bc there's nothing to watch.\nSure; I'm vaguely concerned the NBA ratings because of what dipshit things it might lead\nAdam Silver to do, but it's not like if they were to spike he'd stop being willing to sell the\ntiniest bit of anything for whatever $ he can get.\n3 réponses supplémentaires\nBNKalt ~15 j\nlike my games being readily available on TV so being popular helps.\nScratchSeekero3 ~15 j\nThe only people that should care about ratings are ESPN. Which is ironic because they are directly the\nreason ratings would be down for this series They' 're costing themselves millions.\ntheskyopenedup -15 j",
-                    "score": 78.98871898651123,
+                    "score": 79.01957631111145,
                     "metadata": {
                         "source": "Reddit 2.pdf",
                         "filename": "Reddit 2.pdf",
@@ -1021,7 +1021,7 @@
                 {
                     "source": "Reddit 2.pdf",
                     "text": "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
-                    "score": 78.7598729133606,
+                    "score": 78.8301944732666,
                     "metadata": {
                         "source": "Reddit 2.pdf",
                         "filename": "Reddit 2.pdf",
@@ -1046,7 +1046,7 @@
                 {
                     "source": "Reddit 4.pdf",
                     "text": "Now damn near every teams fights for a play in spot or to keep themselves in the 6th seed or\nabove: It has revitalized the last third of the season\nThen the play in games themselves are pretty fun too. Play ins have had nothing but positive\neffects for the NBA\nThe chances of a 6-8th seed making the Finals is slim. Should we exlude them from the\nplayoffs entirely too? Feels silly to base things off their chances of making the Finals.\niustmefishes ~12 j\nThe play-in is worthwhile for its own sake. It's a few mini-Game 7s amongst not-great but not -\ncompletely-awful teams which makes for a nice appetizer going into the playoffs. Personally\nfind it very interesting to see more flawed average teams being put in that situation as you\nget to learn things about teams and players you otherwise wouldn't; because they'd either\nmiss the playoffs entirely or get bounced quickly in the first round by a much better team_",
-                    "score": 78.44820022583008,
+                    "score": 78.51061224937439,
                     "metadata": {
                         "source": "Reddit 4.pdf",
                         "filename": "Reddit 4.pdf",
@@ -1073,14 +1073,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les fans expriment principalement deux inquiétudes concernant le format des playoffs et du play-in NBA :\n\n1. **Injustice du play-in** : Certains estiment que les équipes à 1-2 matchs d'écart des 7e/8e places devraient automatiquement obtenir leur place en playoffs, sans risque de perdre leur position face à des équipes bien plus loin au classement (ex. : une équipe à 8 matchs derrière ayant encore une chance).\n\n2. **Impact sur la qualité des séries** : Des inquiétudes sont soulevées quant à la dilution de l'intérêt des playoffs, avec des séries moins compétitives si des équipes moins performantes obtiennent une place en raison du play-in, réduisant ainsi les chances de voir les meilleures équipes s'affronter en Finales."
+                "raw_answer": "Les fans expriment principalement deux inquiétudes concernant le format des playoffs et du play-in NBA :\n\n1. **Injustice du play-in** : Certains estiment que les équipes classées 7e et 8e avec seulement 1-2 matchs d'avance sur les 9e et 10e ne devraient pas avoir à participer au play-in, tandis que les équipes à 4 matchs ou plus d'avance devraient avoir leur place en playoffs déjà verrouillée. Ils critiquent aussi qu'une équipe à 8 matchs derrière puisse encore espérer une qualification via le play-in.\n\n2. **Impact sur la qualité des séries** : Des inquiétudes sont soulevées quant à la dilution de la compétitivité, avec des séries finales potentiellement moins attractives si les deux meilleures équipes statistiques ont des chances de s'affronter, ou si des équipes \"moyennes\" accèdent aux playoffs via le play-in, réduisant l'intérêt des premières rondes."
             }
         }
     },
     {
         "id": "Q028",
         "question": "Quelles critiques les fans formulent-ils sur la profondeur des effectifs, le jeu physique et l'arbitrage ?",
-        "answer": "Les fans critiquent la **profondeur des effectifs** des équipes en playoffs, soulignant que *les équipes sans profondeur ont été exposées cette saison*. Concernant le **jeu physique**, certains estiment que les arbitres laissent trop de latitude aux équipes, tolérant un jeu physique excessif. Enfin, sur l’**arbitrage**, des commentaires indiquent que les officiels *laissent passer des contacts durs* en *avalant leurs sifflets*.",
+        "answer": "Les fans critiquent la profondeur des effectifs des équipes en playoffs, soulignant que les équipes sans profondeur ont été exposées. Concernant le jeu physique, certains estiment que les équipes comme les Warriors jouent de manière très physique, tandis que d'autres soulignent que l'arbitrage favorise une tolérance excessive envers les contacts durs, avec des officiels qui \"avalent leurs sifflets\".",
         "contexts": [
             "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
             "and injuring them. In fact the only reason either team won a game is due to taking out the elite\nplayers on Boston/GS.\nam not impressed in the slightest. It's bush league stuff due to a complete lack of skill on both\nrosters\nmoby323 Fm.\nThat's going a little overboard\nNotManyBuses ~1 m\nAm wrong though\nMannerSuperb AO -Lm.\n12/06/2025 13.06 Who are teams in the playoffs that have impressed you? rInba\n2 réponses supplémentaires\nfrankievejle\nBla bla bla the narrative that the Warriors aren't also playing extremely physical basketball is\ncrazy.\nWarriors fans have done a masterful job of complaining so much and so loudly that you have\npeople out here legit thinking the physicality is just one sided while they're playing some\npristine brand of basketball.\nNotManyBuses m.\nThey are; the difference is they have Steph.\nYou have Van Vleet.\nMannerSuperb AO -1m\nThat's on the officials more than the teams. If the refs are swallowing their whistles and letting",
@@ -1255,14 +1255,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Les fans critiquent la **profondeur des effectifs** des équipes en playoffs, soulignant que les équipes sans profondeur ont été exposées cette saison. Concernant le **jeu physique**, certains estiment que les arbitres laissent trop de latitude aux équipes, tolérant un jeu physique excessif. Enfin, sur l’**arbitrage**, des commentaires indiquent que les officiels \"avalent leurs sifflets\" (*swallowing their whistles*), laissant passer des contacts durs."
+                "raw_answer": "Les fans critiquent la profondeur des effectifs des équipes en playoffs, soulignant que les équipes sans profondeur ont été exposées. Concernant le jeu physique, certains estiment que les équipes comme les Warriors jouent de manière très physique, tandis que d'autres soulignent que l'arbitrage favorise une tolérance excessive envers les contacts durs, avec des officiels qui \"avalent leurs sifflets\"."
             }
         }
     },
     {
         "id": "Q029",
         "question": "Quel est le top 5 de joueurs ayant marqués le plus de points, et quelles opinions les fans Reddit expriment-ils sur certains de ces joueurs ?",
-        "answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander (2485 points)\n2. Anthony Edwards (2180 points)\n3. Nikola Jokić (2072 points)\n4. Giannis Antetokounmpo (2037 points)\n5. Jayson Tatum (1930 points)\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Critiqué pour son faible pourcentage de réussite aux lancers francs (FT%) qui impacte son *true shooting percentage* (TS%), malgré son efficacité en 2 points.\n- **Jayson Tatum** : Mentionné dans un débat sur la compétitivité des playoffs, avec des spéculations sur une possible explosion de l'effectif des Celtics.",
+        "answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander – 2485 points\n2. Anthony Edwards – 2180 points\n3. Nikola Jokić – 2072 points\n4. Giannis Antetokounmpo – 2037 points\n5. Jayson Tatum – 1930 points\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Certains fans soulignent que son efficacité globale (true shooting percentage) est pénalisée par son volume élevé de lancers francs, malgré son efficacité à deux points (*\"his ft% (and high volume of them) really brings down the overall ts%\").*\n- **Jayson Tatum** : Des discussions évoquent son rôle clé dans l'équipe des Celtics, avec des spéculations sur l'avenir de l'effectif (*\"Tatum and then run it back; but now it looks like they're gonna blow up the roster\"*).",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nORDER BY t.nombre_points_total DESC\nLIMIT 5;\n\nRésultats :\n{'nom_du_joueur': 'Shai Gilgeous-Alexander', 'nombre_points_total': 2485.0}\n{'nom_du_joueur': 'Anthony Edwards', 'nombre_points_total': 2180.0}\n{'nom_du_joueur': 'Nikola Jokić', 'nombre_points_total': 2072.0}\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'nombre_points_total': 2037.0}\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
             "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
@@ -1430,14 +1430,14 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander (2485 points)\n2. Anthony Edwards (2180 points)\n3. Nikola Jokić (2072 points)\n4. Giannis Antetokounmpo (2037 points)\n5. Jayson Tatum (1930 points)\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Critiqué pour son faible pourcentage de réussite aux lancers francs (FT%) qui impacte son *true shooting percentage* (TS%), malgré son efficacité en 2 points.\n- **Jayson Tatum** : Mentionné dans un débat sur la compétitivité des playoffs, avec des spéculations sur une possible explosion de l'effectif des Celtics."
+                "raw_answer": "Top 5 des joueurs ayant marqué le plus de points :\n1. Shai Gilgeous-Alexander – 2485 points\n2. Anthony Edwards – 2180 points\n3. Nikola Jokić – 2072 points\n4. Giannis Antetokounmpo – 2037 points\n5. Jayson Tatum – 1930 points\n\nOpinions des fans Reddit :\n- **Giannis Antetokounmpo** : Certains fans soulignent que son efficacité globale (true shooting percentage) est pénalisée par son volume élevé de lancers francs, malgré son efficacité à deux points (*\"his ft% (and high volume of them) really brings down the overall ts%\"*).\n- **Jayson Tatum** : Des discussions évoquent son rôle clé dans l'équipe des Celtics, avec des spéculations sur l'avenir de l'effectif (*\"Tatum and then run it back; but now it looks like they're gonna blow up the roster\"*)."
             }
         }
     },
     {
         "id": "Q030",
         "question": "Combien de points Jayson Tatum a-t-il marqués, et quelles inquiétudes les fans Reddit expriment-ils concernant l'avenir des Celtics ?",
-        "answer": "Jayson Tatum a marqué **1930 points** en saison régulière.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la possibilité que l'équipe \"démonte\" son effectif (*\"blow up the roster\"*).",
+        "answer": "Jayson Tatum a marqué **1930 points** cette saison.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la crainte que l'équipe ne \"démonte\" son effectif (*\"they're gonna blow up the roster\"*), ce qui pourrait fragiliser leur compétitivité après des saisons réussies.",
         "contexts": [
             "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    t.nombre_points_total\nFROM top_15_joueurs_points t\nJOIN players p ON t.player_id = p.player_id\nWHERE p.nom_du_joueur LIKE '%Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Jayson Tatum', 'nombre_points_total': 1930.0}",
             "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
@@ -1613,16 +1613,16 @@
             "pydantic_ai_control": {
                 "grounded_in_context": true,
                 "unsupported_claims": [],
-                "raw_answer": "Jayson Tatum a marqué **1930 points** en saison régulière.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la possibilité que l'équipe \"démonte\" son effectif (*\"blow up the roster\"*) après une saison où les blessures et les performances en playoffs ont soulevé des questions sur la durabilité du groupe."
+                "raw_answer": "Jayson Tatum a marqué **1930 points** cette saison.\n\nLes fans Reddit expriment des inquiétudes concernant l'avenir des Celtics, notamment la crainte que l'équipe ne \"démonte\" son effectif (*\"they're gonna blow up the roster\"*), ce qui pourrait fragiliser leur compétitivité après des saisons réussies."
             }
         }
     },
     {
         "id": "Q031",
         "question": "Que montrent les statistiques de points de Giannis Antetokounmpo et de Jayson Tatum, et quelles critiques Reddit sont formulées sur leur efficacité ou leur avenir ?",
-        "answer": "Giannis Antetokounmpo affiche une moyenne de **2037 points** avec un pourcentage de réussite aux tirs de **60,1%**, tandis que Jayson Tatum a marqué **1930 points** avec un pourcentage de réussite de **45,2%**. \n\nLes critiques Reddit sur leur efficacité ou leur avenir mentionnent principalement :\n- **Giannis** : Son efficacité aux lancers francs (61,7%) est critiquée pour son impact sur son *true shooting percentage* (*\"his ft% (and high volume of them) really brings down the overall ts%\"*).\n- **Tatum** : Son rôle offensif et son efficacité en tant que première option sont discutés, avec des remarques sur la dépendance des Celtics à son jeu malgré des lacunes dans l'effectif (*\"they guard their asses off but the supporting cast has been laughably bad\"*).",
+        "answer": "Giannis Antetokounmpo affiche des statistiques offensives dominantes avec **2037 points en moyenne**, un **taux de réussite de 60,1%** et un **net rating de 7,2**, malgré un **pourcentage à 3 points faible (22,2%)** et un **pourcentage aux lancers francs moyen (61,7%)**. Jayson Tatum a marqué **1930 points en moyenne**, avec un **taux de réussite de 45,2%**, un **pourcentage à 3 points élevé (34,3%)** et un **net rating de 9,8**, mais un **usage rate inférieur (30,1%)**.\n\nSur Reddit, des critiques soulignent que **Giannis** voit son efficacité globale parfois discutée en raison de son **faible pourcentage aux lancers francs** malgré une domination à mi-distance, tandis que **Tatum** est parfois jugé moins **dynamique** sans amélioration de son tir. Certains estiment aussi que leur avenir dépendra de l'évolution de leur équipe, avec des craintes de **reconstruction des effectifs** (ex. : Celtics).",
         "contexts": [
-            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
+            "RÉSULTATS SQL :\nRequête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%'\nORDER BY p.nom_du_joueur, m.points_moyens DESC;\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
             "Tatum and then run it back; but now it looks like they' 're gonna blow up the roster.\n2 réponses supplémentaires\nDakozi ~15 j\n12/06/2025 13.09 How is it that the two best teams in the playoffs based on stats having chance of playing against each other in the Finals, is\nIll never say it was full on rigged; but there was a massive benefit to having KC go far in the\nplayoffs\nlbegging_brother ~14 j\nLike for example right here\nSmart_Water ~15 j\nGreen Bay has a population of 105,000 yet you could find a Packers jersey in any NFL crowd\nregardless of who is playing. NFL simply does it better than anyone else\n1 réponse supplémentaire\niackaholicus ~15 j\nThe NFL can focus on small markets that are good because they are the NFL\nThe NFL is so popular that even 'small markets\" have tons of fans.\nNFL fans will watch other games because there's only so many a week. NBA fans are more\nlikely to just watch their teams.",
             "Respect. will always wonder 'what if' about last year's run without Giannis, but this year think the\ndifference is there.\nMannerSuperb AO -1m.\nPaolo and Franz have been a dynamic wing duo this whole series agaisnt one of the best defensive\nteams in basketball plus the defending champs. Yes the supporting cast has been laughably bad at\ntimes around them offensively but they guard their asses off and really giving the Celtics a fight\ndespite missing Suggs and the other Wagner brother. thkkk their floor spacers and average PG away\nfrom being an true contender\ngeorgiosauce\nMagic are down 3-1 despite injuring 3 Celtics starters along the way, they' 're solid trash\n22 réponses supplémentaires\nPeach TreeDish91\nYou really seem like the type of dude who spends 10 minutes watching the youtube highlights\nwhile checking the box score; then spends the next 60 minutes typing bs out the ass on reddit\n[TallnFrosty\nuntil franz fixes his shooting, don't think 'dynamic' is the right word for him",
             "Michael Jordan 5987 106\nJames Harden 3895 106\nHakeem Olajuwon 3755 106\nJulius Erving 4580 105\nTim Duncan 5172 104\nDwyane Wade 3954 103\nGiannis Antetokounmpo 2270 103\nKobe Bryant 5640 102\nLarry Bird 3897 102\ndirtynashtyfilthy -10j\nWhy'd you remove Dirk's 108?\nISportsBettingRef -9 j Modifié il y a ~9 j\n12/06/2025 13:11 Reggie Miller is the most efficient first option in NBA playoff history rInba\ndouble checking\nEdit2: l've correct it.\nIcyAuthorl -10 j\nDidn't expect Bird, Giannis; and Duncan to be that low.\nrayrayiscray -10 j\nGiannis | can understand; his ft% (and high volume of them) really brings down the overall ts%\neven despite being one of the most efficient 2pt scorers in league history.\nMarkoSeke -10j\nTS rewards three point shooters. Also it's not \"low\" this is a list of the top of all time\n2 réponses supplémentaires\nbigvahe33 -10 j\nmchale was huge in the playoffs\nrajs1286 ~10j\nDuncan has never been efficient; despite the narrative\nUnusual-Weather1902 ~10 j",
@@ -1642,7 +1642,7 @@
             "answerable": true,
             "prototype": "prototype_ameliore_hybride",
             "route": "BOTH",
-            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%';\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
+            "sql_result": "Requête SQL exécutée :\nSELECT\n    p.nom_du_joueur,\n    m.points_moyens,\n    m.tirs_reussis,\n    m.tirs_tentes,\n    m.pourcentage_reussite,\n    s.pourcentage_3_points,\n    s.pourcentage_lancers_francs,\n    s.rebonds_totaux,\n    s.passes_decisives,\n    s.turnover_ratio,\n    s.usage_rate,\n    s.net_rating\nFROM players p\nJOIN matches m ON p.player_id = m.player_id\nJOIN stats s ON p.player_id = s.player_id\nWHERE p.nom_du_joueur LIKE '%Giannis Antetokounmpo%' OR p.nom_du_joueur LIKE '%Jayson Tatum%'\nORDER BY p.nom_du_joueur, m.points_moyens DESC;\n\nRésultats :\n{'nom_du_joueur': 'Giannis Antetokounmpo', 'points_moyens': 2037.0, 'tirs_reussis': 791.0, 'tirs_tentes': 1320.0, 'pourcentage_reussite': 60.1, 'pourcentage_3_points': 22.2, 'pourcentage_lancers_francs': 61.7, 'rebonds_totaux': 797.0, 'passes_decisives': 436.0, 'turnover_ratio': 9.1, 'usage_rate': 34.6, 'net_rating': 7.2}\n{'nom_du_joueur': 'Jayson Tatum', 'points_moyens': 1930.0, 'tirs_reussis': 662.0, 'tirs_tentes': 1462.0, 'pourcentage_reussite': 45.2, 'pourcentage_3_points': 34.3, 'pourcentage_lancers_francs': 81.4, 'rebonds_totaux': 626.0, 'passes_decisives': 432.0, 'turnover_ratio': 9.2, 'usage_rate': 30.1, 'net_rating': 9.8}",
             "rag_chunks": [
                 {
                     "source": "Reddit 2.pdf",
@@ -1791,8 +1791,22 @@
             "source_errors": [],
             "pydantic_ai_control": {
                 "grounded_in_context": true,
-                "unsupported_claims": [],
-                "raw_answer": "Giannis Antetokounmpo affiche une moyenne de **2037 points** (60,1% de réussite aux tirs), tandis que Jayson Tatum a marqué **1930 points** (45,2% de réussite). Les critiques Reddit sur leur efficacité ou leur avenir soulignent principalement :\n- **Giannis** : Son efficacité aux lancers francs (61,7%) et son *true shooting percentage* (TS%) sont critiqués comme des points faibles malgré son jeu intérieur dominant (*\"his ft% (and high volume of them) really brings down the overall ts%\"*).\n- **Tatum** : Son rôle offensif est parfois remis en question, avec des débats sur son efficacité en tant que premier option (*\"TS rewards three point shooters\"* et *\"until Franz fixes his shooting, don't think 'dynamic' is the right word for him\"*). Certains soulignent aussi la dépendance des Celtics à son jeu malgré des lacunes dans l'effectif (*\"they guard their asses off but the supporting cast has been laughably bad\"*).\n\nAucune critique directe sur leur avenir n'est documentée dans les extraits fournis."
+                "unsupported_claims": [
+                    "Giannis Antetokounmpo affiche des statistiques offensives dominantes avec **2037 points en moyenne**",
+                    "un **taux de réussite de 60,1%**",
+                    "un **net rating de 7,2**",
+                    "malgré un **pourcentage à 3 points faible (22,2%)**",
+                    "et un **pourcentage aux lancers francs moyen (61,7%)**",
+                    "Jayson Tatum a marqué **1930 points en moyenne**",
+                    "avec un **taux de réussite de 45,2%**",
+                    "un **pourcentage à 3 points élevé (34,3%)**",
+                    "et un **net rating de 9,8**",
+                    "mais un **usage rate inférieur (30,1%)**",
+                    "Sur Reddit, des critiques soulignent que **Giannis** voit son efficacité globale parfois discutée en raison de son **faible pourcentage aux lancers francs** malgré une domination à mi-distance",
+                    "Tatum est parfois jugé moins **dynamique** sans amélioration de son tir",
+                    "Certains estiment aussi que leur avenir dépendra de l'évolution de leur équipe, avec des craintes de **reconstruction des effectifs** (ex. : Celtics)"
+                ],
+                "raw_answer": "Giannis Antetokounmpo affiche des statistiques offensives dominantes avec **2037 points en moyenne**, un **taux de réussite de 60,1%** et un **net rating de 7,2**, malgré un **pourcentage à 3 points faible (22,2%)** et un **pourcentage aux lancers francs moyen (61,7%)**. Jayson Tatum a marqué **1930 points en moyenne**, avec un **taux de réussite de 45,2%**, un **pourcentage à 3 points élevé (34,3%)** et un **net rating de 9,8**, mais un **usage rate inférieur (30,1%)**.\n\nSur Reddit, des critiques soulignent que **Giannis** voit son efficacité globale (TS%) pénalisée par son **faible pourcentage aux lancers francs** malgré une domination à mi-distance, tandis que **Tatum** est parfois jugé moins \"dynamique\" sans amélioration de son tir (notamment Franz Wagner). Certains estiment aussi que leur avenir dépendra de l'évolution de leur équipe, avec des craintes de **reconstruction des effectifs** (ex. : Celtics)."
             }
         }
     }

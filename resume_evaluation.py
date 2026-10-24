@@ -8,13 +8,13 @@ import pandas as pd
 # configuration des chemins
 RESULTS_DIR = Path("ragas_results")
 
-AFTER_DIR = RESULTS_DIR / "after_pydantic_ai"
+BEFORE_DIR = RESULTS_DIR / "before_pydantic_ai"
 PROTOTYPE_AMELIORE_DIR = RESULTS_DIR / "prototype_ameliore_pydantic" 
 
-AFTER_DETAILS = AFTER_DIR / "results_detaille.json"
+BEFORE_DETAILS = BEFORE_DIR / "results_detaille.json"
 PRO_AMELIORE_DETAILS = PROTOTYPE_AMELIORE_DIR / "resultats_detailles.json"
 
-AFTER_SCORES = AFTER_DIR / "scores_par_question.csv"
+BEFORE_SCORES = BEFORE_DIR / "scores_par_question.csv"
 PRO_AMELIORE_SCORES = PROTOTYPE_AMELIORE_DIR / "scores_par_question.csv"
 
 OUTPUT_FILE = RESULTS_DIR / "evaluation_prototypes.csv"
@@ -217,10 +217,10 @@ def build_comment(question, ground_truth_prototype_initial, ground_truth_prototy
 # construction du csv pour avoir les questions, metadata, contexte/reponses/scores avant/après pour chaque question
 def build_complete_csv():
     print("Lecture des exports RAGAS...")
-    before_details = normalize_details(load_json(AFTER_DETAILS))
+    before_details = normalize_details(load_json(BEFORE_DETAILS))
     after_details = normalize_details(load_json(PRO_AMELIORE_DETAILS))
 
-    bs=load_scores(AFTER_SCORES)
+    bs=load_scores(BEFORE_SCORES)
     a_s=load_scores(PRO_AMELIORE_SCORES)
 
     bd={get_question_id(x,i):x for i,x in enumerate(before_details)}; ad={get_question_id(x,i):x for i,x in enumerate(after_details)}

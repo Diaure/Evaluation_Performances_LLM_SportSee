@@ -1,6 +1,8 @@
 # MistralChat.py (version RAG)
 import streamlit as st
 import os
+import ast
+import re
 import logging
 from mistralai.client import Mistral
 # from mistralai.models.chat_completion import ChatMessage
@@ -10,14 +12,27 @@ from dotenv import load_dotenv
 try:
     from utils.config import (
         MISTRAL_API_KEY, MODEL_NAME, SEARCH_K,
-        APP_TITLE, NAME
-    )
+        APP_TITLE, NAME)
+    
     from utils.vector_store import VectorStoreManager
 except ImportError as e:
     st.error(f"Erreur d'importation: {e}. Vérifiez la structure de vos dossiers et les fichiers dans 'utils'.")
     st.stop()
 
+from pydantic_ai import Agent
+from pydantic_ai.models.mistral import MistralModel
+from pydantic_ai.providers.mistral import MistralProvider
+
+from utils.pydantic_validation import (
+    QuestionModel,
+    ChunkModel,
+    AnswerModel,
+    RAGResultModel,
+    ControlledAnswerModel,)
+
 from sql_tool import sql_tool
+
+from evaluate_prototypes_pydantic import generate_reponse_prototype, validation_reponse_pydantic_ai, SYSTEM_PROMPT, reconstruire_classement_sql
 
 # --- Configuration du Logging ---
 # Note: Streamlit peut avoir sa propre gestion de logs. Configurer ici est une bonne pratique.
@@ -38,7 +53,25 @@ except Exception as e:
     st.error(f"Erreur lors de l'initialisation du client Mistral : {e}")
     logging.exception("Erreur initialisation client Mistral")
     st.stop()
-    
+
+# Confoguration de l'Agent pydantic AI (identique à celui de l'évaluation RAGAS)
+mistral_provider = MistralProvider( mistral_client=client)
+pydantic_ai_model = MistralModel(MODEL_NAME, provider=mistral_provider,)
+answer_agent = Agent(
+    model=pydantic_ai_model,
+    output_type=ControlledAnswerModel,
+    instructions=(
+        "Tu es un contrôleur de réponses pour un assistant NBA. "
+        "Tu vérifies une réponse générée à partir d'un contexte "
+        "documentaire et/ou de résultats SQL fournis. "
+        "Utilise exclusivement les informations présentes dans "
+        "le contexte. Ne complète jamais les informations "
+        "manquantes avec tes propres connaissances. "
+        "Conserve les affirmations justifiées. "
+        "Signale les affirmations non justifiées dans "
+        "unsupported_claims. Si le contexte est insuffisant, "
+        "indique-le clairement dans answer et dans "
+        "grounded_in_context. Ne produis jamais une réponse vide."),)  
 
 # --- Chargement du Vector Store (mis en cache) ---
 @st.cache_resource # Garde le manager chargé en mémoire pour la session
@@ -67,18 +100,18 @@ def get_vector_store_manager():
 vector_store_manager = get_vector_store_manager()
 
 # --- Prompt Système pour RAG ---
-# Adaptez ce prompt selon vos besoins
-SYSTEM_PROMPT = f"""Tu es 'NBA Analyst AI', un assistant expert sur la ligue de basketball NBA.
-Ta mission est de répondre aux questions des fans en animant le débat.
+SYSTEM_PROMPT = SYSTEM_PROMPT
+# f"""Tu es 'NBA Analyst AI', un assistant expert sur la ligue de basketball NBA.
+# Ta mission est de répondre aux questions des fans en animant le débat.
 
----
-{{context_str}}
----
+# ---
+# {{context_str}}
+# ---
 
-QUESTION DU FAN:
-{{question}}
+# QUESTION DU FAN:
+# {{question}}
 
-RÉPONSE DE L'ANALYSTE NBA:"""
+# RÉPONSE DE L'ANALYSTE NBA:"""
 
 
 # --- Initialisation de l'historique de conversation ---
@@ -154,6 +187,191 @@ def determiner_source(question: str) -> str:
         logging.exception("Erreur lors de la détermination de la source.")
         raise
 
+# def formater_classement_sql(question: str, resultat_sql: str):
+#     """
+#     Formate un classement à partir des résultats SQL, pour les équipes
+#     comme pour les joueurs.
+
+#     - Détecte l'entité, la statistique et le nombre de places demandées.
+#     - Trie les résultats par ordre décroissant.
+#     - Conserve tous les ex aequo à la dernière place demandée.
+#     - Attribue le même rang aux valeurs égales.
+#     - Retourne None si la question ou les données ne sont pas reconnues.
+#     """
+
+#     question_min = question.lower()
+
+#     # Détecter l'entité concernée.
+#     entite_equipe = bool(re.search(
+#         r"\b(équipe|équipes|team|teams)\b",
+#         question_min,
+#     ))
+
+#     entite_joueur = bool(re.search(
+#         r"\b(joueur|joueurs|player|players)\b",
+#         question_min,
+#     ))
+
+#     # La fonction ne traite que les classements d'équipes ou de joueurs.
+#     if not entite_equipe and not entite_joueur:
+#         return None
+
+#     # Si les deux entités sont mentionnées, ne pas deviner laquelle classer.
+#     if entite_equipe and entite_joueur:
+#         return None
+
+#     # Vérifier qu'il s'agit bien d'une demande de classement.
+#     termes_classement = (
+#         "plus de", "plus d'", "plus d’", "le plus", "la plus",
+#         "les plus", "top", "classement", "meilleur", "meilleure",
+#         "meilleurs", "meilleures", "maximum", "maximal",
+#     )
+
+#     if not any(terme in question_min for terme in termes_classement):
+#         return None
+
+#     # Déterminer le nombre de places demandées.
+#     nombres = {
+#         "un": 1,
+#         "une": 1,
+#         "deux": 2,
+#         "trois": 3,
+#         "quatre": 4,
+#         "cinq": 5,
+#         "six": 6,
+#         "sept": 7,
+#         "huit": 8,
+#         "neuf": 9,
+#         "dix": 10,
+#         "onze": 11,
+#         "douze": 12,
+#         "quinze": 15,
+#         "vingt": 20,
+#     }
+
+#     match_nombre = re.search(r"\b(\d+)\b", question_min)
+#     n = int(match_nombre.group(1)) if match_nombre else None
+
+#     if n is None:
+#         for mot, valeur in nombres.items():
+#             if re.search(rf"\b{mot}\b", question_min):
+#                 n = valeur
+#                 break
+
+#     if n is None or n < 1:
+#         return None
+
+#     # Identifier la statistique demandée.
+#     correspondances = {
+#         "interception": (
+#             "total_interceptions",
+#             "interceptions",
+#         ),
+#         "rebond": (
+#             "total_rebonds",
+#             "rebonds",
+#         ),
+#         "passe décisive": (
+#             "total_passes",
+#             "passes décisives",
+#         ),
+#         "passe": (
+#             "total_passes",
+#             "passes",
+#         ),
+#         "point": (
+#             "total_points",
+#             "points",
+#         ),
+#         "contre": (
+#             "total_contres",
+#             "contres",
+#         ),
+#     }
+
+#     champ_stat = None
+
+#     # Tester les expressions les plus précises en premier.
+#     for terme in sorted(correspondances, key=len, reverse=True):
+#         if re.search(rf"\b{re.escape(terme)}", question_min):
+#             champ_stat = correspondances[terme][0]
+#             break
+
+#     if champ_stat is None:
+#         return None
+
+#     # Extraire les dictionnaires présents dans le résultat SQL.
+#     if isinstance(resultat_sql, list):
+#         rows = [row for row in resultat_sql if isinstance(row, dict)]
+#     else:
+#         lignes_sql = re.findall(r"\{[^{}]*\}", str(resultat_sql or ""))
+#         rows = []
+
+#         for ligne in lignes_sql:
+#             try:
+#                 row = ast.literal_eval(ligne)
+#                 if isinstance(row, dict):
+#                     rows.append(row)
+#             except (ValueError, SyntaxError):
+#                 continue
+
+#     if not rows:
+#         return None
+
+#     # Déterminer les colonnes de nom selon l'entité.
+#     champs_nom_possibles = (["nom_complet_equipe"] if entite_equipe else ["nom_du_joueur"])
+#     champ_nom = next(
+#         (
+#             champ
+#             for champ in champs_nom_possibles
+#             if all(champ in row for row in rows)
+#         ), None,)
+
+#     if champ_nom is None:
+#         return None
+
+#     # Vérifier que chaque ligne contient une statistique numérique exploitable.
+#     if not all(
+#         champ_stat in row
+#         and isinstance(row[champ_stat], (int, float))
+#         and not isinstance(row[champ_stat], bool)
+#         for row in rows
+#     ):
+#         return None
+
+#     # Trier par ordre décroissant.
+#     rows.sort(key=lambda row: row[champ_stat], reverse=True)
+
+#     # Ne pas afficher moins de N résultats si le SQL en fournit moins.
+#     # Conserver tous les ex aequo au seuil de la dernière place demandée.
+#     seuil = rows[min(n, len(rows)) - 1][champ_stat]
+#     selection = [
+#         row for row in rows
+#         if row[champ_stat] >= seuil
+#     ]
+
+#     # Construire le classement avec des rangs partagés.
+#     resultat = []
+#     valeur_precedente = None
+#     rang_precedent = None
+
+#     for position, row in enumerate(selection, start=1):
+#         valeur = row[champ_stat]
+
+#         if position == 1 or valeur != valeur_precedente:
+#             rang = position
+#         else:
+#             rang = rang_precedent
+
+#         resultat.append(
+#             f"{rang}. **{row[champ_nom]}** — {valeur:g}"
+#         )
+
+#         valeur_precedente = valeur
+#         rang_precedent = rang
+
+#     return "\n".join(resultat)
+
 
 # --- Interface Utilisateur Streamlit ---
 st.title(APP_TITLE)
@@ -172,14 +390,13 @@ if prompt := st.chat_input(f"Posez votre question sur la {NAME}..."):
         st.write(prompt)
 
     # === Début de la logique RAG ===
-    # 2. Vérifier si le Vector Store est disponible
+    # Vérifier si le Vector Store est disponible
     if vector_store_manager is None:
         st.error("Le service de recherche de connaissances n'est pas disponible. Impossible de traiter votre demande.")
-        # logging.error("VectorStoreManager non disponible pour la recherche.")
         # On arrête ici car on ne peut pas faire de RAG
         st.stop()
 
-    # 3. Rechercher le contexte dans le Vector Store
+    # Rechercher le contexte dans le Vector Store
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
         message_placeholder.write("Analyse de la question...")
@@ -237,11 +454,58 @@ INFORMATIONS :
 RÉPONSE :
 """
         message_placeholder.write("Synthèse en cours...")
-        response_content = generer_reponse([{"role":"user", "content":prompt_synthese}])  
-        message_placeholder.markdown(response_content)   
-        # logging.info(f"Recherche de contexte pour la question: '{prompt}' avec k={SEARCH_K}")
-        # search_results = vector_store_manager.search(prompt, k=SEARCH_K)
-        # logging.info(f"{len(search_results)} chunks trouvés dans le Vector Store.")
+
+        # Validation de la question
+        question_validee = QuestionModel(question=prompt)
+        
+        # Génération brute par Mistral
+        raw_answer = generate_reponse_prototype(
+            question=question_validee.question,
+            context_str=contexte_final,)
+        
+        # Validation structurelle de la réponse brute
+        AnswerModel(
+            question=question_validee.question,
+            context=contexte_final,
+            answer=raw_answer,)
+        
+        # Contrôle sémantique par Pydantic AI
+        controlled_answer = validation_reponse_pydantic_ai(
+            question=question_validee.question,
+            context_str=contexte_final,
+            raw_answer=raw_answer, )
+        
+        # Réponse contrôlée
+        response_content = controlled_answer.answer.strip()
+        
+        # Conserver le traitement spécifique des classements déjà présent dans MistralChat.py
+        if source in ("SQL", "BOTH"):
+            ranking_answer = reconstruire_classement_sql(
+                prompt,
+                resultat_sql,)
+        
+            if ranking_answer is not None:
+                response_content = ranking_answer
+        
+        # Validation structurelle de la réponse finale
+        AnswerModel(
+            question=question_validee.question,
+            context=contexte_final,
+            answer=response_content,)
+        
+        # Affichage de la réponse finale
+        message_placeholder.markdown(response_content)
+        
+        # response_content = None
+        # if source in ("SQL", "BOTH"):
+        #     response_content = formater_classement_sql(
+        #         question=prompt,
+        #         resultat_sql=str(resultat_sql),)
+
+        # if response_content is None:    
+        #     response_content = generer_reponse([{"role":"user", "content":prompt_synthese}])  
+        
+        # message_placeholder.markdown(response_content)   
     except Exception as e:
         logging.exception("Erreur pendant le traitement de la question.")
         response_content = (
@@ -249,44 +513,8 @@ RÉPONSE :
                 f"Détail : {e}")
 
         message_placeholder.write(response_content)
-        # st.error(f"Une erreur est survenue lors de la recherche d'informations pertinentes: {e}")
-        # logging.exception(f"Erreur pendant vector_store_manager.search pour la query: {prompt}")
-        # search_results = [] # On continue sans contexte si la recherche échoue
 
-    # 4. Formater le contexte pour le prompt LLM
-    # context_str = "\n\n---\n\n".join([
-    #     f"Source: {res['metadata'].get('source', 'Inconnue')} (Score: {res['score']:.1f}%)\nContenu: {res['text']}"
-    #     for res in search_results
-    # ])
-
-    # if not search_results:
-    #     context_str = "Aucune information pertinente trouvée dans la base de connaissances pour cette question."
-    #     logging.warning(f"Aucun contexte trouvé pour la query: {prompt}")
-
-    # 5. Construire le prompt final pour l'API Mistral en utilisant le System Prompt RAG
-    # final_prompt_for_llm = SYSTEM_PROMPT.format(context_str=context_str, question=prompt)
-
-    # Créer la liste de messages pour l'API (juste le prompt système/utilisateur combiné)
-    # messages_for_api = [
-    #     # On pourrait séparer system et user, mais Mistral gère bien un long message user structuré
-    #     ChatMessage(role="user", content=final_prompt_for_llm)
-    # ]
-
-    # === Fin de la logique RAG ===
-
-
-    # 6. Afficher indicateur + Générer la réponse de l'assistant via LLM
-    # with st.chat_message("assistant"):
-    #     message_placeholder = st.empty()
-    #     message_placeholder.text("...") # Indicateur simple
-
-        # Génération de la réponse de l'assistant en utilisant le prompt augmenté
-        # response_content = generer_reponse(messages_for_api)
-
-        # Affichage de la réponse complète
-        # message_placeholder.write(response_content)
-
-    # 7. Ajouter la réponse de l'assistant à l'historique (pour affichage UI)
+    # Ajouter la réponse de l'assistant à l'historique (pour affichage UI)
     st.session_state.messages.append({"role": "assistant", "content": response_content})
 
 # Petit pied de page optionnel

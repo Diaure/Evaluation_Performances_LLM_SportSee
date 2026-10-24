@@ -1,23 +1,4 @@
 
-"""
-Évaluation du prototype NBA amélioré avec Pydantic AI et RAGAS.
-
-Pipeline :
-1. Charger le jeu de validation.
-2. Router chaque question vers SQL, RAG ou BOTH.
-3. Récupérer les informations nécessaires.
-4. Générer une réponse avec Mistral.
-5. Contrôler la réponse avec Pydantic AI.
-6. Évaluer uniquement la réponse contrôlée avec RAGAS.
-7. Exporter les résultats.
-
-Aucune évaluation avant Pydantic AI.
-Aucune comparaison avec l'ancienne évaluation.
-
-Exécution depuis la racine du dépôt :
-    python evaluate_prototype_ameliore_pydantic.py
-"""
-
 import csv
 import json
 import logging
@@ -60,6 +41,7 @@ from utils.pydantic_validation import (
     RAGResultModel,
     ControlledAnswerModel,
 )
+
 from sql_tool import sql_tool
 
 
@@ -90,10 +72,10 @@ logfire.instrument_pydantic()
 logfire.instrument_pydantic_ai()
 
 client = Mistral(api_key=MISTRAL_API_KEY)
+
+# Agent pydantic AI
 mistral_provider = MistralProvider( mistral_client=client)
 pydantic_ai_model = MistralModel(MODEL_NAME, provider=mistral_provider,)
-
-# Aget pydantic AI
 answer_agent = Agent(
     model=pydantic_ai_model,
     output_type=ControlledAnswerModel,
@@ -142,7 +124,7 @@ Règles pour les comparaisons statistiques:
 - Vérifie le niveau de granularité des données avant d'utiliser SUM: ne somme pas plusieurs fois des statistiques déjà agrégées et ne mélange pas des périodes différentes.
 - Ne somme jamais une statistique d'équipe déjà agrégée après une jointure qui multiplie les lignes.
 - Respecte exactement les statistiques demandées et les colonnes réellement présentes dans le schéma.
-- Conserve les ex æquo lorsque plusieurs équipes partagent le maximum.
+- Conserve les ex æquo dans le classement lorsque plusieurs équipes partagent le maximum.
 - N'invente aucune colonne, aucune valeur et aucun résultat.
 
 RÈGLES POUR LES COMPARAISONS DOMICILE / EXTÉRIEUR
@@ -219,14 +201,23 @@ RÈGLES DE RÉPONSE:
 - Ne mentionne que les indicateurs utiles pour répondre, sans produire systématiquement une liste exhaustive de toutes les colonnes disponibles.
 
 4. CLASSEMENTS ET RÉSULTATS MULTIPLES
-- Respecte le nombre de résultats explicitement demandé.
+- Les résultats SQL fournis dans le contexte font autorité. Tu ne dois ni les modifier, ni supprimer des lignes, ni inventer des résultats.
+- Respecte le nombre de résultats explicitement demandéen, en tenant compte des ex æquo.
+- Lorsqu'un classement des N premiers éléments est demandé, restitue tous les éléments occupant les N premières places du classement, y compris les ex æquo à la dernière place. Le nombre de lignes retournées peut donc être supérieur à N.
+- Si plusieurs éléments ont la même valeur statistique à la limite du classement demandé, conserve-les tous dans la réponse principale, au même rang.
+- Ne traite pas un ex æquo comme un résultat supplémentaire à exclure: les éléments ayant la même valeur doivent être conservés ensemble.
+- Respecte strictement l'ordre de classement et les valeurs statistiques indiqués dans les résultats SQL.
 - Si un classement est demandé sans nombre précisé, restitue le classement fourni par le contexte SQL dans la limite des résultats disponibles.
+- Ne supprime jamais un élément présent dans les résultats SQL au seul motif que le nombre de lignes dépasse le nombre demandé, lorsqu'un ex æquo explique ce dépassement.
 - Ne réduis pas arbitrairement un classement à un ou deux résultats lorsque le contexte en fournit davantage.
 - Respecte l'ordre de classement indiqué par les résultats SQL.
 - Préserve les ex æquo lorsqu'ils sont présents dans les résultats.
 - N'ajoute pas de joueurs ou d'équipes absents des résultats SQL pour compléter un classement.
 - Ne présente pas un classement partiel comme un classement exhaustif.
 - Si le contexte ne contient qu'un extrait ou un nombre limité de résultats, précise cette limite lorsque cela change l'interprétation de la réponse.
+- Pour toute question demandant des joueurs répondant à plusieurs critères statistiques, indique le nom de chaque joueur ainsi que la valeur exacte
+  de chaque statistique demandée, lorsque ces valeurs sont disponibles dans les résultats SQL.
+- Ne réponds jamais uniquement par les noms des joueurs lorsque les résultats SQL contiennent les statistiques permettant de justifier leur sélection.
 
 5. FIABILITÉ DES STATISTIQUES ET DES CALCULS
 - Les valeurs statistiques et les calculs quantitatifs doivent être fondés sur les résultats SQL fournis.
@@ -467,6 +458,7 @@ Vérifie chaque affirmation à partir du contexte fourni.
 
 - Conserve toutes les affirmations factuelles justifiées par le contexte.
 - Conserve les chiffres, les unités, les noms, les classements et les explications factuelles corrects présents dans la réponse initiale.
+- Ne supprime jamais les éléments d'un classement même s'il y a des ex æquo, gardes les bien dans le classement sans aucune note d'information supplémentaire.
 - Signale les affirmations non justifiées et corrige-les ou supprime-les si nécessaire.
 - Si le contexte est insuffisant, indique-le clairement sans inventer d'information.
 - N'utilise aucune connaissance extérieure au contexte.
@@ -503,6 +495,119 @@ La concision ne constitue pas un motif pour supprimer des informations correctes
 
     return controlled_answer
 
+# reconstruction d'un classement en conservant les es aequo
+def reconstruire_classement_sql(question: str, sql_result: str):
+    if not sql_result:
+        return None
+
+    q = question.lower()
+
+    # Ne traiter que les questions de classement.
+    mots_classement = (
+        "plus de", "meilleur", "meilleure",
+        "top ", "classement", "premier", "première",
+        "premiers", "en tête", "premières",)
+    
+    if not any(mot in q for mot in mots_classement):
+        return None
+
+    # Déterminer le nombre de places demandé.
+    nombres = {
+        "un": 1, "une": 1, "deux": 2, "trois": 3,
+        "quatre": 4, "cinq": 5, "six": 6,
+        "sept": 7, "huit": 8, "neuf": 9, "dix": 10,
+        "quinze": 15, "vingt": 20,}
+
+    match = re.search(r"\b(\d+)\b", q)
+    n = int(match.group(1)) if match else None
+
+    if n is None:
+        for mot, valeur in nombres.items():
+            if re.search(rf"\b{mot}\b", q):
+                n = valeur
+                break
+
+    if n is None:
+        return None
+
+    # Extraire les dictionnaires des résultats SQL.
+    rows = []
+    for line in sql_result.splitlines():
+        line = line.strip()
+        if line.startswith("{") and line.endswith("}"):
+            try:
+                row = ast.literal_eval(line)
+                if isinstance(row, dict):
+                    rows.append(row)
+            except (ValueError, SyntaxError):
+                continue
+
+    if len(rows) < n:
+        return None
+
+    # Identifier le champ contenant le nom de l'équipe ou du joueur.
+    champs_nom = (
+        "nom_complet_equipe", "nom_equipe",
+        "team_name", "nom_complet_joueur",
+        "nom_joueur", "player_name",)
+    
+    champ_nom = next(
+        (champ for champ in champs_nom if all(champ in row for row in rows)),
+        None,)
+    
+    if champ_nom is None:
+        return None
+
+    # Identifier la statistique demandée.
+    mots_question = set(re.findall(r"[a-zà-ÿ]+", q))
+    champs_numeriques = [
+        champ for champ in rows[0]
+        if all(
+            isinstance(row.get(champ), (int, float))
+            and not isinstance(row.get(champ), bool)
+            for row in rows)]
+
+    candidats = [
+        champ for champ in champs_numeriques
+        if set(champ.lower().split("_")) & mots_question]
+
+    # Exclure les champs qui ne sont pas des statistiques.
+    candidats = [
+        champ for champ in candidats
+        if champ.lower() not in {"id", "rank", "rang", "classement"}]
+
+    if len(candidats) != 1:
+        return None
+
+    champ_stat = candidats[0]
+
+    # Trier les résultats et conserver tous les ex aequo.
+    rows.sort(key=lambda row: row[champ_stat], reverse=True)
+    seuil = rows[n - 1][champ_stat]
+    selection = [row for row in rows if row[champ_stat] >= seuil]
+
+    titre = f"Classement des {n} premiers résultats"
+    lignes = [f"**{titre} :**", ""]
+
+    rang_precedent = None
+    valeur_precedente = None
+
+    for position, row in enumerate(selection, start=1):
+        valeur = row[champ_stat]
+        rang = (
+            rang_precedent
+            if valeur == valeur_precedente
+            else position
+        )
+
+        lignes.append(
+            f"{rang}. **{row[champ_nom]}** — {valeur:g}"
+        )
+
+        rang_precedent = rang
+        valeur_precedente = valeur
+
+    return "\n".join(lignes)
 
 # Construction du dataset
 def build_controlled_dataset(eval_set, vector_store,):
@@ -535,6 +640,29 @@ def build_controlled_dataset(eval_set, vector_store,):
             raw_answer=raw_answer,)
 
         final_answer = controlled_answer.answer.strip()
+        print("\n" + "=" * 70)
+        print("QUESTION :", question)
+        print("ROUTE :", retrieved["route"])
+        print("SQL_RESULT TYPE :", type(retrieved["sql_result"]))
+        print("SQL_RESULT COMPLET :")
+        print(repr(retrieved["sql_result"]))
+        print("=" * 70)
+
+        # classements SQL avec ex aequo.
+        ranking_answer = reconstruire_classement_sql(
+            question=question,
+            sql_result=retrieved["sql_result"],)
+
+        if ranking_answer is not None:
+            logger.info(
+                "Classement reconstruit à partir des résultats SQL : %s",
+                item["id"],)
+            
+            final_answer = ranking_answer
+        print("RÉPONSE BRUTE :", raw_answer)
+        print("RÉPONSE PYDANTIC AI :", controlled_answer.answer)
+        print("RÉPONSE RECONSTRUITE :", repr(ranking_answer))
+        print("RÉPONSE FINALE :", final_answer)
 
         # Validation de la réponse finale
         validated_answer = AnswerModel(
@@ -577,7 +705,7 @@ def build_controlled_dataset(eval_set, vector_store,):
     return controlled_dataset
 
 
-# 11. LLM & EMBEDDINGS RAGAS
+# LLM & EMBEDDINGS RAGAS
 class MistralRagasLLM(BaseRagasLLM):
     def generate_text(
         self,
@@ -685,6 +813,15 @@ def run_ragas_evaluation(dataset):
         embeddings=evaluator_embeddings,
         raise_exceptions=False,
     )
+
+    result_df = result.to_pandas()
+    print("\n--- DIAGNOSTIC DES MÉTRIQUES RAGAS ---")
+    for metric in ["answer_relevancy", "answer_correctness", "answer_similarity",]:
+        if metric in result_df.columns:
+            print(
+                f"{metric} : "
+                f"{result_df[metric].notna().sum()}/"
+                f"{len(result_df)} scores calculés")
 
     return result
 
