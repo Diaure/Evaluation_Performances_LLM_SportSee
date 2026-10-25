@@ -3,45 +3,30 @@ import argparse
 import logging
 from typing import Optional
 
-from pathlib import Path
-
-from utils.config import (
-    INPUT_DIR,
-    FAISS_INDEX_FILE,
-    DOCUMENT_CHUNKS_FILE,
-)
-
-from utils.config import INPUT_DIR # INPUT_DATA_URL (décommentez si besoin)
-from utils.data_loader_reviewed import load_and_parse_files
+from utils.config_initial import INPUT_DIR # INPUT_DATA_URL (décommentez si besoin)
+from utils.data_loader_initial import download_and_extract_zip, load_and_parse_files
 from utils.vector_store import VectorStoreManager
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# chemins des nouveaux fichiers
-DEFAULT_NEW_FAISS_INDEX = str(Path(FAISS_INDEX_FILE).with_name("faiss_index_new.idx"))
-DEFAULT_NEW_CHUNKS = str(Path(DOCUMENT_CHUNKS_FILE).with_name("document_chunks_new.pkl"))
-
-
-def run_indexing(input_directory: str): # , data_url: Optional[str] = None
+def run_indexing(input_directory: str, data_url: Optional[str] = None):
     """Exécute le processus complet d'indexation."""
     logging.info("--- Démarrage du processus d'indexation ---")
 
-    logging.info("Chargement et parsing des fichiers depuis : %s", input_directory,)
-
     # --- Étape 1: Téléchargement et Extraction (Optionnel) ---
-    # if data_url:
-    #     logging.info(f"Tentative de téléchargement depuis l'URL: {data_url}")
-    #     success = extraction_zip(data_url, input_directory)
-    #     if not success:
-    #         logging.error("Échec du téléchargement ou de l'extraction. Arrêt.")
+    if data_url:
+        logging.info(f"Tentative de téléchargement depuis l'URL: {data_url}")
+        success = download_and_extract_zip(data_url, input_directory)
+        if not success:
+            logging.error("Échec du téléchargement ou de l'extraction. Arrêt.")
             # Décider si on continue avec le contenu local existant ou si on arrête.
             # Ici, on arrête pour éviter d'indexer des données potentiellement incomplètes/anciennes.
-            # return
-    # else:
-    #     logging.info(f"Aucune URL fournie. Utilisation des fichiers locaux dans: {input_directory}")
+            return
+    else:
+        logging.info(f"Aucune URL fournie. Utilisation des fichiers locaux dans: {input_directory}")
 
-    # # --- Étape 2: Chargement et Parsing des Fichiers ---
-    # logging.info(f"Chargement et parsing des fichiers depuis: {input_directory}")
+    # --- Étape 2: Chargement et Parsing des Fichiers ---
+    logging.info(f"Chargement et parsing des fichiers depuis: {input_directory}")
     documents = load_and_parse_files(input_directory)
 
     if not documents:
@@ -51,19 +36,16 @@ def run_indexing(input_directory: str): # , data_url: Optional[str] = None
 
     # --- Étape 3: Création/Mise à jour de l'index Vectoriel ---
     logging.info("Initialisation du gestionnaire de Vector Store...")
-    vector_store = VectorStoreManager(
-        faiss_index_file=DEFAULT_NEW_FAISS_INDEX,
-        document_chunks_file=DEFAULT_NEW_CHUNKS,) # Le constructeur ne fait que charger s'il existe
+    vector_store = VectorStoreManager() # Le constructeur ne fait que charger s'il existe
 
     logging.info("Construction de l'index Faiss (cela peut prendre du temps)...")
     # Cette méthode va splitter, générer les embeddings, créer l'index et sauvegarder
     vector_store.build_index(documents)
 
     logging.info("--- Processus d'indexation terminé avec succès ---")
-    logging.info(f"Nombre de documents traités: %s", len(documents))
-
-    if vector_store.index is not None:
-        logging.info(f"Nombre de chunks indexés: %s", vector_store.index.ntotal)
+    logging.info(f"Nombre de documents traités: {len(documents)}")
+    if vector_store.index:
+        logging.info(f"Nombre de chunks indexés: {vector_store.index.ntotal}")
     else:
         logging.warning("L'index final n'a pas pu être créé ou est vide.")
 
@@ -85,9 +67,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # Vérifier si l'URL est passée en argument, sinon prendre celle du .env (si définie)
-    # final_data_url = args.data_url if args.data_url is not None else INPUT_DATA_URL
-    # Simplification: on utilise seulement l'argument --data-url pour l'instant
     final_data_url = args.data_url
 
-    run_indexing(input_directory=args.input_dir) # , data_url=final_data_url
+    run_indexing(input_directory=args.input_dir, data_url=final_data_url)

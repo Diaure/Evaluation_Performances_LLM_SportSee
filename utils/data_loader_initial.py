@@ -1,4 +1,3 @@
-# utils/data_loader.py
 import os
 import requests
 import zipfile

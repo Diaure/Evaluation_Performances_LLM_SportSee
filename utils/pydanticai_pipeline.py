@@ -4,7 +4,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.mistral import MistralModel
 from pydantic_ai.providers.mistral import MistralProvider
 
-from .models import PreparedDocumentModel
+from utils.pydantic_validation import PreparedDocumentModel
 
 
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
