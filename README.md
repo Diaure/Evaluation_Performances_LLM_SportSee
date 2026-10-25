@@ -90,7 +90,7 @@ DB_NAME = nom de de la base
 
 ## Structure du projet
 
-![Structure projet](https://raw.githubusercontent.com/Diaure/Evaluation_Performances_LLM_SportSee/main/inputs/Capture.png)
+![Structure projet](https://raw.githubusercontent.com/Diaure/Evaluation_Performances_LLM_SportSee/main/inputs/Capture.PNG)
 
 
 ## Utilisation
@@ -260,10 +260,6 @@ Le score moyen de `faithfulness` atteint presque 1,0 dans le tableau comparatif.
 - Les `questions mixtes SQL + RAG` restent plus complexes, car elles nécessitent de combiner des données quantitatives avec des opinions issues de documents textuels. La qualité de la récupération et l'attribution correcte des opinions demeurent des axes d'amélioration.
 
 Le détail des résultats, les scores par question et les commentaires personnalisés sont disponibles dans `Comparaison_prototypes.xlsx`.
-
-## Structure du projet
-
-![Structure projet](https://raw.githubusercontent.com/Diaure/Evaluation_Performances_LLM_SportSee/main/inputs/Capture.png)
 
 ## Conclusion
 Ce projet met en œuvre une architecture hybride combinant SQL, recherche sémantique et génération de réponses par un LLM.
