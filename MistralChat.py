@@ -34,6 +34,17 @@ from sql_tool import sql_tool
 
 from evaluate_prototypes_pydantic import generate_reponse_prototype, validation_reponse_pydantic_ai, SYSTEM_PROMPT, reconstruire_classement_sql
 
+import logfire
+# --- Configuration de Logfire ---
+logfire.configure(
+    service_name="sportsee-rag-app",
+    environment="development",
+    send_to_logfire="if-token-present",)
+
+# Instrumentation des appels Pydantic AI
+logfire.instrument_pydantic()
+logfire.instrument_pydantic_ai()
+
 # --- Configuration du Logging ---
 # Note: Streamlit peut avoir sa propre gestion de logs. Configurer ici est une bonne pratique.
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(module)s - %(message)s')
@@ -101,17 +112,6 @@ vector_store_manager = get_vector_store_manager()
 
 # --- Prompt Système pour RAG ---
 SYSTEM_PROMPT = SYSTEM_PROMPT
-# f"""Tu es 'NBA Analyst AI', un assistant expert sur la ligue de basketball NBA.
-# Ta mission est de répondre aux questions des fans en animant le débat.
-
-# ---
-# {{context_str}}
-# ---
-
-# QUESTION DU FAN:
-# {{question}}
-
-# RÉPONSE DE L'ANALYSTE NBA:"""
 
 
 # --- Initialisation de l'historique de conversation ---
@@ -187,192 +187,6 @@ def determiner_source(question: str) -> str:
         logging.exception("Erreur lors de la détermination de la source.")
         raise
 
-# def formater_classement_sql(question: str, resultat_sql: str):
-#     """
-#     Formate un classement à partir des résultats SQL, pour les équipes
-#     comme pour les joueurs.
-
-#     - Détecte l'entité, la statistique et le nombre de places demandées.
-#     - Trie les résultats par ordre décroissant.
-#     - Conserve tous les ex aequo à la dernière place demandée.
-#     - Attribue le même rang aux valeurs égales.
-#     - Retourne None si la question ou les données ne sont pas reconnues.
-#     """
-
-#     question_min = question.lower()
-
-#     # Détecter l'entité concernée.
-#     entite_equipe = bool(re.search(
-#         r"\b(équipe|équipes|team|teams)\b",
-#         question_min,
-#     ))
-
-#     entite_joueur = bool(re.search(
-#         r"\b(joueur|joueurs|player|players)\b",
-#         question_min,
-#     ))
-
-#     # La fonction ne traite que les classements d'équipes ou de joueurs.
-#     if not entite_equipe and not entite_joueur:
-#         return None
-
-#     # Si les deux entités sont mentionnées, ne pas deviner laquelle classer.
-#     if entite_equipe and entite_joueur:
-#         return None
-
-#     # Vérifier qu'il s'agit bien d'une demande de classement.
-#     termes_classement = (
-#         "plus de", "plus d'", "plus d’", "le plus", "la plus",
-#         "les plus", "top", "classement", "meilleur", "meilleure",
-#         "meilleurs", "meilleures", "maximum", "maximal",
-#     )
-
-#     if not any(terme in question_min for terme in termes_classement):
-#         return None
-
-#     # Déterminer le nombre de places demandées.
-#     nombres = {
-#         "un": 1,
-#         "une": 1,
-#         "deux": 2,
-#         "trois": 3,
-#         "quatre": 4,
-#         "cinq": 5,
-#         "six": 6,
-#         "sept": 7,
-#         "huit": 8,
-#         "neuf": 9,
-#         "dix": 10,
-#         "onze": 11,
-#         "douze": 12,
-#         "quinze": 15,
-#         "vingt": 20,
-#     }
-
-#     match_nombre = re.search(r"\b(\d+)\b", question_min)
-#     n = int(match_nombre.group(1)) if match_nombre else None
-
-#     if n is None:
-#         for mot, valeur in nombres.items():
-#             if re.search(rf"\b{mot}\b", question_min):
-#                 n = valeur
-#                 break
-
-#     if n is None or n < 1:
-#         return None
-
-#     # Identifier la statistique demandée.
-#     correspondances = {
-#         "interception": (
-#             "total_interceptions",
-#             "interceptions",
-#         ),
-#         "rebond": (
-#             "total_rebonds",
-#             "rebonds",
-#         ),
-#         "passe décisive": (
-#             "total_passes",
-#             "passes décisives",
-#         ),
-#         "passe": (
-#             "total_passes",
-#             "passes",
-#         ),
-#         "point": (
-#             "total_points",
-#             "points",
-#         ),
-#         "contre": (
-#             "total_contres",
-#             "contres",
-#         ),
-#     }
-
-#     champ_stat = None
-
-#     # Tester les expressions les plus précises en premier.
-#     for terme in sorted(correspondances, key=len, reverse=True):
-#         if re.search(rf"\b{re.escape(terme)}", question_min):
-#             champ_stat = correspondances[terme][0]
-#             break
-
-#     if champ_stat is None:
-#         return None
-
-#     # Extraire les dictionnaires présents dans le résultat SQL.
-#     if isinstance(resultat_sql, list):
-#         rows = [row for row in resultat_sql if isinstance(row, dict)]
-#     else:
-#         lignes_sql = re.findall(r"\{[^{}]*\}", str(resultat_sql or ""))
-#         rows = []
-
-#         for ligne in lignes_sql:
-#             try:
-#                 row = ast.literal_eval(ligne)
-#                 if isinstance(row, dict):
-#                     rows.append(row)
-#             except (ValueError, SyntaxError):
-#                 continue
-
-#     if not rows:
-#         return None
-
-#     # Déterminer les colonnes de nom selon l'entité.
-#     champs_nom_possibles = (["nom_complet_equipe"] if entite_equipe else ["nom_du_joueur"])
-#     champ_nom = next(
-#         (
-#             champ
-#             for champ in champs_nom_possibles
-#             if all(champ in row for row in rows)
-#         ), None,)
-
-#     if champ_nom is None:
-#         return None
-
-#     # Vérifier que chaque ligne contient une statistique numérique exploitable.
-#     if not all(
-#         champ_stat in row
-#         and isinstance(row[champ_stat], (int, float))
-#         and not isinstance(row[champ_stat], bool)
-#         for row in rows
-#     ):
-#         return None
-
-#     # Trier par ordre décroissant.
-#     rows.sort(key=lambda row: row[champ_stat], reverse=True)
-
-#     # Ne pas afficher moins de N résultats si le SQL en fournit moins.
-#     # Conserver tous les ex aequo au seuil de la dernière place demandée.
-#     seuil = rows[min(n, len(rows)) - 1][champ_stat]
-#     selection = [
-#         row for row in rows
-#         if row[champ_stat] >= seuil
-#     ]
-
-#     # Construire le classement avec des rangs partagés.
-#     resultat = []
-#     valeur_precedente = None
-#     rang_precedent = None
-
-#     for position, row in enumerate(selection, start=1):
-#         valeur = row[champ_stat]
-
-#         if position == 1 or valeur != valeur_precedente:
-#             rang = position
-#         else:
-#             rang = rang_precedent
-
-#         resultat.append(
-#             f"{rang}. **{row[champ_nom]}** — {valeur:g}"
-#         )
-
-#         valeur_precedente = valeur
-#         rang_precedent = rang
-
-#     return "\n".join(resultat)
-
-
 # --- Interface Utilisateur Streamlit ---
 st.title(APP_TITLE)
 st.caption(f"Assistant virtuel pour {NAME} | Modèle: {model}")
@@ -384,6 +198,7 @@ for message in st.session_state.messages:
 
 # Zone de saisie utilisateur
 if prompt := st.chat_input(f"Posez votre question sur la {NAME}..."):
+    
     # 1. Ajouter et afficher le message de l'utilisateur
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -402,35 +217,44 @@ if prompt := st.chat_input(f"Posez votre question sur la {NAME}..."):
         message_placeholder.write("Analyse de la question...")
 
     try:
-        source = determiner_source(prompt)
-        logging.info("Source sélectionnée : %s", source)
+        with logfire.span("streamlit.question"):
+            with logfire.span("question.routing"):
+                source = determiner_source(prompt)
+                logging.info("Source sélectionnée : %s", source)
 
         contextes = []
+        resultat_sql = None
+        search_results = []
 
         # SQL: appel du tool LangChain existant
         if source in ("SQL", "BOTH"):
-            message_placeholder.write("Interrogation de la base SQL...")
-            logging.info("Début de l'appel sql_tool")
-            resultat_sql = sql_tool.invoke({"question": prompt})
-            logging.info("Fin de l'appel sql_tool") 
-            logging.info("Résultat SQL : %s", resultat_sql)
-            contextes.append("RÉSULTATS SQL :\n" + str(resultat_sql))
+            with logfire.span("retrieval.sql"):
+                message_placeholder.write("Interrogation de la base SQL...")
+                logging.info("Début de l'appel sql_tool")
+                resultat_sql = sql_tool.invoke({"question": prompt})
+                logging.info("Fin de l'appel sql_tool") 
+                contextes.append(f"RÉSULTATS SQL :\n{resultat_sql}")
+                logfire.info("Récupération SQL terminée")
 
         # RAG: recherche dans les chunks indexés
         if source in ("RAG", "BOTH"):
-            message_placeholder.write("Recherche dans les documents...")
-            search_results = vector_store_manager.search(prompt, k=SEARCH_K, )
-            if search_results:
-                contexte_rag = "\n\n---\n\n".join(
-                    f"Source : {res.get('metadata', {}).get('source', 'Inconnue')}\n"
-                    f"Contenu : {res.get('text', '')}"
-                    for res in search_results)
-                contextes.append("CONTEXTE REDDIT :\n" + contexte_rag)
-            else:
-                contextes.append("CONTEXTE REDDIT : aucun résultat pertinent trouvé.")
+            with logfire.span("retrieval.faiss"):
+                message_placeholder.write("Recherche dans les documents...")
+                search_results = vector_store_manager.search(prompt, k=SEARCH_K, )
+                if search_results:
+                    contexte_rag = "\n\n---\n\n".join(
+                        f"Source : {res.get('metadata', {}).get('source', 'Inconnue')}\n"
+                        f"Contenu : {res.get('text', '')}"
+                        for res in search_results)
+                    contextes.append("CONTEXTE REDDIT :\n" + contexte_rag)
+                else:
+                    contextes.append("CONTEXTE REDDIT : aucun résultat pertinent trouvé.")
+
+                logfire.info("Récupération FAISS terminée", nombre_chunks=len(search_results),)
 
         # Synthèse finale
-        contexte_final = "\n\n".join(contextes)
+        with logfire.span("context.build"):
+            contexte_final = "\n\n".join(contextes)
 
         prompt_synthese = f"""
 Tu es NBA Analyst AI, un assistant spécialisé dans la NBA.
@@ -456,58 +280,64 @@ RÉPONSE :
         message_placeholder.write("Synthèse en cours...")
 
         # Validation de la question
-        question_validee = QuestionModel(question=prompt)
+        with logfire.span("validation.question"):
+            question_validee = QuestionModel(question=prompt)
         
         # Génération brute par Mistral
-        raw_answer = generate_reponse_prototype(
-            question=question_validee.question,
-            context_str=contexte_final,)
+        with logfire.span("generation.mistral"):
+            raw_answer = generate_reponse_prototype(
+                question=question_validee.question,
+                context_str=contexte_final,)
+            logfire.info("Génération terminée", longueur_reponse=len(raw_answer),)
         
         # Validation structurelle de la réponse brute
-        AnswerModel(
-            question=question_validee.question,
-            context=contexte_final,
-            answer=raw_answer,)
+        with logfire.span("validation.answer_structure"):
+            AnswerModel(
+                question=question_validee.question,
+                context=contexte_final,
+                answer=raw_answer,)
         
         # Contrôle sémantique par Pydantic AI
-        controlled_answer = validation_reponse_pydantic_ai(
-            question=question_validee.question,
-            context_str=contexte_final,
-            raw_answer=raw_answer, )
+        with logfire.span("validation.pydantic_ai"):
+            controlled_answer = validation_reponse_pydantic_ai(
+                question=question_validee.question,
+                context_str=contexte_final,
+                raw_answer=raw_answer, )
         
         # Réponse contrôlée
         response_content = controlled_answer.answer.strip()
         
         # Conserver le traitement spécifique des classements déjà présent dans MistralChat.py
         if source in ("SQL", "BOTH"):
-            ranking_answer = reconstruire_classement_sql(
-                prompt,
-                resultat_sql,)
-        
-            if ranking_answer is not None:
-                response_content = ranking_answer
+            with logfire.span("postprocessing.ranking"):
+                ranking_answer = reconstruire_classement_sql(
+                    prompt,
+                    resultat_sql,)
+            
+                if ranking_answer is not None:
+                    response_content = ranking_answer
         
         # Validation structurelle de la réponse finale
-        AnswerModel(
-            question=question_validee.question,
-            context=contexte_final,
-            answer=response_content,)
+        with logfire.span("validation.final_answer"):
+            AnswerModel(
+                question=question_validee.question,
+                context=contexte_final,
+                answer=response_content,)
         
-        # Affichage de la réponse finale
-        message_placeholder.markdown(response_content)
-        
-        # response_content = None
-        # if source in ("SQL", "BOTH"):
-        #     response_content = formater_classement_sql(
-        #         question=prompt,
-        #         resultat_sql=str(resultat_sql),)
-
-        # if response_content is None:    
-        #     response_content = generer_reponse([{"role":"user", "content":prompt_synthese}])  
+            # Affichage de la réponse finale
+            message_placeholder.markdown(response_content)
+            logfire.info(
+                "Question traitée avec succès",
+                source=source,
+                longueur_reponse=len(response_content),)
         
         # message_placeholder.markdown(response_content)   
     except Exception as e:
         logging.exception("Erreur pendant le traitement de la question.")
+        logfire.error(
+        "Échec du traitement de la question",
+        error_type=type(e).__name__,
+        error_message=str(e),)
         response_content = (
                 "Une erreur technique empêche le traitement de la question. "
                 f"Détail : {e}")
