@@ -46,7 +46,6 @@ from sql_tool import sql_tool
 
 
 # Configuration
-
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -326,45 +325,69 @@ def route_question(question: str) -> str:
 
 # Récupération RAG
 def retrieve_rag(vector_store, question):
-    search_results = (vector_store.search(question, k=SEARCH_K) or [])
+    with logfire.span("RAG - Recherche vectorielle", question=question, k=SEARCH_K,):
+        search_results = (vector_store.search(question, k=SEARCH_K) or [])
 
-    display_contexts = []
-    ragas_contexts = []
-    chunks_details = []
+        display_contexts = []
+        ragas_contexts = []
+        chunks_details = []
 
-    for result in search_results:
-        chunk = ChunkModel(
-            text=result["text"],
-            metadata=result.get("metadata", {}),
-            score=result.get("score"),)
+    with logfire.span("RAG - Traitement et sélection des chunks"):
+        for result in search_results:
+            chunk = ChunkModel(
+                text=result["text"],
+                metadata=result.get("metadata", {}),
+                score=result.get("score"),)
 
-        chunk_text = str(chunk.text or "").strip()
-        if not chunk_text:
-            continue
+            chunk_text = str(chunk.text or "").strip()
+            if not chunk_text:
+                continue
 
-        source = chunk.metadata.get("source", "Inconnue")
-        display_contexts.append(
-            f"Source : {source}\n"
-            f"Contenu : {chunk_text}")
+            source = chunk.metadata.get("source", "Inconnue")
+            display_contexts.append(
+                f"Source : {source}\n"
+                f"Contenu : {chunk_text}")
 
-        # récupération des chunks
-        ragas_contexts.append(chunk_text)
-        chunks_details.append({
-            "source": source,
-            "text": chunk_text,
-            "score": chunk.score,
-            "metadata": chunk.metadata,})
+            # récupération des chunks
+            ragas_contexts.append(chunk_text)
+            chunks_details.append({
+                "source": source,
+                "text": chunk_text,
+                "score": chunk.score,
+                "metadata": chunk.metadata,})
+
+        logfire.info(
+            "Chunks retenus après traitement",
+            chunks_count=len(chunks_details),
+            sources=str([
+                chunk["source"] for chunk in chunks_details
+            ]),
+            scores=str([
+                chunk["score"] for chunk in chunks_details
+            ]),)
 
     return (display_contexts, ragas_contexts, chunks_details,)
 
 # Choix des sources SQL / RAG / BOTH
 def retrieve_sources(item, vector_store):
-    validated_question = QuestionModel(question=item["question"])
-    question = validated_question.question
-    route = route_question(question)
-    expected_route = infer_expected_route(item)
-    logger.info("Routage %s | attendu=%s | sélectionné=%s | question=%s", item["id"], expected_route, route, question,)
+    with logfire.span(
+        "RAG - Préparation et routage",
+        question_id=item.get("id", item.get("question_id", "inconnue")),):
+    
+        validated_question = QuestionModel(question=item["question"])
+        question = validated_question.question
 
+        with logfire.span("Routage - Classification de la question"):
+            route = route_question(question)
+            expected_route = infer_expected_route(item)
+            logger.info("Routage %s | attendu=%s | sélectionné=%s | question=%s", item["id"], expected_route, route, question,)
+
+            logfire.info(
+                "Route sélectionnée",
+                expected_route=str(expected_route),
+                selected_route=str(route),
+                question=question,)
+    
     context_sections = []
     ragas_contexts = []
     chunks_details = []
@@ -374,35 +397,54 @@ def retrieve_sources(item, vector_store):
     # Source SQL
     if route in {"SQL", "BOTH"}:
         try:
-            sql_result = str(sql_tool.invoke({"question": question}))
-            context_sections.append("RÉSULTATS SQL :\n" + sql_result)
-            ragas_contexts.append("RÉSULTATS SQL :\n" + sql_result)
+            with logfire.span("SQL - Interrogation de la base"):
+                sql_result = str(sql_tool.invoke({"question": question}))
+                context_sections.append("RÉSULTATS SQL :\n" + sql_result)
+                ragas_contexts.append("RÉSULTATS SQL :\n" + sql_result)
+
+                logfire.info("Résultat SQL obtenu", result_length=len(sql_result),)
 
         except Exception as exc:
             logger.exception("Erreur SQL pour %s", item["id"],)
             source_errors.append(f"SQL : {type(exc).__name__}: {exc}")
+            logfire.error(
+                "Échec de la récupération SQL",
+                error_type=type(exc).__name__,
+                error=str(exc),)
+            
             context_sections.append("RÉSULTATS SQL : erreur pendant l'interrogation de la base.")
             ragas_contexts.append("Erreur SQL : aucune donnée exploitable n'a été obtenue.")
 
     # Source RAG
     if route in {"RAG", "BOTH"}:
         try:
-            (display_contexts, retrieved_contexts, chunks_details,) = retrieve_rag(vector_store, question,)
+            with logfire.span("RAG - Récupération des documents"):
+                (display_contexts, retrieved_contexts, chunks_details,) = retrieve_rag(vector_store, question,)
 
-            if display_contexts:
-                context_sections.append(
-                    "CONTEXTE DOCUMENTAIRE RAG :\n"
-                    + "\n\n---\n\n".join(display_contexts))
+                if display_contexts:
+                    context_sections.append(
+                        "CONTEXTE DOCUMENTAIRE RAG :\n"
+                        + "\n\n---\n\n".join(display_contexts))
 
-                ragas_contexts.extend(retrieved_contexts)
+                    ragas_contexts.extend(retrieved_contexts)
 
-            else:
-                context_sections.append("CONTEXTE DOCUMENTAIRE RAG : aucun résultat pertinent trouvé.")
-                ragas_contexts.append("Aucun contexte documentaire pertinent n'a été retrouvé.")
+                else:
+                    context_sections.append("CONTEXTE DOCUMENTAIRE RAG : aucun résultat pertinent trouvé.")
+                    ragas_contexts.append("Aucun contexte documentaire pertinent n'a été retrouvé.")
+
+                logfire.info(
+                    "Récupération RAG terminée",
+                    chunks_count=len(chunks_details),
+                    contexts_count=len(retrieved_contexts),)
 
         except Exception as exc:
             logger.exception("Erreur RAG pour %s", item["id"],)
             source_errors.append(f"RAG : {type(exc).__name__}: {exc}")
+            logfire.error(
+                "Échec de la récupération RAG",
+                error_type=type(exc).__name__,
+                error=str(exc),)
+
             context_sections.append("CONTEXTE DOCUMENTAIRE RAG : erreur pendant la recherche.")
             ragas_contexts.append("Erreur RAG : aucun contexte documentaire exploitable n'a été obtenu.")
 
@@ -411,6 +453,16 @@ def retrieve_sources(item, vector_store):
 
     if not ragas_contexts:
         ragas_contexts.append("Aucune information n'a été récupérée.")
+
+    # Construction du contexte final transmis au générateur
+    with logfire.span("RAG - Construction du contexte final"):
+        context_str = "\n\n".join(context_sections)
+
+        logfire.info(
+            "Contexte final construit",
+            context_length=len(context_str),
+            ragas_context_count=len(ragas_contexts),
+            source_errors_count=len(source_errors),)
 
     return {
         "question": question,
@@ -625,44 +677,44 @@ def build_controlled_dataset(eval_set, vector_store,):
         context_str = retrieved["context_str"]
 
         # Génération de la réponse brute
-        raw_answer = generate_reponse_prototype(question, context_str,)
+        with logfire.span("Génération - Réponse brute Mistral"):
+            raw_answer = generate_reponse_prototype(question, context_str,)
+            logfire.info("Réponse brute générée", answer_length=len(raw_answer),)
 
         # Validation structurelle Pydantic, comme dans l'ancien script
-        validated_answer = AnswerModel(
-            question=question,
-            context=context_str,
-            answer=raw_answer,)
+        with logfire.span("Validation - Modèle AnswerModel"):
+            validated_answer = AnswerModel(
+                question=question,
+                context=context_str,
+                answer=raw_answer,)
 
         # Contrôle Pydantic AI
-        controlled_answer = validation_reponse_pydantic_ai(
-            question=question,
-            context_str=context_str,
-            raw_answer=raw_answer,)
+        with logfire.span("Contrôle - Pydantic AI"):
+            controlled_answer = validation_reponse_pydantic_ai(
+                question=question,
+                context_str=context_str,
+                raw_answer=raw_answer,)
 
         final_answer = controlled_answer.answer.strip()
-        print("\n" + "=" * 70)
-        print("QUESTION :", question)
-        print("ROUTE :", retrieved["route"])
-        print("SQL_RESULT TYPE :", type(retrieved["sql_result"]))
-        print("SQL_RESULT COMPLET :")
-        print(repr(retrieved["sql_result"]))
-        print("=" * 70)
+        logfire.info(
+        "Résultat du contrôle",
+        grounded_in_context=(controlled_answer.grounded_in_context),
+        unsupported_claims=str(controlled_answer.unsupported_claims),
+        answer_length=len(final_answer),)
 
         # classements SQL avec ex aequo.
-        ranking_answer = reconstruire_classement_sql(
-            question=question,
-            sql_result=retrieved["sql_result"],)
+        with logfire.span("Post-traitement - Classement SQL et ex aequo"):
+            ranking_answer = reconstruire_classement_sql(
+                question=question,
+                sql_result=retrieved["sql_result"],)
 
-        if ranking_answer is not None:
-            logger.info(
-                "Classement reconstruit à partir des résultats SQL : %s",
-                item["id"],)
-            
-            final_answer = ranking_answer
-        print("RÉPONSE BRUTE :", raw_answer)
-        print("RÉPONSE PYDANTIC AI :", controlled_answer.answer)
-        print("RÉPONSE RECONSTRUITE :", repr(ranking_answer))
-        print("RÉPONSE FINALE :", final_answer)
+            if ranking_answer is not None:
+                logger.info(
+                    "Classement reconstruit à partir des résultats SQL : %s",
+                    item["id"],)
+                
+                final_answer = ranking_answer
+                logfire.info("Post-traitement terminé", ranking_reconstructed=ranking_answer is not None,)
 
         # Validation de la réponse finale
         validated_answer = AnswerModel(
